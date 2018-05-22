@@ -26,6 +26,10 @@ namespace Generator
 
         static void Main(string[] args)
         {
+            var docHandler = new DocHandler();
+            docHandler.DownloadGL4();
+            //docHandler.DownloadGL2();
+
             var parser = new XMLParser();
             var def = parser.Parse(@"https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/master/xml/gl.xml");
             var consts = new IndentedStringBuilder();
@@ -115,7 +119,7 @@ namespace Generator
             delegates.AppendLine("");
             delegates.AppendLine("namespace {0} {{", Namespace);
             delegates.Indent();
-            delegates.AppendLine("internal static class Delegates {");
+            delegates.AppendLine("internal unsafe static class Delegates {");
             delegates.Indent();
             var wrappers = new IndentedStringBuilder();
             wrappers.AppendLine("using System;");
@@ -125,7 +129,7 @@ namespace Generator
             wrappers.AppendLine("");
             wrappers.AppendLine("namespace {0} {{", Namespace);
             wrappers.Indent();
-            wrappers.AppendLine("public static partial class Wrappers {");
+            wrappers.AppendLine("public unsafe static partial class Wrappers {");
             wrappers.Indent();
             wrappers.AppendLine("private static string PtrToStringUTF8(IntPtr ptr) {");
             wrappers.Indent();
@@ -154,7 +158,7 @@ namespace Generator
 
             var hashlist = new HashSet<string>();
             hashlist.Add("glGetIntegerv");
-            def.Commands.Build(delegates, pointers, wrappers, def, hashlist);
+            def.Commands.Build(delegates, pointers, wrappers, def, hashlist, docHandler);
 
             foreach(var feature in def.Feature.Where(x => x.Api == "gl")) {
                 feature.BuildLoader(loader, hashlist);

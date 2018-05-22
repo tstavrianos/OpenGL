@@ -170,6 +170,7 @@ namespace OpenGLSpec
 		public bool NeedsOut;
 		public string EnumTranslated;
 		public bool HasEnum;
+		public string OrigName;
 
 		public string Declaration(bool std = true) {
 			if(std) {
@@ -226,6 +227,7 @@ namespace OpenGLSpec
 		public void FixParams(Registry reg) {
 			if(Param != null) {
 				foreach(var param in Param) {
+					param.OrigName = param.Name;
 					param.Name = Senzible.CleanUpName(param.Name);
 					param.Translated = Senzible.GetReturnType(param);
 					param.NeedsFixed = param.Translated.EndsWith("*");
@@ -238,8 +240,7 @@ namespace OpenGLSpec
 		}
 
 		public void BuildDelegate(IndentedStringBuilder sb) {
-			sb.AppendLine("internal {0}delegate {1} {2}({3});", 
-				Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
+			sb.AppendLine("internal delegate {0} {1}({2});", 
 				Proto.ReturnType, 
 				Proto.Name,
 				Param != null ? string.Join(", ", Param.Select(x => x.Translated + " " + x.Name)): "");
@@ -251,6 +252,7 @@ namespace OpenGLSpec
 		}
 
 		private struct FixedParam {
+			public string OrigName;
 			public string Name;
 			public string Type;
 			public bool IsFixed;
@@ -279,11 +281,12 @@ namespace OpenGLSpec
 					(accseq, item) => accseq.Concat(new[] { item })));
 		}
 		
-		private IEnumerable<IEnumerable<FixedParam>> GetFixedParams(){
+		private IEnumerable<IEnumerable<FixedParam>> GetParamVariations(){
 			var res = new List<List<FixedParam>>();
 			foreach(var param in Param) {
 				var pList = new List<FixedParam>();
 				pList.Add(new FixedParam() {
+					OrigName = param.OrigName,
 					Name = param.Name,
 					Type = param.Translated,
 					IsFixed = false,
@@ -296,6 +299,7 @@ namespace OpenGLSpec
 				});
 				if(param.NeedsFixed && !param.NeedsOut && !param.HasEnum) {
 					pList.Add(new FixedParam() {
+						OrigName = param.OrigName,
 						Name = param.Name,
 						Type = param.Translated,
 						IsFixed = true,
@@ -309,6 +313,7 @@ namespace OpenGLSpec
 				}
 				else if(param.NeedsOut && !param.HasEnum) {
 					pList.Add(new FixedParam() {
+						OrigName = param.OrigName,
 						Name = param.Name,
 						Type = param.Translated,
 						IsFixed = false,
@@ -322,6 +327,7 @@ namespace OpenGLSpec
 				}
 				else if(!param.NeedsFixed && param.HasEnum) {
 					pList.Add(new FixedParam() {
+						OrigName = param.OrigName,
 						Name = param.Name,
 						Type = param.Translated,
 						IsFixed = false,
@@ -334,6 +340,7 @@ namespace OpenGLSpec
 				}
 				else if(param.NeedsFixed && !param.NeedsOut && param.HasEnum) {
 					pList.Add(new FixedParam() {
+						OrigName = param.OrigName,
 						Name = param.Name,
 						Type = param.Translated,
 						IsFixed = true,
@@ -347,6 +354,7 @@ namespace OpenGLSpec
 				}
 				else if(param.NeedsOut && param.HasEnum) {
 					pList.Add(new FixedParam() {
+						OrigName = param.OrigName,
 						Name = param.Name,
 						Type = param.Translated,
 						IsFixed = false,
@@ -363,124 +371,8 @@ namespace OpenGLSpec
 			return CartesianProduct(res);
 		}
 		
-		public void BuildStdWrapper(IndentedStringBuilder sb) {
-			sb.AppendLine("/// <summary>");
-			if(!string.IsNullOrEmpty(Comment)) {
-				sb.AppendLine("/// {0}", Comment);
-			} else {
-				sb.AppendLine("/// ");
-			}
-			sb.AppendLine("/// </summary>");
-			foreach(var param in Param) {
-				sb.AppendLine("/// <param name=\"{0}\"></param>", param.Name);
-			}
-			sb.AppendLine("public {0}static {1} {2}({3}) => {4}Pointers.{2}({5}){6};", 
-				Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
-				Proto.MarshalString ? "string" : Proto.ReturnType, 
-				Proto.Name,
-				Param != null ? string.Join(", ", Param.Select(x => x.Declaration())): "",
-				Proto.MarshalString ? "PtrToStringUTF8(" : "",
-				Param != null ? string.Join(", ", Param.Select(x => x.Name)): "",
-				Proto.MarshalString ? ")" : ""
-				);
-		}
-
-		public void BuildStdEnumWrapper(IndentedStringBuilder sb) {
-			if(Param.Any(x => x.HasEnum)) {
-				sb.AppendLine("");
-				sb.AppendLine("public {0}static {1} {2}({3}) => {4}Pointers.{2}({5}){6};", 
-					Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
-					Proto.MarshalString ? "string" : Proto.ReturnType, 
-					Proto.Name,
-					Param != null ? string.Join(", ", Param.Select(x => x.EnumDeclaration())): "",
-					Proto.MarshalString ? "PtrToStringUTF8(" : "",
-					Param != null ? string.Join(", ", Param.Select(x => (string.IsNullOrEmpty(x.Group) ? "" : "(" + x.Translated + ")") + x.Name)): "",
-					Proto.MarshalString ? ")" : ""
-					);
-			}
-		}
-
-		public void BuildFixedWrapper(IndentedStringBuilder sb) {
-			if (Param != null && Param.Any(x => x.NeedsFixed)) {
-				sb.AppendLine("");
-				sb.AppendLine("/// <summary>");
-				if(!string.IsNullOrEmpty(Comment)) {
-					sb.AppendLine("/// {0}", Comment);
-				} else {
-					sb.AppendLine("/// ");
-				}
-				sb.AppendLine("/// </summary>");
-				foreach(var param in Param) {
-					sb.AppendLine("/// <param name=\"{0}\"></param>", param.Name);
-				}
-				sb.AppendLine("public unsafe static {0} {1}({2}) {{", 
-					Proto.ReturnType,
-					Proto.Name,
-					string.Join(", ", Param.Select(x => x.Declaration(false)))
-				);
-				sb.Indent();
-				foreach(var param in Param)
-				{
-					if(param.NeedsFixed) {
-						sb.AppendLine("fixed({0} {1}_ = &{1}[0])", param.Translated, param.Name);
-					}
-				}
-				sb.Indent();
-				sb.AppendLine("{0}Pointers.{1}({2});", 
-					Proto.ReturnType == "void" ? "" : "return ",
-					Proto.Name, 
-					string.Join(", ", Param.Select(x => x.NeedsFixed ? (x.Name + "_") : x.Name))
-				);
-				sb.Outdent();
-				sb.Outdent();
-				sb.AppendLine("}");
-			}
-		}
-
-		public void BuildFixedEnumWrapper(IndentedStringBuilder sb) {
-			if (Param != null && Param.Any(x => x.NeedsFixed)) {
-				if(Param.Any(x => x.HasEnum)) {
-					sb.AppendLine("");
-					sb.AppendLine("public unsafe static {0} {1}({2}) {{", 
-						Proto.ReturnType,
-						Proto.Name,
-						string.Join(", ", Param.Select(x => x.EnumDeclaration(false)))
-					);
-					sb.Indent();
-					foreach(var param in Param)
-					{
-						if(param.NeedsFixed) {
-							sb.AppendLine("fixed({0} {1}_ = &{1}[0])", param.EnumTranslated, param.Name);
-						}
-					}
-					sb.Indent();
-					sb.AppendLine("{0}{1}({2});", 
-						Proto.ReturnType == "void" ? "" : "return ",
-						Proto.Name, 
-						string.Join(", ", Param.Select(x => x.NeedsFixed ? (x.Name + "_") : x.Name))
-					);
-					sb.Outdent();
-					sb.Outdent();
-					sb.AppendLine("}");
-				}
-			}
-		}
-
-		public void BuildOutWrapper(IndentedStringBuilder sb) {
-
-		}
-		public void BuildOutEnumWrapper(IndentedStringBuilder sb) {
-			
-		}
-		public void BuildOutFixedWrapper(IndentedStringBuilder sb) {
-			
-		}
-		public void BuildOutFixedEnumWrapper(IndentedStringBuilder sb) {
-			
-		}
-		
-		public void BuildWrappers(IndentedStringBuilder sb) {
-			var p1 = GetFixedParams();
+		public void BuildWrappers(IndentedStringBuilder sb, DocHandler doc) {
+			var p1 = GetParamVariations();
 			var first = true;
 			foreach(var p2 in p1) {
 				if(first) {
@@ -489,7 +381,16 @@ namespace OpenGLSpec
 					sb.AppendLine("");
 				}
 
-				sb.AppendLine("public unsafe static {0} {1}({2}) {{",
+				doc.WriteMainDoc(sb, Proto.Name);
+				foreach(var param in p2){
+					doc.WriteParameter(sb, Proto.Name, param.Name, param.OrigName);
+				}
+				if(!string.IsNullOrEmpty(Comment)) {
+					sb.AppendLine("/// <remarks>");
+					sb.AppendLine("/// {0}", Comment);
+					sb.AppendLine("/// </remarks>");
+				}
+				sb.AppendLine("public static {0} {1}({2}) {{",
 					Proto.MarshalString ? "string" : Proto.ReturnType,
 					Proto.Name,
 					string.Join(", ", p2.Select(x => x.DeclareType + " " + x.Name))
@@ -519,145 +420,6 @@ namespace OpenGLSpec
 				sb.AppendLine("}");
 			}
 
-
-			/*sb.AppendLine("/// <summary>");
-			if(!string.IsNullOrEmpty(Comment)) {
-				sb.AppendLine("/// {0}", Comment);
-			} else {
-				sb.AppendLine("/// ");
-			}
-			sb.AppendLine("/// </summary>");
-			foreach(var param in Param) {
-				sb.AppendLine("/// <param name=\"{0}\"></param>", param.Name);
-			}
-			sb.AppendLine("public {0}static {1} {2}({3}) => {4}Pointers.{2}({5}){6};", 
-				Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
-				Proto.MarshalString ? "string" : Proto.ReturnType, 
-				Proto.Name,
-				Param != null ? string.Join(", ", Param.Select(x => x.Declaration())): "",
-				Proto.MarshalString ? "PtrToStringUTF8(" : "",
-				Param != null ? string.Join(", ", Param.Select(x => x.Name)): "",
-				Proto.MarshalString ? ")" : ""
-				);
-			if(Param.Any(x => x.HasEnum)) {
-				sb.AppendLine("");
-				sb.AppendLine("public {0}static {1} {2}({3}) => {4}Pointers.{2}({5}){6};", 
-					Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
-					Proto.MarshalString ? "string" : Proto.ReturnType, 
-					Proto.Name,
-					Param != null ? string.Join(", ", Param.Select(x => x.EnumDeclaration())): "",
-					Proto.MarshalString ? "PtrToStringUTF8(" : "",
-					Param != null ? string.Join(", ", Param.Select(x => (string.IsNullOrEmpty(x.Group) ? "" : "(" + x.Translated + ")") + x.Name)): "",
-					Proto.MarshalString ? ")" : ""
-					);
-			}
-			if (Param != null && Param.Any(x => x.NeedsFixed)) {
-				sb.AppendLine("");
-				sb.AppendLine("/// <summary>");
-				if(!string.IsNullOrEmpty(Comment)) {
-					sb.AppendLine("/// {0}", Comment);
-				} else {
-					sb.AppendLine("/// ");
-				}
-				sb.AppendLine("/// </summary>");
-				foreach(var param in Param) {
-					sb.AppendLine("/// <param name=\"{0}\"></param>", param.Name);
-				}
-				sb.AppendLine("public unsafe static {0} {1}({2}) {{", 
-					Proto.ReturnType,
-					Proto.Name,
-					string.Join(", ", Param.Select(x => x.Declaration(false)))
-				);
-				sb.Indent();
-				foreach(var param in Param)
-				{
-					if(param.NeedsFixed) {
-						sb.AppendLine("fixed({0} {1}_ = &{1}[0])", param.Translated, param.Name);
-					}
-				}
-				sb.Indent();
-				sb.AppendLine("{0}Pointers.{1}({2});", 
-					Proto.ReturnType == "void" ? "" : "return ",
-					Proto.Name, 
-					string.Join(", ", Param.Select(x => x.NeedsFixed ? (x.Name + "_") : x.Name))
-				);
-				sb.Outdent();
-				sb.Outdent();
-				sb.AppendLine("}");
-
-				if(Param.Any(x => x.HasEnum)) {
-					sb.AppendLine("");
-					sb.AppendLine("public unsafe static {0} {1}({2}) {{", 
-						Proto.ReturnType,
-						Proto.Name,
-						string.Join(", ", Param.Select(x => x.EnumDeclaration(false)))
-					);
-					sb.Indent();
-					foreach(var param in Param)
-					{
-						if(param.NeedsFixed) {
-							sb.AppendLine("fixed({0} {1}_ = &{1}[0])", param.EnumTranslated, param.Name);
-						}
-					}
-					sb.Indent();
-					sb.AppendLine("{0}{1}({2});", 
-						Proto.ReturnType == "void" ? "" : "return ",
-						Proto.Name, 
-						string.Join(", ", Param.Select(x => x.NeedsFixed ? (x.Name + "_") : x.Name))
-					);
-					sb.Outdent();
-					sb.Outdent();
-					sb.AppendLine("}");
-				}
-			}
-			if(Param.Any(x => x.NeedsOut)) {
-				sb.AppendLine("");
-				sb.AppendLine("public unsafe static void {0}({1}) {{",
-					Proto.Name,
-					string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.Translated.Substring(0, x.Translated.Length - 1)) : x.Translated) + " " + x.Name))
-				);
-				sb.Indent();
-				sb.AppendLine("{0}({1});",
-					Proto.Name,
-					string.Join(", ", Param.Select(x => (x.NeedsOut ? "&" : "") + x.Name))
-				);
-				sb.Outdent();
-				sb.AppendLine("}");
-				if(Param.Any(x => x.HasEnum)) {
-					sb.AppendLine("");
-					sb.AppendLine("public unsafe static void {0}({1}) {{",
-						Proto.Name,
-						string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.EnumTranslated.Substring(0, x.EnumTranslated.Length - 1)) : x.EnumTranslated) + " " + x.Name))
-					);
-					sb.Indent();
-					sb.AppendLine("{0}({1});",
-						Proto.Name,
-						string.Join(", ", Param.Select(x => (x.NeedsOut ? "&" : "") + x.Name))
-					);
-					foreach(var param in Param) {
-						if(param.NeedsOut) {
-							sb.AppendLine("{0} = {0}_[0];", param.Name);
-						}
-					}
-					sb.Outdent();
-					sb.AppendLine("}");
-				}
-			}
-			if(Param.Any(x => x.NeedsFixed && Param.Any(y => y.NeedsOut && y.Name != x.Name))) {
-				sb.AppendLine("");
-				sb.AppendLine("public unsafe static void {0}({1}) {{",
-					Proto.Name,
-					string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.Translated.Substring(0, x.Translated.Length - 1)) : x.Translated) + " " + x.Name))
-				);
-				sb.Indent();
-				sb.AppendLine("{0}({1});",
-					Proto.Name,
-					string.Join(", ", Param.Select(x => (x.NeedsOut ? "&" : "") + x.Name))
-				);
-				sb.Outdent();
-				sb.AppendLine("}");
-			}*/
-
 			if(
 				(Proto.Name.StartsWith("glGen") || Proto.Name.StartsWith("glCreate")) &&
 				Proto.ReturnType == "void" &&
@@ -681,7 +443,7 @@ namespace OpenGLSpec
 			if(new[]{"glGetIntegerv","glGetFloatv","glGetDoublev","glGetBooleanv"}.Contains(Proto.Name)) {
 				sb.AppendLine("");
 				var param = Param.First(x => x.NeedsFixed);
-				sb.AppendLine("public unsafe static {0} {1}({2}) {{",
+				sb.AppendLine("public static {0} {1}({2}) {{",
 					param.Translated.Substring(0, param.Translated.Length - 1),
 					Proto.Name,
 					string.Join(", ", Param.Where(x => x != param).Select(x => x.Translated + " " + x.Name))
@@ -734,7 +496,7 @@ namespace OpenGLSpec
 		[XmlAttribute(AttributeName="namespace")]
 		public string Namespace { get; set; }
 
-		public void Build(IndentedStringBuilder delegates, IndentedStringBuilder pointers, IndentedStringBuilder wrappers, Registry reg, HashSet<string> commands) {
+		public void Build(IndentedStringBuilder delegates, IndentedStringBuilder pointers, IndentedStringBuilder wrappers, Registry reg, HashSet<string> commands, DocHandler doc) {
 			var wrapperStart = true;
 			foreach(var c in Command) {
 				c.Proto.ReturnType = Senzible.GetReturnType(c.Proto);
@@ -746,7 +508,7 @@ namespace OpenGLSpec
 				} else {
 					wrapperStart = false;
 				}
-				c.BuildWrappers(wrappers);
+				c.BuildWrappers(wrappers, doc);
 				commands.Add(c.Proto.Name);
 			}
 		}
