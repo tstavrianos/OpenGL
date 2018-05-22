@@ -72,7 +72,7 @@ namespace Generator
                     return "bool";
                 case "glboolean const *":
                 case "glboolean *":
-                    return "bool *";
+                    return "bool*";
                 case "glboolean **":
                 case "glboolean const **":
                     return "bool[]";

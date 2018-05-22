@@ -89,7 +89,7 @@ namespace Generator
             loader.AppendLine("public static void Init(Func<string, IntPtr> loadProc, bool disableRemovedProcs = false, bool loadExtensions = true, bool loadExtensionProcs = true, bool loadLeftovers = false) {");
             loader.Indent();
             loader.AppendLine("var proc = IntPtr.Zero;");
-            loader.AppendLine("if((proc = loadProc(\"{0}\")) != IntPtr.Zero) Pointers.{0} = (Delegates.{0})Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.{0}));", "glGetIntegerv");
+            OpenGLSpec.Command.BuildLoader(loader, "glGetIntegerv");
             loader.AppendLine("");
             loader.AppendLine("var int1 = new int[1];");
             loader.AppendLine("var versionMajor = 0;");

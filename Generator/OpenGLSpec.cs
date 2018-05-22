@@ -167,6 +167,7 @@ namespace OpenGLSpec
 		public string Len { get; set; }
 		public string Translated;
 		public bool NeedsFixed;
+		public bool NeedsOut;
 		public string EnumTranslated;
 		public bool HasEnum;
 	}
@@ -208,6 +209,8 @@ namespace OpenGLSpec
 					param.NeedsFixed = param.Translated.EndsWith("*");
 					param.HasEnum = !string.IsNullOrEmpty(param.Group) && reg.Enums.Any(x => x.Group == param.Group);
 					param.EnumTranslated = !param.HasEnum ? param.Translated : ("Enums." + param.Group + (param.NeedsFixed ? "*" : ""));
+					param.NeedsOut = param.NeedsFixed && Proto.ReturnType == "void" &&
+						new[]{"glGetIntegerv","glGetFloatv", "glGetDoublev", "glGetBooleanv"}.Contains(Proto.Name);
 				}
 			}			
 		}
@@ -316,10 +319,121 @@ namespace OpenGLSpec
 					sb.AppendLine("}");
 				}
 			}
+			if(Param.Any(x => x.NeedsOut)) {
+				sb.AppendLine("");
+				sb.AppendLine("public static void {0}({1}) {{",
+					Proto.Name,
+					string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.Translated.Substring(0, x.Translated.Length - 1)) : x.Translated) + " " + x.Name))
+				);
+				sb.Indent();
+				foreach(var param in Param) {
+					if(param.NeedsOut) {
+						sb.AppendLine("var {0}_ = new {1}[1];", param.Name, param.Translated.Substring(0, param.Translated.Length - 1));
+					}
+				}
+				sb.AppendLine("{0}({1});",
+					Proto.Name,
+					string.Join(", ", Param.Select(x => x.NeedsOut ? (x.Name + "_") : x.Name))
+				);
+				foreach(var param in Param) {
+					if(param.NeedsOut) {
+						sb.AppendLine("{0} = {0}_[0];", param.Name);
+					}
+				}
+				sb.Outdent();
+				sb.AppendLine("}");
+				if(Param.Any(x => x.HasEnum)) {
+					sb.AppendLine("");
+					sb.AppendLine("public static void {0}({1}) {{",
+						Proto.Name,
+						string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.EnumTranslated.Substring(0, x.EnumTranslated.Length - 1)) : x.Translated) + " " + x.Name))
+					);
+					sb.Indent();
+					foreach(var param in Param) {
+						if(param.NeedsOut) {
+							sb.AppendLine("var {0}_ = new {1}[1];", param.Name, param.EnumTranslated.Substring(0, param.EnumTranslated.Length - 1));
+						}
+					}
+					sb.AppendLine("{0}({1});",
+						Proto.Name,
+						string.Join(", ", Param.Select(x => x.NeedsOut ? (x.Name + "_") : x.Name))
+					);
+					foreach(var param in Param) {
+						if(param.NeedsOut) {
+							sb.AppendLine("{0} = {0}_[0];", param.Name);
+						}
+					}
+					sb.Outdent();
+					sb.AppendLine("}");					
+				}
+				if(Param.Count(x => x.NeedsOut) == 1) {
+					var outParam = Param.First(x => x.NeedsOut);
+					sb.AppendLine("");
+					sb.AppendLine("public unsafe static {2} {0}({1}) {{",
+						Proto.Name,
+						string.Join(", ", Param.Where(x => x != outParam).Select(x => x.Translated + " " + x.Name)),
+						outParam.Translated.Substring(0, outParam.Translated.Length - 1)
+					);
+					sb.Indent();
+					sb.AppendLine("{1} {0}_;", outParam.Name, outParam.Translated.Substring(0, outParam.Translated.Length - 1));
+					sb.AppendLine("{0}({1});",
+						Proto.Name,
+						string.Join(", ", Param.Select(x => x.NeedsOut ? ("&" + x.Name + "_") : x.Name))
+					);
+					sb.AppendLine("return {0}_;", outParam.Name);
+					sb.Outdent();
+					sb.AppendLine("}");
+					if(Param.Any(x => x.HasEnum)) {
+						sb.AppendLine("");
+						sb.AppendLine("public unsafe static {2} {0}({1}) {{",
+							Proto.Name,
+							string.Join(", ", Param.Where(x => x != outParam).Select(x => x.EnumTranslated + " " + x.Name)),
+							outParam.EnumTranslated.Substring(0, outParam.EnumTranslated.Length - 1)
+						);
+						sb.Indent();
+						sb.AppendLine("{1} {0}_;", outParam.Name, outParam.EnumTranslated.Substring(0, outParam.EnumTranslated.Length - 1));
+						sb.AppendLine("{0}({1});",
+							Proto.Name,
+							string.Join(", ", Param.Select(x => x.NeedsOut ? ("&" + x.Name + "_") : x.Name))
+						);
+						sb.AppendLine("return {0}_;", outParam.Name);
+						sb.Outdent();
+						sb.AppendLine("}");
+					}
+				}
+			}
+
+			if(
+				(Proto.Name.StartsWith("glGen") || Proto.Name.StartsWith("glCreate")) &&
+				Proto.ReturnType == "void" &&
+				Param.Count == 2 &&
+				Param.Any(x => x.NeedsFixed && !string.IsNullOrEmpty(x.Len) && Param.Any(y => y.Name == x.Len && y.Name != x.Name))
+			) {
+				var param = Param.First(x => !string.IsNullOrEmpty(x.Len));
+				sb.AppendLine("");
+				sb.AppendLine("public static {0} {1}() {{",
+					param.Translated.Substring(0, param.Translated.Length - 1),
+					Proto.Name.EndsWith("s") ? Proto.Name.Substring(0, Proto.Name.Length - 1) : Proto.Name
+				);
+				sb.Indent();
+				sb.AppendLine("var {0}_ = new {1}[1];", param.Name, param.Translated.Substring(0, param.Translated.Length - 1));
+				sb.AppendLine("{0}(1, {1}_);", Proto.Name, param.Name);
+				sb.AppendLine("return {0}_[0];", param.Name);
+				sb.Outdent();
+				sb.AppendLine("}");
+			}
 		}
 
 		public static void BuildLoader(IndentedStringBuilder sb, string name) {
-			sb.AppendLine("if(Pointers.{0} == null) if((proc = loadProc(\"{0}\")) != IntPtr.Zero) Pointers.{0} = (Delegates.{0})Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.{0}));", name);
+			sb.AppendLine("if(Pointers.{0} == null) {{", name);
+			sb.Indent();
+			sb.AppendLine("if((proc = loadProc(\"{0}\")) != IntPtr.Zero) {{", name);
+			sb.Indent();
+			sb.AppendLine("Pointers.{0} = (Delegates.{0})Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.{0}));", name);
+			sb.Outdent();
+			sb.AppendLine("}");
+			sb.Outdent();
+			sb.AppendLine("}");
 		}
 
 		public void BuildLoader(IndentedStringBuilder sb) {
@@ -478,8 +592,8 @@ namespace OpenGLSpec
 		public List<Extension> Extension { get; set; }
 
 		public void BuildLoader(IndentedStringBuilder sb, string api, HashSet<string> commands) {
-            foreach(var ext in Extension.Where(x => x.Supported == api && x.Require != null && x.Require.Any(y => y.Command != null && y.Command.Count > 0))) {
-                ext.BuildLoader(sb, commands);
+			foreach(var ext in Extension.Where(x => x.Supported == api && x.Require != null && x.Require.Any(y => y.Command != null && y.Command.Count > 0))) {
+				ext.BuildLoader(sb, commands);
             }
 		}
 	}

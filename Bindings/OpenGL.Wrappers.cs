@@ -177,7 +177,7 @@ namespace OpenGL {
         /// <param name="n"></param>
         /// <param name="programs"></param>
         /// <param name="residences"></param>
-        public unsafe static bool glAreProgramsResidentNV(int n, uint* programs, bool * residences) => Pointers.glAreProgramsResidentNV(n, programs, residences);
+        public unsafe static bool glAreProgramsResidentNV(int n, uint* programs, bool* residences) => Pointers.glAreProgramsResidentNV(n, programs, residences);
         
         /// <summary>
         /// 
@@ -185,9 +185,9 @@ namespace OpenGL {
         /// <param name="n"></param>
         /// <param name="programs"></param>
         /// <param name="residences"></param>
-        public unsafe static bool glAreProgramsResidentNV(int n, uint[] programs, bool [] residences) {
+        public unsafe static bool glAreProgramsResidentNV(int n, uint[] programs, bool[] residences) {
             fixed(uint* programs_ = &programs[0])
-            fixed(bool * residences_ = &residences[0])
+            fixed(bool* residences_ = &residences[0])
                 return Pointers.glAreProgramsResidentNV(n, programs_, residences_);
         }
         
@@ -197,7 +197,7 @@ namespace OpenGL {
         /// <param name="n"></param>
         /// <param name="textures"></param>
         /// <param name="residences"></param>
-        public unsafe static bool glAreTexturesResident(int n, uint* textures, bool * residences) => Pointers.glAreTexturesResident(n, textures, residences);
+        public unsafe static bool glAreTexturesResident(int n, uint* textures, bool* residences) => Pointers.glAreTexturesResident(n, textures, residences);
         
         /// <summary>
         /// 
@@ -205,9 +205,9 @@ namespace OpenGL {
         /// <param name="n"></param>
         /// <param name="textures"></param>
         /// <param name="residences"></param>
-        public unsafe static bool glAreTexturesResident(int n, uint[] textures, bool [] residences) {
+        public unsafe static bool glAreTexturesResident(int n, uint[] textures, bool[] residences) {
             fixed(uint* textures_ = &textures[0])
-            fixed(bool * residences_ = &residences[0])
+            fixed(bool* residences_ = &residences[0])
                 return Pointers.glAreTexturesResident(n, textures_, residences_);
         }
         
@@ -217,7 +217,7 @@ namespace OpenGL {
         /// <param name="n"></param>
         /// <param name="textures"></param>
         /// <param name="residences"></param>
-        public unsafe static bool glAreTexturesResidentEXT(int n, uint* textures, bool * residences) => Pointers.glAreTexturesResidentEXT(n, textures, residences);
+        public unsafe static bool glAreTexturesResidentEXT(int n, uint* textures, bool* residences) => Pointers.glAreTexturesResidentEXT(n, textures, residences);
         
         /// <summary>
         /// 
@@ -225,9 +225,9 @@ namespace OpenGL {
         /// <param name="n"></param>
         /// <param name="textures"></param>
         /// <param name="residences"></param>
-        public unsafe static bool glAreTexturesResidentEXT(int n, uint[] textures, bool [] residences) {
+        public unsafe static bool glAreTexturesResidentEXT(int n, uint[] textures, bool[] residences) {
             fixed(uint* textures_ = &textures[0])
-            fixed(bool * residences_ = &residences[0])
+            fixed(bool* residences_ = &residences[0])
                 return Pointers.glAreTexturesResidentEXT(n, textures_, residences_);
         }
         
@@ -4533,6 +4533,12 @@ namespace OpenGL {
                 Pointers.glCreateBuffers(n, buffers_);
         }
         
+        public static uint glCreateBuffer() {
+            var buffers_ = new uint[1];
+            glCreateBuffers(1, buffers_);
+            return buffers_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -4550,6 +4556,12 @@ namespace OpenGL {
                 Pointers.glCreateCommandListsNV(n, lists_);
         }
         
+        public static uint glCreateCommandListsNV() {
+            var lists_ = new uint[1];
+            glCreateCommandListsNV(1, lists_);
+            return lists_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -4565,6 +4577,12 @@ namespace OpenGL {
         public unsafe static void glCreateFramebuffers(int n, uint[] framebuffers) {
             fixed(uint* framebuffers_ = &framebuffers[0])
                 Pointers.glCreateFramebuffers(n, framebuffers_);
+        }
+        
+        public static uint glCreateFramebuffer() {
+            var framebuffers_ = new uint[1];
+            glCreateFramebuffers(1, framebuffers_);
+            return framebuffers_[0];
         }
         
         /// <summary>
@@ -4628,6 +4646,12 @@ namespace OpenGL {
                 Pointers.glCreateProgramPipelines(n, pipelines_);
         }
         
+        public static uint glCreateProgramPipeline() {
+            var pipelines_ = new uint[1];
+            glCreateProgramPipelines(1, pipelines_);
+            return pipelines_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -4664,6 +4688,12 @@ namespace OpenGL {
                 Pointers.glCreateRenderbuffers(n, renderbuffers_);
         }
         
+        public static uint glCreateRenderbuffer() {
+            var renderbuffers_ = new uint[1];
+            glCreateRenderbuffers(1, renderbuffers_);
+            return renderbuffers_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -4679,6 +4709,12 @@ namespace OpenGL {
         public unsafe static void glCreateSamplers(int n, uint[] samplers) {
             fixed(uint* samplers_ = &samplers[0])
                 Pointers.glCreateSamplers(n, samplers_);
+        }
+        
+        public static uint glCreateSampler() {
+            var samplers_ = new uint[1];
+            glCreateSamplers(1, samplers_);
+            return samplers_[0];
         }
         
         /// <summary>
@@ -4743,6 +4779,12 @@ namespace OpenGL {
                 Pointers.glCreateStatesNV(n, states_);
         }
         
+        public static uint glCreateStatesNV() {
+            var states_ = new uint[1];
+            glCreateStatesNV(1, states_);
+            return states_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -4787,6 +4829,12 @@ namespace OpenGL {
                 Pointers.glCreateTransformFeedbacks(n, ids_);
         }
         
+        public static uint glCreateTransformFeedback() {
+            var ids_ = new uint[1];
+            glCreateTransformFeedbacks(1, ids_);
+            return ids_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -4802,6 +4850,12 @@ namespace OpenGL {
         public unsafe static void glCreateVertexArrays(int n, uint[] arrays) {
             fixed(uint* arrays_ = &arrays[0])
                 Pointers.glCreateVertexArrays(n, arrays_);
+        }
+        
+        public static uint glCreateVertexArray() {
+            var arrays_ = new uint[1];
+            glCreateVertexArrays(1, arrays_);
+            return arrays_[0];
         }
         
         /// <summary>
@@ -6926,7 +6980,7 @@ namespace OpenGL {
         /// <param name="stride"></param>
         /// <param name="count"></param>
         /// <param name="pointer"></param>
-        public unsafe static void glEdgeFlagPointerEXT(int stride, int count, bool * pointer) => Pointers.glEdgeFlagPointerEXT(stride, count, pointer);
+        public unsafe static void glEdgeFlagPointerEXT(int stride, int count, bool* pointer) => Pointers.glEdgeFlagPointerEXT(stride, count, pointer);
         
         /// <summary>
         /// 
@@ -6934,8 +6988,8 @@ namespace OpenGL {
         /// <param name="stride"></param>
         /// <param name="count"></param>
         /// <param name="pointer"></param>
-        public unsafe static void glEdgeFlagPointerEXT(int stride, int count, bool [] pointer) {
-            fixed(bool * pointer_ = &pointer[0])
+        public unsafe static void glEdgeFlagPointerEXT(int stride, int count, bool[] pointer) {
+            fixed(bool* pointer_ = &pointer[0])
                 Pointers.glEdgeFlagPointerEXT(stride, count, pointer_);
         }
         
@@ -6951,14 +7005,14 @@ namespace OpenGL {
         /// 
         /// </summary>
         /// <param name="flag"></param>
-        public unsafe static void glEdgeFlagv(bool * flag) => Pointers.glEdgeFlagv(flag);
+        public unsafe static void glEdgeFlagv(bool* flag) => Pointers.glEdgeFlagv(flag);
         
         /// <summary>
         /// 
         /// </summary>
         /// <param name="flag"></param>
-        public unsafe static void glEdgeFlagv(bool [] flag) {
-            fixed(bool * flag_ = &flag[0])
+        public unsafe static void glEdgeFlagv(bool[] flag) {
+            fixed(bool* flag_ = &flag[0])
                 Pointers.glEdgeFlagv(flag_);
         }
         
@@ -8745,6 +8799,12 @@ namespace OpenGL {
                 Pointers.glGenBuffers(n, buffers_);
         }
         
+        public static uint glGenBuffer() {
+            var buffers_ = new uint[1];
+            glGenBuffers(1, buffers_);
+            return buffers_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -8760,6 +8820,12 @@ namespace OpenGL {
         public unsafe static void glGenBuffersARB(int n, uint[] buffers) {
             fixed(uint* buffers_ = &buffers[0])
                 Pointers.glGenBuffersARB(n, buffers_);
+        }
+        
+        public static uint glGenBuffersARB() {
+            var buffers_ = new uint[1];
+            glGenBuffersARB(1, buffers_);
+            return buffers_[0];
         }
         
         /// <summary>
@@ -8779,6 +8845,12 @@ namespace OpenGL {
                 Pointers.glGenFencesAPPLE(n, fences_);
         }
         
+        public static uint glGenFencesAPPLE() {
+            var fences_ = new uint[1];
+            glGenFencesAPPLE(1, fences_);
+            return fences_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -8794,6 +8866,12 @@ namespace OpenGL {
         public unsafe static void glGenFencesNV(int n, uint[] fences) {
             fixed(uint* fences_ = &fences[0])
                 Pointers.glGenFencesNV(n, fences_);
+        }
+        
+        public static uint glGenFencesNV() {
+            var fences_ = new uint[1];
+            glGenFencesNV(1, fences_);
+            return fences_[0];
         }
         
         /// <summary>
@@ -8819,6 +8897,12 @@ namespace OpenGL {
                 Pointers.glGenFramebuffers(n, framebuffers_);
         }
         
+        public static uint glGenFramebuffer() {
+            var framebuffers_ = new uint[1];
+            glGenFramebuffers(1, framebuffers_);
+            return framebuffers_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -8836,6 +8920,12 @@ namespace OpenGL {
                 Pointers.glGenFramebuffersEXT(n, framebuffers_);
         }
         
+        public static uint glGenFramebuffersEXT() {
+            var framebuffers_ = new uint[1];
+            glGenFramebuffersEXT(1, framebuffers_);
+            return framebuffers_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -8851,6 +8941,12 @@ namespace OpenGL {
         public unsafe static void glGenFramebuffersOES(int n, uint[] framebuffers) {
             fixed(uint* framebuffers_ = &framebuffers[0])
                 Pointers.glGenFramebuffersOES(n, framebuffers_);
+        }
+        
+        public static uint glGenFramebuffersOES() {
+            var framebuffers_ = new uint[1];
+            glGenFramebuffersOES(1, framebuffers_);
+            return framebuffers_[0];
         }
         
         /// <summary>
@@ -8895,6 +8991,12 @@ namespace OpenGL {
                 Pointers.glGenOcclusionQueriesNV(n, ids_);
         }
         
+        public static uint glGenOcclusionQueriesNV() {
+            var ids_ = new uint[1];
+            glGenOcclusionQueriesNV(1, ids_);
+            return ids_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -8918,6 +9020,12 @@ namespace OpenGL {
                 Pointers.glGenPerfMonitorsAMD(n, monitors_);
         }
         
+        public static uint glGenPerfMonitorsAMD() {
+            var monitors_ = new uint[1];
+            glGenPerfMonitorsAMD(1, monitors_);
+            return monitors_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -8933,6 +9041,12 @@ namespace OpenGL {
         public unsafe static void glGenProgramPipelines(int n, uint[] pipelines) {
             fixed(uint* pipelines_ = &pipelines[0])
                 Pointers.glGenProgramPipelines(n, pipelines_);
+        }
+        
+        public static uint glGenProgramPipeline() {
+            var pipelines_ = new uint[1];
+            glGenProgramPipelines(1, pipelines_);
+            return pipelines_[0];
         }
         
         /// <summary>
@@ -8952,6 +9066,12 @@ namespace OpenGL {
                 Pointers.glGenProgramPipelinesEXT(n, pipelines_);
         }
         
+        public static uint glGenProgramPipelinesEXT() {
+            var pipelines_ = new uint[1];
+            glGenProgramPipelinesEXT(1, pipelines_);
+            return pipelines_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -8967,6 +9087,12 @@ namespace OpenGL {
         public unsafe static void glGenProgramsARB(int n, uint[] programs) {
             fixed(uint* programs_ = &programs[0])
                 Pointers.glGenProgramsARB(n, programs_);
+        }
+        
+        public static uint glGenProgramsARB() {
+            var programs_ = new uint[1];
+            glGenProgramsARB(1, programs_);
+            return programs_[0];
         }
         
         /// <summary>
@@ -8986,6 +9112,12 @@ namespace OpenGL {
                 Pointers.glGenProgramsNV(n, programs_);
         }
         
+        public static uint glGenProgramsNV() {
+            var programs_ = new uint[1];
+            glGenProgramsNV(1, programs_);
+            return programs_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9001,6 +9133,12 @@ namespace OpenGL {
         public unsafe static void glGenQueries(int n, uint[] ids) {
             fixed(uint* ids_ = &ids[0])
                 Pointers.glGenQueries(n, ids_);
+        }
+        
+        public static uint glGenQuerie() {
+            var ids_ = new uint[1];
+            glGenQueries(1, ids_);
+            return ids_[0];
         }
         
         /// <summary>
@@ -9020,6 +9158,12 @@ namespace OpenGL {
                 Pointers.glGenQueriesARB(n, ids_);
         }
         
+        public static uint glGenQueriesARB() {
+            var ids_ = new uint[1];
+            glGenQueriesARB(1, ids_);
+            return ids_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9035,6 +9179,12 @@ namespace OpenGL {
         public unsafe static void glGenQueriesEXT(int n, uint[] ids) {
             fixed(uint* ids_ = &ids[0])
                 Pointers.glGenQueriesEXT(n, ids_);
+        }
+        
+        public static uint glGenQueriesEXT() {
+            var ids_ = new uint[1];
+            glGenQueriesEXT(1, ids_);
+            return ids_[0];
         }
         
         /// <summary>
@@ -9054,6 +9204,12 @@ namespace OpenGL {
                 Pointers.glGenQueryResourceTagNV(n, tagIds_);
         }
         
+        public static int glGenQueryResourceTagNV() {
+            var tagIds_ = new int[1];
+            glGenQueryResourceTagNV(1, tagIds_);
+            return tagIds_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9069,6 +9225,12 @@ namespace OpenGL {
         public unsafe static void glGenRenderbuffers(int n, uint[] renderbuffers) {
             fixed(uint* renderbuffers_ = &renderbuffers[0])
                 Pointers.glGenRenderbuffers(n, renderbuffers_);
+        }
+        
+        public static uint glGenRenderbuffer() {
+            var renderbuffers_ = new uint[1];
+            glGenRenderbuffers(1, renderbuffers_);
+            return renderbuffers_[0];
         }
         
         /// <summary>
@@ -9088,6 +9250,12 @@ namespace OpenGL {
                 Pointers.glGenRenderbuffersEXT(n, renderbuffers_);
         }
         
+        public static uint glGenRenderbuffersEXT() {
+            var renderbuffers_ = new uint[1];
+            glGenRenderbuffersEXT(1, renderbuffers_);
+            return renderbuffers_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9103,6 +9271,12 @@ namespace OpenGL {
         public unsafe static void glGenRenderbuffersOES(int n, uint[] renderbuffers) {
             fixed(uint* renderbuffers_ = &renderbuffers[0])
                 Pointers.glGenRenderbuffersOES(n, renderbuffers_);
+        }
+        
+        public static uint glGenRenderbuffersOES() {
+            var renderbuffers_ = new uint[1];
+            glGenRenderbuffersOES(1, renderbuffers_);
+            return renderbuffers_[0];
         }
         
         /// <summary>
@@ -9122,6 +9296,12 @@ namespace OpenGL {
                 Pointers.glGenSamplers(count, samplers_);
         }
         
+        public static uint glGenSampler() {
+            var samplers_ = new uint[1];
+            glGenSamplers(1, samplers_);
+            return samplers_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9137,6 +9317,12 @@ namespace OpenGL {
         public unsafe static void glGenSemaphoresEXT(int n, uint[] semaphores) {
             fixed(uint* semaphores_ = &semaphores[0])
                 Pointers.glGenSemaphoresEXT(n, semaphores_);
+        }
+        
+        public static uint glGenSemaphoresEXT() {
+            var semaphores_ = new uint[1];
+            glGenSemaphoresEXT(1, semaphores_);
+            return semaphores_[0];
         }
         
         /// <summary>
@@ -9165,6 +9351,12 @@ namespace OpenGL {
                 Pointers.glGenTextures(n, textures_);
         }
         
+        public static uint glGenTexture() {
+            var textures_ = new uint[1];
+            glGenTextures(1, textures_);
+            return textures_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9180,6 +9372,12 @@ namespace OpenGL {
         public unsafe static void glGenTexturesEXT(int n, uint[] textures) {
             fixed(uint* textures_ = &textures[0])
                 Pointers.glGenTexturesEXT(n, textures_);
+        }
+        
+        public static uint glGenTexturesEXT() {
+            var textures_ = new uint[1];
+            glGenTexturesEXT(1, textures_);
+            return textures_[0];
         }
         
         /// <summary>
@@ -9199,6 +9397,12 @@ namespace OpenGL {
                 Pointers.glGenTransformFeedbacks(n, ids_);
         }
         
+        public static uint glGenTransformFeedback() {
+            var ids_ = new uint[1];
+            glGenTransformFeedbacks(1, ids_);
+            return ids_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9214,6 +9418,12 @@ namespace OpenGL {
         public unsafe static void glGenTransformFeedbacksNV(int n, uint[] ids) {
             fixed(uint* ids_ = &ids[0])
                 Pointers.glGenTransformFeedbacksNV(n, ids_);
+        }
+        
+        public static uint glGenTransformFeedbacksNV() {
+            var ids_ = new uint[1];
+            glGenTransformFeedbacksNV(1, ids_);
+            return ids_[0];
         }
         
         /// <summary>
@@ -9233,6 +9443,12 @@ namespace OpenGL {
                 Pointers.glGenVertexArrays(n, arrays_);
         }
         
+        public static uint glGenVertexArray() {
+            var arrays_ = new uint[1];
+            glGenVertexArrays(1, arrays_);
+            return arrays_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9250,6 +9466,12 @@ namespace OpenGL {
                 Pointers.glGenVertexArraysAPPLE(n, arrays_);
         }
         
+        public static uint glGenVertexArraysAPPLE() {
+            var arrays_ = new uint[1];
+            glGenVertexArraysAPPLE(1, arrays_);
+            return arrays_[0];
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -9265,6 +9487,12 @@ namespace OpenGL {
         public unsafe static void glGenVertexArraysOES(int n, uint[] arrays) {
             fixed(uint* arrays_ = &arrays[0])
                 Pointers.glGenVertexArraysOES(n, arrays_);
+        }
+        
+        public static uint glGenVertexArraysOES() {
+            var arrays_ = new uint[1];
+            glGenVertexArraysOES(1, arrays_);
+            return arrays_[0];
         }
         
         /// <summary>
@@ -9800,7 +10028,7 @@ namespace OpenGL {
         /// <param name="target"></param>
         /// <param name="index"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetBooleanIndexedvEXT(int target, uint index, bool * data) => Pointers.glGetBooleanIndexedvEXT(target, index, data);
+        public unsafe static void glGetBooleanIndexedvEXT(int target, uint index, bool* data) => Pointers.glGetBooleanIndexedvEXT(target, index, data);
         
         /// <summary>
         /// 
@@ -9808,8 +10036,8 @@ namespace OpenGL {
         /// <param name="target"></param>
         /// <param name="index"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetBooleanIndexedvEXT(int target, uint index, bool [] data) {
-            fixed(bool * data_ = &data[0])
+        public unsafe static void glGetBooleanIndexedvEXT(int target, uint index, bool[] data) {
+            fixed(bool* data_ = &data[0])
                 Pointers.glGetBooleanIndexedvEXT(target, index, data_);
         }
         
@@ -9819,7 +10047,7 @@ namespace OpenGL {
         /// <param name="target"></param>
         /// <param name="index"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetBooleani_v(int target, uint index, bool * data) => Pointers.glGetBooleani_v(target, index, data);
+        public unsafe static void glGetBooleani_v(int target, uint index, bool* data) => Pointers.glGetBooleani_v(target, index, data);
         
         /// <summary>
         /// 
@@ -9827,8 +10055,8 @@ namespace OpenGL {
         /// <param name="target"></param>
         /// <param name="index"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetBooleani_v(int target, uint index, bool [] data) {
-            fixed(bool * data_ = &data[0])
+        public unsafe static void glGetBooleani_v(int target, uint index, bool[] data) {
+            fixed(bool* data_ = &data[0])
                 Pointers.glGetBooleani_v(target, index, data_);
         }
         
@@ -9837,16 +10065,28 @@ namespace OpenGL {
         /// </summary>
         /// <param name="pname"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetBooleanv(int pname, bool * data) => Pointers.glGetBooleanv(pname, data);
+        public unsafe static void glGetBooleanv(int pname, bool* data) => Pointers.glGetBooleanv(pname, data);
         
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pname"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetBooleanv(int pname, bool [] data) {
-            fixed(bool * data_ = &data[0])
+        public unsafe static void glGetBooleanv(int pname, bool[] data) {
+            fixed(bool* data_ = &data[0])
                 Pointers.glGetBooleanv(pname, data_);
+        }
+        
+        public static void glGetBooleanv(int pname, out bool data) {
+            var data_ = new bool[1];
+            glGetBooleanv(pname, data_);
+            data = data_[0];
+        }
+        
+        public unsafe static bool glGetBooleanv(int pname) {
+            bool data_;
+            glGetBooleanv(pname, &data_);
+            return data_;
         }
         
         /// <summary>
@@ -10748,6 +10988,18 @@ namespace OpenGL {
                 Pointers.glGetDoublev(pname, data_);
         }
         
+        public static void glGetDoublev(int pname, out double data) {
+            var data_ = new double[1];
+            glGetDoublev(pname, data_);
+            data = data_[0];
+        }
+        
+        public unsafe static double glGetDoublev(int pname) {
+            double data_;
+            glGetDoublev(pname, &data_);
+            return data_;
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -11010,6 +11262,18 @@ namespace OpenGL {
         public unsafe static void glGetFloatv(int pname, float[] data) {
             fixed(float* data_ = &data[0])
                 Pointers.glGetFloatv(pname, data_);
+        }
+        
+        public static void glGetFloatv(int pname, out float data) {
+            var data_ = new float[1];
+            glGetFloatv(pname, data_);
+            data = data_[0];
+        }
+        
+        public unsafe static float glGetFloatv(int pname) {
+            float data_;
+            glGetFloatv(pname, &data_);
+            return data_;
         }
         
         /// <summary>
@@ -11651,6 +11915,18 @@ namespace OpenGL {
                 Pointers.glGetIntegerv(pname, data_);
         }
         
+        public static void glGetIntegerv(int pname, out int data) {
+            var data_ = new int[1];
+            glGetIntegerv(pname, data_);
+            data = data_[0];
+        }
+        
+        public unsafe static int glGetIntegerv(int pname) {
+            int data_;
+            glGetIntegerv(pname, &data_);
+            return data_;
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -11728,7 +12004,7 @@ namespace OpenGL {
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetInvariantBooleanvEXT(uint id, int value, bool * data) => Pointers.glGetInvariantBooleanvEXT(id, value, data);
+        public unsafe static void glGetInvariantBooleanvEXT(uint id, int value, bool* data) => Pointers.glGetInvariantBooleanvEXT(id, value, data);
         
         /// <summary>
         /// 
@@ -11736,8 +12012,8 @@ namespace OpenGL {
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetInvariantBooleanvEXT(uint id, int value, bool [] data) {
-            fixed(bool * data_ = &data[0])
+        public unsafe static void glGetInvariantBooleanvEXT(uint id, int value, bool[] data) {
+            fixed(bool* data_ = &data[0])
                 Pointers.glGetInvariantBooleanvEXT(id, value, data_);
         }
         
@@ -11918,7 +12194,7 @@ namespace OpenGL {
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetLocalConstantBooleanvEXT(uint id, int value, bool * data) => Pointers.glGetLocalConstantBooleanvEXT(id, value, data);
+        public unsafe static void glGetLocalConstantBooleanvEXT(uint id, int value, bool* data) => Pointers.glGetLocalConstantBooleanvEXT(id, value, data);
         
         /// <summary>
         /// 
@@ -11926,8 +12202,8 @@ namespace OpenGL {
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetLocalConstantBooleanvEXT(uint id, int value, bool [] data) {
-            fixed(bool * data_ = &data[0])
+        public unsafe static void glGetLocalConstantBooleanvEXT(uint id, int value, bool[] data) {
+            fixed(bool* data_ = &data[0])
                 Pointers.glGetLocalConstantBooleanvEXT(id, value, data_);
         }
         
@@ -16879,7 +17155,7 @@ namespace OpenGL {
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetVariantBooleanvEXT(uint id, int value, bool * data) => Pointers.glGetVariantBooleanvEXT(id, value, data);
+        public unsafe static void glGetVariantBooleanvEXT(uint id, int value, bool* data) => Pointers.glGetVariantBooleanvEXT(id, value, data);
         
         /// <summary>
         /// 
@@ -16887,8 +17163,8 @@ namespace OpenGL {
         /// <param name="id"></param>
         /// <param name="value"></param>
         /// <param name="data"></param>
-        public unsafe static void glGetVariantBooleanvEXT(uint id, int value, bool [] data) {
-            fixed(bool * data_ = &data[0])
+        public unsafe static void glGetVariantBooleanvEXT(uint id, int value, bool[] data) {
+            fixed(bool* data_ = &data[0])
                 Pointers.glGetVariantBooleanvEXT(id, value, data_);
         }
         

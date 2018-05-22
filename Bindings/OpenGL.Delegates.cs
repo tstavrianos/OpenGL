@@ -23,9 +23,9 @@ namespace OpenGL {
         internal delegate void glApplyFramebufferAttachmentCMAAINTEL();
         internal delegate void glApplyTextureEXT(int mode);
         internal delegate bool glAcquireKeyedMutexWin32EXT(uint memory, ulong key, uint timeout);
-        internal unsafe delegate bool glAreProgramsResidentNV(int n, uint* programs, bool * residences);
-        internal unsafe delegate bool glAreTexturesResident(int n, uint* textures, bool * residences);
-        internal unsafe delegate bool glAreTexturesResidentEXT(int n, uint* textures, bool * residences);
+        internal unsafe delegate bool glAreProgramsResidentNV(int n, uint* programs, bool* residences);
+        internal unsafe delegate bool glAreTexturesResident(int n, uint* textures, bool* residences);
+        internal unsafe delegate bool glAreTexturesResidentEXT(int n, uint* textures, bool* residences);
         internal delegate void glArrayElement(int i);
         internal delegate void glArrayElementEXT(int i);
         internal delegate void glArrayObjectATI(int array, int size, int type, int stride, uint buffer, uint offset);
@@ -611,9 +611,9 @@ namespace OpenGL {
         internal delegate void glEdgeFlag(bool flag);
         internal delegate void glEdgeFlagFormatNV(int stride);
         internal delegate void glEdgeFlagPointer(int stride, IntPtr pointer);
-        internal unsafe delegate void glEdgeFlagPointerEXT(int stride, int count, bool * pointer);
+        internal unsafe delegate void glEdgeFlagPointerEXT(int stride, int count, bool* pointer);
         internal delegate void glEdgeFlagPointerListIBM(int stride, bool[] pointer, int ptrstride);
-        internal unsafe delegate void glEdgeFlagv(bool * flag);
+        internal unsafe delegate void glEdgeFlagv(bool* flag);
         internal delegate void glElementPointerAPPLE(int type, IntPtr pointer);
         internal delegate void glElementPointerATI(int type, IntPtr pointer);
         internal delegate void glEnable(int cap);
@@ -851,9 +851,9 @@ namespace OpenGL {
         internal unsafe delegate void glGetAttachedShaders(uint program, int maxCount, int* count, uint* shaders);
         internal delegate int glGetAttribLocation(uint program, string name);
         internal delegate int glGetAttribLocationARB(uint programObj, string name);
-        internal unsafe delegate void glGetBooleanIndexedvEXT(int target, uint index, bool * data);
-        internal unsafe delegate void glGetBooleani_v(int target, uint index, bool * data);
-        internal unsafe delegate void glGetBooleanv(int pname, bool * data);
+        internal unsafe delegate void glGetBooleanIndexedvEXT(int target, uint index, bool* data);
+        internal unsafe delegate void glGetBooleani_v(int target, uint index, bool* data);
+        internal unsafe delegate void glGetBooleanv(int pname, bool* data);
         internal unsafe delegate void glGetBufferParameteri64v(int target, int pname, long* _params);
         internal unsafe delegate void glGetBufferParameteriv(int target, int pname, int* _params);
         internal unsafe delegate void glGetBufferParameterivARB(int target, int pname, int* _params);
@@ -967,7 +967,7 @@ namespace OpenGL {
         internal unsafe delegate void glGetInternalformatSampleivNV(int target, int internalformat, int samples, int pname, int bufSize, int* _params);
         internal unsafe delegate void glGetInternalformati64v(int target, int internalformat, int pname, int bufSize, long* _params);
         internal unsafe delegate void glGetInternalformativ(int target, int internalformat, int pname, int bufSize, int* _params);
-        internal unsafe delegate void glGetInvariantBooleanvEXT(uint id, int value, bool * data);
+        internal unsafe delegate void glGetInvariantBooleanvEXT(uint id, int value, bool* data);
         internal unsafe delegate void glGetInvariantFloatvEXT(uint id, int value, float* data);
         internal unsafe delegate void glGetInvariantIntegervEXT(uint id, int value, int* data);
         internal unsafe delegate void glGetLightfv(int light, int pname, float* _params);
@@ -977,7 +977,7 @@ namespace OpenGL {
         internal unsafe delegate void glGetLightxvOES(int light, int pname, IntPtr* _params);
         internal unsafe delegate void glGetListParameterfvSGIX(uint list, int pname, float* _params);
         internal unsafe delegate void glGetListParameterivSGIX(uint list, int pname, int* _params);
-        internal unsafe delegate void glGetLocalConstantBooleanvEXT(uint id, int value, bool * data);
+        internal unsafe delegate void glGetLocalConstantBooleanvEXT(uint id, int value, bool* data);
         internal unsafe delegate void glGetLocalConstantFloatvEXT(uint id, int value, float* data);
         internal unsafe delegate void glGetLocalConstantIntegervEXT(uint id, int value, int* data);
         internal unsafe delegate void glGetMapAttribParameterfvNV(int target, uint index, int pname, float* _params);
@@ -1246,7 +1246,7 @@ namespace OpenGL {
         internal unsafe delegate void glGetUnsignedBytei_vEXT(int target, uint index, byte* data);
         internal unsafe delegate void glGetVariantArrayObjectfvATI(uint id, int pname, float* _params);
         internal unsafe delegate void glGetVariantArrayObjectivATI(uint id, int pname, int* _params);
-        internal unsafe delegate void glGetVariantBooleanvEXT(uint id, int value, bool * data);
+        internal unsafe delegate void glGetVariantBooleanvEXT(uint id, int value, bool* data);
         internal unsafe delegate void glGetVariantFloatvEXT(uint id, int value, float* data);
         internal unsafe delegate void glGetVariantIntegervEXT(uint id, int value, int* data);
         internal unsafe delegate void glGetVariantPointervEXT(uint id, int value, IntPtr* data);
