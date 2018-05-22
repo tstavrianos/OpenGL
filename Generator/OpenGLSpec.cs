@@ -170,6 +170,28 @@ namespace OpenGLSpec
 		public bool NeedsOut;
 		public string EnumTranslated;
 		public bool HasEnum;
+
+		public string Declaration(bool std = true) {
+			if(std) {
+				return Translated + " " + Name;
+			} else if(NeedsFixed && !NeedsOut) {
+				return Translated.Substring(0, Translated.Length - 1) + "[] " + Name;
+			} else if (NeedsOut) {
+				return "out " + Translated.Substring(0, Translated.Length - 1) + " " + Name;
+			}
+			return string.Empty;
+		}
+
+		public string EnumDeclaration(bool std = true) {
+			if(std) {
+				return EnumTranslated + " " + Name;
+			} else if(NeedsFixed && !NeedsOut) {
+				return EnumTranslated.Substring(0, EnumTranslated.Length - 1) + "[] " + Name;
+			} else if (NeedsOut) {
+				return "out " + EnumTranslated.Substring(0, EnumTranslated.Length - 1) + " " + Name;
+			}
+			return string.Empty;
+		}
 	}
 
 	[XmlRoot(ElementName="glx")]
@@ -209,8 +231,8 @@ namespace OpenGLSpec
 					param.NeedsFixed = param.Translated.EndsWith("*");
 					param.HasEnum = !string.IsNullOrEmpty(param.Group) && reg.Enums.Any(x => x.Group == param.Group);
 					param.EnumTranslated = !param.HasEnum ? param.Translated : ("Enums." + param.Group + (param.NeedsFixed ? "*" : ""));
-					param.NeedsOut = param.NeedsFixed && Proto.ReturnType == "void" &&
-						new[]{"glGetIntegerv","glGetFloatv", "glGetDoublev", "glGetBooleanv"}.Contains(Proto.Name);
+					param.NeedsOut = 
+						param.NeedsFixed && !string.IsNullOrEmpty(param.Len) && param.Len == "1";
 				}
 			}			
 		}
@@ -228,7 +250,120 @@ namespace OpenGLSpec
 			sb.AppendLine("internal static Delegates.{0} {0} = null;", Proto.Name);
 		}
 
-		public void BuildWrappers(IndentedStringBuilder sb) {
+		private struct FixedParam {
+			public string Name;
+			public string Type;
+			public bool IsFixed;
+			public bool IsOut;
+			public bool IsEnum;
+			public string EnumType;
+
+			public string DeclareType;
+			public string FixedType;
+			public string Param;
+		}
+
+		public static IEnumerable<IEnumerable<T>> CartesianProduct<T>(IEnumerable<IEnumerable<T>> sequences)
+		{
+			if (sequences == null)
+			{
+				return null;
+			}
+
+			IEnumerable<IEnumerable<T>> emptyProduct = new[] { Enumerable.Empty<T>() };
+
+			return sequences.Aggregate(
+				emptyProduct,
+				(accumulator, sequence) => accumulator.SelectMany(
+					accseq => sequence,
+					(accseq, item) => accseq.Concat(new[] { item })));
+		}
+		
+		private IEnumerable<IEnumerable<FixedParam>> GetFixedParams(){
+			var res = new List<List<FixedParam>>();
+			foreach(var param in Param) {
+				var pList = new List<FixedParam>();
+				pList.Add(new FixedParam() {
+					Name = param.Name,
+					Type = param.Translated,
+					IsFixed = false,
+					IsOut = false,
+					IsEnum = false,
+					EnumType = null,
+					DeclareType = param.Translated,
+					FixedType = param.Translated,
+					Param = param.Name
+				});
+				if(param.NeedsFixed && !param.NeedsOut && !param.HasEnum) {
+					pList.Add(new FixedParam() {
+						Name = param.Name,
+						Type = param.Translated,
+						IsFixed = true,
+						IsOut = false,
+						IsEnum = false,
+						EnumType = null,
+						DeclareType = param.Translated.Substring(0, param.Translated.Length - 1) + "[]",
+						FixedType = param.Translated,
+						Param = param.Name + "_"
+					});
+				}
+				else if(param.NeedsOut && !param.HasEnum) {
+					pList.Add(new FixedParam() {
+						Name = param.Name,
+						Type = param.Translated,
+						IsFixed = false,
+						IsOut = true,
+						IsEnum = false,
+						EnumType = null,
+						DeclareType = "out " + param.Translated.Substring(0, param.Translated.Length - 1),
+						FixedType = param.Translated,
+						Param = param.Name + "_"
+					});
+				}
+				else if(!param.NeedsFixed && param.HasEnum) {
+					pList.Add(new FixedParam() {
+						Name = param.Name,
+						Type = param.Translated,
+						IsFixed = false,
+						IsOut = false,
+						IsEnum = true,
+						EnumType = param.EnumTranslated,
+						DeclareType = param.EnumTranslated,
+						Param = "(" + param.Translated + ")" + param.Name
+					});
+				}
+				else if(param.NeedsFixed && !param.NeedsOut && param.HasEnum) {
+					pList.Add(new FixedParam() {
+						Name = param.Name,
+						Type = param.Translated,
+						IsFixed = true,
+						IsOut = false,
+						IsEnum = true,
+						EnumType = param.EnumTranslated,
+						DeclareType = param.EnumTranslated.Substring(0, param.EnumTranslated.Length - 1) + "[]",
+						FixedType = param.EnumTranslated,
+						Param = "(" + param.Translated + ")" + param.Name
+					});
+				}
+				else if(param.NeedsOut && param.HasEnum) {
+					pList.Add(new FixedParam() {
+						Name = param.Name,
+						Type = param.Translated,
+						IsFixed = false,
+						IsOut = true,
+						IsEnum = true,
+						EnumType = param.EnumTranslated,
+						DeclareType = "out " + param.EnumTranslated.Substring(0, param.EnumTranslated.Length - 1),
+						FixedType = param.EnumTranslated,
+						Param = "(" + param.Translated + ")" + param.Name + "_"
+					});
+				}
+				res.Add(pList);
+			}
+			return CartesianProduct(res);
+		}
+		
+		public void BuildStdWrapper(IndentedStringBuilder sb) {
 			sb.AppendLine("/// <summary>");
 			if(!string.IsNullOrEmpty(Comment)) {
 				sb.AppendLine("/// {0}", Comment);
@@ -243,7 +378,163 @@ namespace OpenGLSpec
 				Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
 				Proto.MarshalString ? "string" : Proto.ReturnType, 
 				Proto.Name,
-				Param != null ? string.Join(", ", Param.Select(x => x.Translated + " " + x.Name)): "",
+				Param != null ? string.Join(", ", Param.Select(x => x.Declaration())): "",
+				Proto.MarshalString ? "PtrToStringUTF8(" : "",
+				Param != null ? string.Join(", ", Param.Select(x => x.Name)): "",
+				Proto.MarshalString ? ")" : ""
+				);
+		}
+
+		public void BuildStdEnumWrapper(IndentedStringBuilder sb) {
+			if(Param.Any(x => x.HasEnum)) {
+				sb.AppendLine("");
+				sb.AppendLine("public {0}static {1} {2}({3}) => {4}Pointers.{2}({5}){6};", 
+					Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
+					Proto.MarshalString ? "string" : Proto.ReturnType, 
+					Proto.Name,
+					Param != null ? string.Join(", ", Param.Select(x => x.EnumDeclaration())): "",
+					Proto.MarshalString ? "PtrToStringUTF8(" : "",
+					Param != null ? string.Join(", ", Param.Select(x => (string.IsNullOrEmpty(x.Group) ? "" : "(" + x.Translated + ")") + x.Name)): "",
+					Proto.MarshalString ? ")" : ""
+					);
+			}
+		}
+
+		public void BuildFixedWrapper(IndentedStringBuilder sb) {
+			if (Param != null && Param.Any(x => x.NeedsFixed)) {
+				sb.AppendLine("");
+				sb.AppendLine("/// <summary>");
+				if(!string.IsNullOrEmpty(Comment)) {
+					sb.AppendLine("/// {0}", Comment);
+				} else {
+					sb.AppendLine("/// ");
+				}
+				sb.AppendLine("/// </summary>");
+				foreach(var param in Param) {
+					sb.AppendLine("/// <param name=\"{0}\"></param>", param.Name);
+				}
+				sb.AppendLine("public unsafe static {0} {1}({2}) {{", 
+					Proto.ReturnType,
+					Proto.Name,
+					string.Join(", ", Param.Select(x => x.Declaration(false)))
+				);
+				sb.Indent();
+				foreach(var param in Param)
+				{
+					if(param.NeedsFixed) {
+						sb.AppendLine("fixed({0} {1}_ = &{1}[0])", param.Translated, param.Name);
+					}
+				}
+				sb.Indent();
+				sb.AppendLine("{0}Pointers.{1}({2});", 
+					Proto.ReturnType == "void" ? "" : "return ",
+					Proto.Name, 
+					string.Join(", ", Param.Select(x => x.NeedsFixed ? (x.Name + "_") : x.Name))
+				);
+				sb.Outdent();
+				sb.Outdent();
+				sb.AppendLine("}");
+			}
+		}
+
+		public void BuildFixedEnumWrapper(IndentedStringBuilder sb) {
+			if (Param != null && Param.Any(x => x.NeedsFixed)) {
+				if(Param.Any(x => x.HasEnum)) {
+					sb.AppendLine("");
+					sb.AppendLine("public unsafe static {0} {1}({2}) {{", 
+						Proto.ReturnType,
+						Proto.Name,
+						string.Join(", ", Param.Select(x => x.EnumDeclaration(false)))
+					);
+					sb.Indent();
+					foreach(var param in Param)
+					{
+						if(param.NeedsFixed) {
+							sb.AppendLine("fixed({0} {1}_ = &{1}[0])", param.EnumTranslated, param.Name);
+						}
+					}
+					sb.Indent();
+					sb.AppendLine("{0}{1}({2});", 
+						Proto.ReturnType == "void" ? "" : "return ",
+						Proto.Name, 
+						string.Join(", ", Param.Select(x => x.NeedsFixed ? (x.Name + "_") : x.Name))
+					);
+					sb.Outdent();
+					sb.Outdent();
+					sb.AppendLine("}");
+				}
+			}
+		}
+
+		public void BuildOutWrapper(IndentedStringBuilder sb) {
+
+		}
+		public void BuildOutEnumWrapper(IndentedStringBuilder sb) {
+			
+		}
+		public void BuildOutFixedWrapper(IndentedStringBuilder sb) {
+			
+		}
+		public void BuildOutFixedEnumWrapper(IndentedStringBuilder sb) {
+			
+		}
+		
+		public void BuildWrappers(IndentedStringBuilder sb) {
+			var p1 = GetFixedParams();
+			var first = true;
+			foreach(var p2 in p1) {
+				if(first) {
+					first = false;
+				} else {
+					sb.AppendLine("");
+				}
+
+				sb.AppendLine("public unsafe static {0} {1}({2}) {{",
+					Proto.MarshalString ? "string" : Proto.ReturnType,
+					Proto.Name,
+					string.Join(", ", p2.Select(x => x.DeclareType + " " + x.Name))
+				);
+				sb.Indent();
+				var fxd = false;
+				foreach(var param in p2) {
+					if(param.IsFixed) {
+						fxd = true;
+						sb.AppendLine("fixed({0} {1}_ = &{1}[0])", param.FixedType, param.Name);
+					}
+					else if(param.IsOut) {
+						fxd = true;
+						sb.AppendLine("fixed({0} {1}_ = &{1})", param.FixedType, param.Name);
+					}
+				}
+				if(fxd) sb.Indent();
+				sb.AppendLine("{0}{2}Pointers.{1}({3}){4};", 
+					Proto.ReturnType == "void" ? "" : "return ",
+					Proto.Name, 
+					Proto.MarshalString ? "PtrToStringUTF8(" : "",
+					string.Join(", ", p2.Select(x => x.Param)),
+					Proto.MarshalString ? ")" : ""
+				);
+				if(fxd) sb.Outdent();
+				sb.Outdent();
+				sb.AppendLine("}");
+			}
+
+
+			/*sb.AppendLine("/// <summary>");
+			if(!string.IsNullOrEmpty(Comment)) {
+				sb.AppendLine("/// {0}", Comment);
+			} else {
+				sb.AppendLine("/// ");
+			}
+			sb.AppendLine("/// </summary>");
+			foreach(var param in Param) {
+				sb.AppendLine("/// <param name=\"{0}\"></param>", param.Name);
+			}
+			sb.AppendLine("public {0}static {1} {2}({3}) => {4}Pointers.{2}({5}){6};", 
+				Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
+				Proto.MarshalString ? "string" : Proto.ReturnType, 
+				Proto.Name,
+				Param != null ? string.Join(", ", Param.Select(x => x.Declaration())): "",
 				Proto.MarshalString ? "PtrToStringUTF8(" : "",
 				Param != null ? string.Join(", ", Param.Select(x => x.Name)): "",
 				Proto.MarshalString ? ")" : ""
@@ -254,7 +545,7 @@ namespace OpenGLSpec
 					Param != null && Param.Any(x => x.NeedsFixed) ? "unsafe " : "",
 					Proto.MarshalString ? "string" : Proto.ReturnType, 
 					Proto.Name,
-					Param != null ? string.Join(", ", Param.Select(x => x.EnumTranslated + " " + x.Name)): "",
+					Param != null ? string.Join(", ", Param.Select(x => x.EnumDeclaration())): "",
 					Proto.MarshalString ? "PtrToStringUTF8(" : "",
 					Param != null ? string.Join(", ", Param.Select(x => (string.IsNullOrEmpty(x.Group) ? "" : "(" + x.Translated + ")") + x.Name)): "",
 					Proto.MarshalString ? ")" : ""
@@ -275,7 +566,7 @@ namespace OpenGLSpec
 				sb.AppendLine("public unsafe static {0} {1}({2}) {{", 
 					Proto.ReturnType,
 					Proto.Name,
-					string.Join(", ", Param.Select(x => (x.NeedsFixed ? x.Translated.Substring(0, x.Translated.Length - 1) +"[]" : x.Translated) + " " + x.Name))
+					string.Join(", ", Param.Select(x => x.Declaration(false)))
 				);
 				sb.Indent();
 				foreach(var param in Param)
@@ -299,7 +590,7 @@ namespace OpenGLSpec
 					sb.AppendLine("public unsafe static {0} {1}({2}) {{", 
 						Proto.ReturnType,
 						Proto.Name,
-						string.Join(", ", Param.Select(x => (x.NeedsFixed ? x.EnumTranslated.Substring(0, x.EnumTranslated.Length - 1) +"[]" : x.EnumTranslated) + " " + x.Name))
+						string.Join(", ", Param.Select(x => x.EnumDeclaration(false)))
 					);
 					sb.Indent();
 					foreach(var param in Param)
@@ -321,42 +612,27 @@ namespace OpenGLSpec
 			}
 			if(Param.Any(x => x.NeedsOut)) {
 				sb.AppendLine("");
-				sb.AppendLine("public static void {0}({1}) {{",
+				sb.AppendLine("public unsafe static void {0}({1}) {{",
 					Proto.Name,
 					string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.Translated.Substring(0, x.Translated.Length - 1)) : x.Translated) + " " + x.Name))
 				);
 				sb.Indent();
-				foreach(var param in Param) {
-					if(param.NeedsOut) {
-						sb.AppendLine("var {0}_ = new {1}[1];", param.Name, param.Translated.Substring(0, param.Translated.Length - 1));
-					}
-				}
 				sb.AppendLine("{0}({1});",
 					Proto.Name,
-					string.Join(", ", Param.Select(x => x.NeedsOut ? (x.Name + "_") : x.Name))
+					string.Join(", ", Param.Select(x => (x.NeedsOut ? "&" : "") + x.Name))
 				);
-				foreach(var param in Param) {
-					if(param.NeedsOut) {
-						sb.AppendLine("{0} = {0}_[0];", param.Name);
-					}
-				}
 				sb.Outdent();
 				sb.AppendLine("}");
 				if(Param.Any(x => x.HasEnum)) {
 					sb.AppendLine("");
-					sb.AppendLine("public static void {0}({1}) {{",
+					sb.AppendLine("public unsafe static void {0}({1}) {{",
 						Proto.Name,
-						string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.EnumTranslated.Substring(0, x.EnumTranslated.Length - 1)) : x.Translated) + " " + x.Name))
+						string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.EnumTranslated.Substring(0, x.EnumTranslated.Length - 1)) : x.EnumTranslated) + " " + x.Name))
 					);
 					sb.Indent();
-					foreach(var param in Param) {
-						if(param.NeedsOut) {
-							sb.AppendLine("var {0}_ = new {1}[1];", param.Name, param.EnumTranslated.Substring(0, param.EnumTranslated.Length - 1));
-						}
-					}
 					sb.AppendLine("{0}({1});",
 						Proto.Name,
-						string.Join(", ", Param.Select(x => x.NeedsOut ? (x.Name + "_") : x.Name))
+						string.Join(", ", Param.Select(x => (x.NeedsOut ? "&" : "") + x.Name))
 					);
 					foreach(var param in Param) {
 						if(param.NeedsOut) {
@@ -364,44 +640,23 @@ namespace OpenGLSpec
 						}
 					}
 					sb.Outdent();
-					sb.AppendLine("}");					
-				}
-				if(Param.Count(x => x.NeedsOut) == 1) {
-					var outParam = Param.First(x => x.NeedsOut);
-					sb.AppendLine("");
-					sb.AppendLine("public unsafe static {2} {0}({1}) {{",
-						Proto.Name,
-						string.Join(", ", Param.Where(x => x != outParam).Select(x => x.Translated + " " + x.Name)),
-						outParam.Translated.Substring(0, outParam.Translated.Length - 1)
-					);
-					sb.Indent();
-					sb.AppendLine("{1} {0}_;", outParam.Name, outParam.Translated.Substring(0, outParam.Translated.Length - 1));
-					sb.AppendLine("{0}({1});",
-						Proto.Name,
-						string.Join(", ", Param.Select(x => x.NeedsOut ? ("&" + x.Name + "_") : x.Name))
-					);
-					sb.AppendLine("return {0}_;", outParam.Name);
-					sb.Outdent();
 					sb.AppendLine("}");
-					if(Param.Any(x => x.HasEnum)) {
-						sb.AppendLine("");
-						sb.AppendLine("public unsafe static {2} {0}({1}) {{",
-							Proto.Name,
-							string.Join(", ", Param.Where(x => x != outParam).Select(x => x.EnumTranslated + " " + x.Name)),
-							outParam.EnumTranslated.Substring(0, outParam.EnumTranslated.Length - 1)
-						);
-						sb.Indent();
-						sb.AppendLine("{1} {0}_;", outParam.Name, outParam.EnumTranslated.Substring(0, outParam.EnumTranslated.Length - 1));
-						sb.AppendLine("{0}({1});",
-							Proto.Name,
-							string.Join(", ", Param.Select(x => x.NeedsOut ? ("&" + x.Name + "_") : x.Name))
-						);
-						sb.AppendLine("return {0}_;", outParam.Name);
-						sb.Outdent();
-						sb.AppendLine("}");
-					}
 				}
 			}
+			if(Param.Any(x => x.NeedsFixed && Param.Any(y => y.NeedsOut && y.Name != x.Name))) {
+				sb.AppendLine("");
+				sb.AppendLine("public unsafe static void {0}({1}) {{",
+					Proto.Name,
+					string.Join(", ", Param.Select(x => (x.NeedsOut ? ("out " + x.Translated.Substring(0, x.Translated.Length - 1)) : x.Translated) + " " + x.Name))
+				);
+				sb.Indent();
+				sb.AppendLine("{0}({1});",
+					Proto.Name,
+					string.Join(", ", Param.Select(x => (x.NeedsOut ? "&" : "") + x.Name))
+				);
+				sb.Outdent();
+				sb.AppendLine("}");
+			}*/
 
 			if(
 				(Proto.Name.StartsWith("glGen") || Proto.Name.StartsWith("glCreate")) &&
@@ -419,6 +674,25 @@ namespace OpenGLSpec
 				sb.AppendLine("var {0}_ = new {1}[1];", param.Name, param.Translated.Substring(0, param.Translated.Length - 1));
 				sb.AppendLine("{0}(1, {1}_);", Proto.Name, param.Name);
 				sb.AppendLine("return {0}_[0];", param.Name);
+				sb.Outdent();
+				sb.AppendLine("}");
+			}
+
+			if(new[]{"glGetIntegerv","glGetFloatv","glGetDoublev","glGetBooleanv"}.Contains(Proto.Name)) {
+				sb.AppendLine("");
+				var param = Param.First(x => x.NeedsFixed);
+				sb.AppendLine("public unsafe static {0} {1}({2}) {{",
+					param.Translated.Substring(0, param.Translated.Length - 1),
+					Proto.Name,
+					string.Join(", ", Param.Where(x => x != param).Select(x => x.Translated + " " + x.Name))
+				);
+				sb.Indent();
+				sb.AppendLine("{0} {1};", param.Translated.Substring(0, param.Translated.Length - 1), param.Name);
+				sb.AppendLine("{0}({1});",
+					Proto.Name,
+					string.Join(", ", Param.Select(x => (x == param ? "&" : "") + x.Name))
+				);
+				sb.AppendLine("return {0};", param.Name);
 				sb.Outdent();
 				sb.AppendLine("}");
 			}
