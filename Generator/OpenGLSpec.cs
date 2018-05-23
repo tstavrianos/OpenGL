@@ -280,6 +280,21 @@ namespace OpenGLSpec
 					accseq => sequence,
 					(accseq, item) => accseq.Concat(new[] { item })));
 		}
+
+		private string ParamAlias(int i, DocHandler doc) {
+			var name = Proto.Name;
+			if(!doc.Prototypes.ContainsKey(name)) {
+				if(Alias != null && !string.IsNullOrEmpty(Alias.Name)) {
+					if(doc.Prototypes.ContainsKey(Alias.Name)) {
+						name = Alias.Name;
+					}
+				}
+			}
+			if(!doc.Prototypes.ContainsKey(name)) return Param[i].OrigName;
+
+			if(doc.Prototypes[name].Params.Count <= i) return Param[i].OrigName;
+			return doc.Prototypes[name].Params[i];
+		}
 		
 		private IEnumerable<IEnumerable<FixedParam>> GetParamVariations(){
 			var res = new List<List<FixedParam>>();
@@ -371,7 +386,22 @@ namespace OpenGLSpec
 			return CartesianProduct(res);
 		}
 		
-		public void BuildWrappers(IndentedStringBuilder sb, DocHandler doc) {
+		public string Filename(DocHandler doc, Registry reg) {
+			if(!doc.map.ContainsKey(Proto.Name)) {
+				if(Alias != null && !string.IsNullOrEmpty(Alias.Name)) {
+					if(doc.map.ContainsKey(Alias.Name)) {
+						return doc.map[Alias.Name];
+					} else {
+						return reg.Commands.Command.First(x => x.Proto.Name == Alias.Name).Filename(doc, reg);
+					}
+				}
+				return string.Empty;
+			} else {
+				return doc.map[Proto.Name];
+			}
+		}
+
+		public void BuildWrappers(IndentedStringBuilder sb, DocHandler doc, Registry reg) {
 			var p1 = GetParamVariations();
 			var first = true;
 			foreach(var p2 in p1) {
@@ -381,15 +411,17 @@ namespace OpenGLSpec
 					sb.AppendLine("");
 				}
 
-				doc.WriteMainDoc(sb, Proto.Name);
-				foreach(var param in p2){
-					doc.WriteParameter(sb, Proto.Name, param.Name, param.OrigName);
+				var filename = Filename(doc, reg);
+				if (filename != string.Empty) {
+					doc.map[Proto.Name] = filename;
+					doc.WriteMainDoc(sb, Proto.Name);
+					var i = 0;
+					foreach(var param in p2){
+						doc.WriteParameter(sb, Proto.Name, param.Name, ParamAlias(i, doc));
+						i++;
+					}
 				}
-				if(!string.IsNullOrEmpty(Comment)) {
-					sb.AppendLine("/// <remarks>");
-					sb.AppendLine("/// {0}", Comment);
-					sb.AppendLine("/// </remarks>");
-				}
+
 				sb.AppendLine("public static {0} {1}({2}) {{",
 					Proto.MarshalString ? "string" : Proto.ReturnType,
 					Proto.Name,
@@ -508,7 +540,7 @@ namespace OpenGLSpec
 				} else {
 					wrapperStart = false;
 				}
-				c.BuildWrappers(wrappers, doc);
+				c.BuildWrappers(wrappers, doc, reg);
 				commands.Add(c.Proto.Name);
 			}
 		}

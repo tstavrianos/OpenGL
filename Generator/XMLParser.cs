@@ -8,18 +8,27 @@ namespace Generator
     {
         private static readonly XmlSerializer ReferencePageSerializer = new XmlSerializer(typeof(OpenGLSpec.Registry));
         
-        public OpenGLSpec.Registry Parse(string url) {
+        public static void CacheUrl(string url, string file) {
+            if (!File.Exists(file)) {
+                var webRequest = WebRequest.Create(url);
+
+                using (var response = webRequest.GetResponse())
+                using (var content = response.GetResponseStream())
+                {
+                    using (var reader = new StreamReader(content))
+                    {
+                        File.WriteAllText(file, reader.ReadToEnd());
+                    }
+                }
+            }
+        }
+        
+        public OpenGLSpec.Registry Parse(string url, string file) {
             OpenGLSpec.Registry result;
 
-            var webRequest = WebRequest.Create(url);
-
-            using (var response = webRequest.GetResponse())
-            using (var content = response.GetResponseStream())
-            {
-                using (var reader = new StreamReader(content))
-                {
-                    result = (OpenGLSpec.Registry)ReferencePageSerializer.Deserialize(reader);
-                }
+            CacheUrl(url, file);
+            using(var reader = File.OpenText(file)){
+                result = (OpenGLSpec.Registry)ReferencePageSerializer.Deserialize(reader);
             }
 
             return result;

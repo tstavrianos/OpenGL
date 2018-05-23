@@ -11,19 +11,22 @@ using System.Xml.Xsl;
 
 namespace Generator
 {
-    // Copied from https://github.com/giawa/opengl4csharp/blob/master/BindingsGen/CreateDocumentation/Program.cs
     public class DocHandler
     {
         public Dictionary<string, string> map = new Dictionary<string, string>();
+        private HashSet<string> gl4Files = new HashSet<string>();
+        public class FunctionPrototype {
+            public string Name;
+            public List<string> Params = new List<string>();
+        }
+        public Dictionary<string, FunctionPrototype> Prototypes = new Dictionary<string, FunctionPrototype>();
 
+        private Regex indexRegex = new Regex("<li><a href=\"(.+?).xhtml\" target=\"pagedisplay\">(.+?)</a></li>", RegexOptions.Compiled);
+        private Regex functionsRegex = new Regex("<funcsynopsis>\\s*?<funcprototype>(.*?)</funcprototype>\\s*?</funcsynopsis>", RegexOptions.Compiled | RegexOptions.Singleline);
+        private Regex functionNameRegex = new Regex("<funcdef>.*?<function>(.+?)</function></funcdef>", RegexOptions.Compiled);
+        private Regex functionParamRegex = new Regex("<paramdef>.*?<parameter>(.+?)</parameter></paramdef>", RegexOptions.Compiled);
         public void DownloadGL4() {
             if(!Directory.Exists("cache")) Directory.CreateDirectory("cache");
-
-            var regex = new Regex(
-                "<li><a href=\"(.*?).xhtml\" target=\"pagedisplay\">(.*?)</a></li>",
-                RegexOptions.Multiline | RegexOptions.Compiled
-            );
-            var functionRegex = new Regex("<code class=\"funcdef\">.*?<strong class=\"fsfunc\">(.*?)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
 
             var index = "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/master/gl4/html/indexflat.php";
             var contents = string.Empty;
@@ -38,13 +41,15 @@ namespace Generator
                 }
             }
 
-            var matches = regex.Matches(contents);
+            var matches = indexRegex.Matches(contents);
             foreach(Match match in matches) {
                 var name = match.Groups[1].Value;
+                gl4Files.Add(name);
+                Console.WriteLine("DocHandler - GL4 - Parsing: {0}", name);
                 var xmlContents = string.Empty;
-                if(!File.Exists("cache/" + name + ".xhtml")) {
+                if(!File.Exists("cache/" + name + ".xml")) {
                     try {
-                        var xmlRequest = WebRequest.Create("https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/master/gl4/html/" + name + ".xhtml");
+                        var xmlRequest = WebRequest.Create("https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/master/gl4/" + name + ".xml");
 
                         using (var response = xmlRequest.GetResponse())
                         using (var content = response.GetResponseStream())
@@ -52,60 +57,67 @@ namespace Generator
                             using (var reader = new StreamReader(content))
                             {
                                 xmlContents = reader.ReadToEnd();
-                                File.WriteAllText("cache/" + name + ".xhtml", xmlContents);
+                                File.WriteAllText("cache/" + name + ".xml", xmlContents);
                             }
                         }
                     } catch {
-                        System.Console.WriteLine("https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/master/gl4/html/" + name + ".xhtml");
+                        //System.Console.WriteLine("https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/master/gl4/" + name + ".xml");
                     }
                 } else {
-                    xmlContents = File.ReadAllText("cache/" + name + ".xhtml");
+                    xmlContents = File.ReadAllText("cache/" + name + ".xml");
                 }
-                var functions = functionRegex.Matches(xmlContents);
+
+
+                var functions = functionsRegex.Matches(xmlContents);
                 foreach(Match function in functions) {
-                    if(!map.ContainsKey(function.Groups[1].Value)) {
-                        map[function.Groups[1].Value] = name;
+                    var nameMatch = functionNameRegex.Match(function.Groups[1].Value);
+                    var functionName = nameMatch.Groups[1].Value;
+                    var paramsMatches = functionParamRegex.Matches(function.Groups[1].Value);
+                    var f = new FunctionPrototype();
+                    f.Name = functionName;
+                    foreach(Match param in paramsMatches) {
+                        f.Params.Add(param.Groups[1].Value);
+                    }
+                    Prototypes[functionName] = f;
+
+                    if(!map.ContainsKey(functionName)) {
+                        map[functionName] = name;
                     }
                 }
             }
         }
-        
+
+        private Regex summaryRegex = new Regex("<refpurpose>(.+?)</refpurpose>", RegexOptions.Compiled);
+        private Regex descriptionRegex = new Regex("id=\"description\"><title>Description</title>\\s*?<para>(.*?)</para>", RegexOptions.Singleline | RegexOptions.Compiled);
         public void WriteMainDoc(IndentedStringBuilder sb, string name) {
+            sb.AppendLine("/// <summary>");
             if(map.ContainsKey(name)) {
-                if(File.Exists("cache/" + map[name] + ".xhtml")) {
-                    var contents = File.ReadAllText("cache/" + map[name] + ".xhtml");
+                if(File.Exists("cache/" + map[name] + ".xml")) {
+                    var contents = File.ReadAllText("cache/" + map[name] + ".xml");
+                    var match1 = summaryRegex.Match(contents);
+                    if(match1.Success) {
+                        var summary = match1.Groups[1].Value;
+                        summary = StripHTML(summary);
+                        sb.AppendLine("/// " + summary);
+                    } else {
+                        sb.AppendLine("/// ");
+                    }
 
-                    string summary = contents.Substring(contents.IndexOf("<p>") + 3);
-                    summary = summary.Substring(0, summary.IndexOf("</p>"));
-                    //string names = summary.Substring(0, summary.IndexOf((char)226)).Trim();
-                    summary = summary.Substring(summary.IndexOf((char)8221) + 1);
-                    summary = summary.Replace('\n', ' ').Trim(new char[] { ' ', '\t', '.' });
-                    while (summary.Contains("  ")) summary = summary.Replace("  ", " ");
-                    var Summary = string.Format("{0}{1}.", char.ToUpper(summary[0]), summary.Substring(1));
-                    Summary = StripHTML(Summary);
+                    var match2 = descriptionRegex.Match(contents);
+                    if(match2.Success) {
+                        var description = match2.Groups[1].Value;
+                        description = StripHTML(description);
+                        description = description.Replace('\n', ' ').Trim(new char[] { ' ', '\t', '.' });
+                        while (description.Contains("  ")) description = description.Replace("  ", " ");
 
-                    string description = contents.Substring(contents.IndexOf("<h2>Description</h2>") + 20);
-                    description = description.Substring(0, description.IndexOf("</p>"));
-                    description = StripHTML(description);
-                    description = description.Replace('\n', ' ').Trim(new char[] { ' ', '\t', '.' });
-                    while (description.Contains("  ")) description = description.Replace("  ", " ");
-
-                    // special case for math formatting from the man pages
-                    if (description.Contains("clamped to the range 0 "))
-                        description = description.Replace("clamped to the range 0 ", "clamped to the range [0, ").Replace("1", "1]");
-
-                    var Description = string.Format("{0}{1}.", char.ToUpper(description[0]), description.Substring(1));
-
-                    sb.AppendLine("/// <summary>");
-                    sb.AppendLine("/// " + Summary);
-                    sb.AppendLine("/// <para>");
-                    string text = Description;
-                    if (text.StartsWith("Gl")) text = text.Replace("Gl", "gl");
-                    WriteMultiLine(sb, text);
-                    sb.AppendLine("/// </para>");
-                    sb.AppendLine("/// </summary>");
+                        sb.AppendLine("/// <para>");
+                        if (description.StartsWith("Gl")) description = description.Replace("Gl", "gl");
+                        WriteMultiLine(sb, description);
+                        sb.AppendLine("/// </para>");
+                    }
                 }
             }
+            sb.AppendLine("/// </summary>");
         }
 
         private static void WriteMultiLine(IndentedStringBuilder sb, string text, int maxLine = 100) {
@@ -121,83 +133,94 @@ namespace Generator
 
         public void WriteParameter(IndentedStringBuilder sb, string function, string parameter, string parameterOrig) {
             if(map.ContainsKey(function)) {
-                if(File.Exists("cache/" + map[function] + ".xhtml")) {
-                    var contents = File.ReadAllText("cache/" + map[function] + ".xhtml");
+                if(File.Exists("cache/" + map[function] + ".xml")) {
+                    var contents = File.ReadAllText("cache/" + map[function] + ".xml");
+                    var regex = new Regex("<term>.*?<parameter>"+parameterOrig+"</parameter>.*?</term>\\s*?<listitem>\\s*?<para>(.*?)</para>", RegexOptions.Singleline);
+                    var matches = regex.Matches(contents);
+                    if(matches.Count >= 1) {
+                        Match match = matches[0];
+                        var parameterText = match.Groups[1].Value;
+                        parameterText = parameterText.Replace('\n', ' ').Trim(new char[] { '\r', '\n', '\t', ' ' });
+                        parameterText = StripHTML(parameterText);
+                        while (parameterText.Contains("  ")) parameterText = parameterText.Replace("  ", " ");
 
-                    if (contents.IndexOf("id=\"parameters\"") > 0)
-                    {
-                        contents = contents.Substring(contents.IndexOf("id=\"parameters\""));
-
-                        // check if multiple methods are in here - if so, move to the correct method
-                        if (contents.Contains("parameters2"))
-                        {
-                            if (contents.Contains(map[function] + "</code></h2>"))
-                            {
-                                contents = contents.Substring(contents.IndexOf(map[function] + "</code></h2>"));
-                            }
-                            else
-                            {
-                                contents = contents.Substring(contents.IndexOf(map[function]));
-                            }
-                        }
-
-                        contents = contents.Substring(0, contents.IndexOf("div class=\"refsect1\""));
-
-                        var found = false;
-                        while (contents.Contains("<span class=\"term\">"))
-                        {
-                            contents = contents.Substring(contents.IndexOf("<em class=\"parameter\"") + 17);
-
-                            //List<string> parameterNames = new List<string>();
-
-                            while (contents.IndexOf("<code>") > 0 && contents.IndexOf("<code>") < contents.IndexOf("<p>"))
-                            {
-                                string parameterName = contents.Substring(contents.IndexOf("<code>") + 6);
-                                parameterName = parameterName.Substring(0, parameterName.IndexOf("</code>")).Trim(new char[] { '\r', '\n', '\t', ' ' });
-
-                                //parameterNames.Add(parameterName);
-                                if(parameterName == parameterOrig) found = true;
-
-                                contents = contents.Substring(contents.IndexOf("</code>") + 7);
-                            }
-                            if(found) {
-                                string parameterText = contents.Substring(contents.IndexOf("<p>") + 3);
-                                parameterText = parameterText.Substring(0, parameterText.IndexOf("</dd>"));
-                                parameterText = parameterText.Replace('\n', ' ').Trim(new char[] { '\r', '\n', '\t', ' ' });
-                                parameterText = StripHTML(parameterText);
-                                while (parameterText.Contains("  ")) parameterText = parameterText.Replace("  ", " ");
-
-                                // special case for math formatting from the man pages
-                                if (parameterText.Contains("clamped to the range 0 "))
-                                    parameterText = parameterText.Replace("clamped to the range 0 ", "clamped to the range [0, ").Replace("1 .", "1].").Replace("2 n - 1 ,", "2^n - 1],");
-                                sb.AppendLine("/// <param name=\"{0}\">", parameter);
-                                WriteMultiLine(sb, parameterText);
-                                sb.AppendLine("/// </param>");
-                                return;
-                            }
-                        }
+                        sb.AppendLine("/// <param name=\"{0}\">", parameter);
+                        WriteMultiLine(sb, parameterText);
+                        sb.AppendLine("/// </param>");
+                        return;
                     }
+                    //System.Console.WriteLine("{0}, {1}, {2}, {3}", function, map[function], parameter, parameterOrig);
                 }
             }
+            sb.AppendLine("/// <param name=\"{0}\"> </param>", parameter);
         }
 
         private static string StripHTML(string data)
         {
-            var sb = new StringBuilder();
+            return Regex.Replace(data, @"<(.|\n)*?>", string.Empty);
+        }
 
-            char[] chars = data.ToCharArray();
-            for (int i = 0; i < data.Length; i++)
+        private Regex indexRegex2 = new Regex("<tr><td><a target=\"pagedisp\" href=\"(.+?).xml\">\\1</a></td></tr>", RegexOptions.Compiled);
+        public void DownloadGL2() {
+            if(!Directory.Exists("cache")) Directory.CreateDirectory("cache");
+
+            var index = "https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/master/gl2.1/xhtml/index.html";
+            var contents = string.Empty;
+            var webRequest = WebRequest.Create(index);
+
+            using (var response = webRequest.GetResponse())
+            using (var content = response.GetResponseStream())
             {
-                if (chars[i] == '<')
+                using (var reader = new StreamReader(content))
                 {
-                    while (chars[i] != '>') i++;
-                    continue;
+                    contents = reader.ReadToEnd();
                 }
-
-                sb.Append(chars[i]);
             }
 
-            return sb.ToString();
+            var matches = indexRegex2.Matches(contents);
+            foreach(Match match in matches) {
+                var name = match.Groups[1].Value;
+                if(gl4Files.Contains(name)) continue;
+                Console.WriteLine("DocHandler - GL2 - Parsing: {0}", name);
+
+                var xmlContents = string.Empty;
+                if(!File.Exists("cache/" + name + ".xml")) {
+                    try {
+                        var xmlRequest = WebRequest.Create("https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/master/gl2.1/" + name + ".xml");
+
+                        using (var response = xmlRequest.GetResponse())
+                        using (var content = response.GetResponseStream())
+                        {
+                            using (var reader = new StreamReader(content))
+                            {
+                                xmlContents = reader.ReadToEnd();
+                                File.WriteAllText("cache/" + name + ".xml", xmlContents);
+                            }
+                        }
+                    } catch {
+                        System.Console.WriteLine("https://raw.githubusercontent.com/KhronosGroup/OpenGL-Refpages/master/gl4/" + name + ".xml");
+                    }
+                } else {
+                    xmlContents = File.ReadAllText("cache/" + name + ".xml");
+                }
+
+                var functions = functionsRegex.Matches(xmlContents);
+                foreach(Match function in functions) {
+                    var nameMatch = functionNameRegex.Match(function.Groups[1].Value);
+                    var functionName = nameMatch.Groups[1].Value;
+                    var paramsMatches = functionParamRegex.Matches(function.Groups[1].Value);
+                    var f = new FunctionPrototype();
+                    f.Name = functionName;
+                    foreach(Match param in paramsMatches) {
+                        f.Params.Add(param.Groups[1].Value);
+                    }
+                    Prototypes[functionName] = f;
+
+                    if(!map.ContainsKey(functionName)) {
+                        map[functionName] = name;
+                    }
+                }
+            }
         }
     }
 }

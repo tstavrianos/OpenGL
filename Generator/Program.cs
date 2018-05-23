@@ -28,10 +28,11 @@ namespace Generator
         {
             var docHandler = new DocHandler();
             docHandler.DownloadGL4();
-            //docHandler.DownloadGL2();
+            docHandler.DownloadGL2();
 
             var parser = new XMLParser();
-            var def = parser.Parse(@"https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/master/xml/gl.xml");
+            
+            var def = parser.Parse(@"https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/master/xml/gl.xml", "cache/gl.xml");
             var consts = new IndentedStringBuilder();
             consts.AppendLine("namespace {0} {{", Namespace);
             consts.Indent();
