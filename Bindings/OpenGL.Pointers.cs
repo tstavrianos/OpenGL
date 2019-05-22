@@ -86,6 +86,7 @@ namespace OpenGL {
         internal static Delegates.glBindRenderbufferOES glBindRenderbufferOES = null;
         internal static Delegates.glBindSampler glBindSampler = null;
         internal static Delegates.glBindSamplers glBindSamplers = null;
+        internal static Delegates.glBindShadingRateImageNV glBindShadingRateImageNV = null;
         internal static Delegates.glBindTexGenParameterEXT glBindTexGenParameterEXT = null;
         internal static Delegates.glBindTexture glBindTexture = null;
         internal static Delegates.glBindTextureEXT glBindTextureEXT = null;
@@ -159,6 +160,7 @@ namespace OpenGL {
         internal static Delegates.glBlitFramebufferNV glBlitFramebufferNV = null;
         internal static Delegates.glBlitNamedFramebuffer glBlitNamedFramebuffer = null;
         internal static Delegates.glBufferAddressRangeNV glBufferAddressRangeNV = null;
+        internal static Delegates.glBufferAttachMemoryNV glBufferAttachMemoryNV = null;
         internal static Delegates.glBufferData glBufferData = null;
         internal static Delegates.glBufferDataARB glBufferDataARB = null;
         internal static Delegates.glBufferPageCommitmentARB glBufferPageCommitmentARB = null;
@@ -579,6 +581,8 @@ namespace OpenGL {
         internal static Delegates.glDrawElementsInstancedEXT glDrawElementsInstancedEXT = null;
         internal static Delegates.glDrawElementsInstancedNV glDrawElementsInstancedNV = null;
         internal static Delegates.glDrawMeshArraysSUN glDrawMeshArraysSUN = null;
+        internal static Delegates.glDrawMeshTasksNV glDrawMeshTasksNV = null;
+        internal static Delegates.glDrawMeshTasksIndirectNV glDrawMeshTasksIndirectNV = null;
         internal static Delegates.glDrawPixels glDrawPixels = null;
         internal static Delegates.glDrawRangeElementArrayAPPLE glDrawRangeElementArrayAPPLE = null;
         internal static Delegates.glDrawRangeElementArrayATI glDrawRangeElementArrayATI = null;
@@ -993,6 +997,7 @@ namespace OpenGL {
         internal static Delegates.glGetMaterialxOES glGetMaterialxOES = null;
         internal static Delegates.glGetMaterialxv glGetMaterialxv = null;
         internal static Delegates.glGetMaterialxvOES glGetMaterialxvOES = null;
+        internal static Delegates.glGetMemoryObjectDetachedResourcesuivNV glGetMemoryObjectDetachedResourcesuivNV = null;
         internal static Delegates.glGetMemoryObjectParameterivEXT glGetMemoryObjectParameterivEXT = null;
         internal static Delegates.glGetMinmax glGetMinmax = null;
         internal static Delegates.glGetMinmaxEXT glGetMinmaxEXT = null;
@@ -1158,6 +1163,8 @@ namespace OpenGL {
         internal static Delegates.glGetShaderSource glGetShaderSource = null;
         internal static Delegates.glGetShaderSourceARB glGetShaderSourceARB = null;
         internal static Delegates.glGetShaderiv glGetShaderiv = null;
+        internal static Delegates.glGetShadingRateImagePaletteNV glGetShadingRateImagePaletteNV = null;
+        internal static Delegates.glGetShadingRateSampleLocationivNV glGetShadingRateSampleLocationivNV = null;
         internal static Delegates.glGetSharpenTexFuncSGIS glGetSharpenTexFuncSGIS = null;
         internal static Delegates.glGetStageIndexNV glGetStageIndexNV = null;
         internal static Delegates.glGetString glGetString = null;
@@ -1615,6 +1622,8 @@ namespace OpenGL {
         internal static Delegates.glMultiDrawElementsIndirectCount glMultiDrawElementsIndirectCount = null;
         internal static Delegates.glMultiDrawElementsIndirectCountARB glMultiDrawElementsIndirectCountARB = null;
         internal static Delegates.glMultiDrawElementsIndirectEXT glMultiDrawElementsIndirectEXT = null;
+        internal static Delegates.glMultiDrawMeshTasksIndirectNV glMultiDrawMeshTasksIndirectNV = null;
+        internal static Delegates.glMultiDrawMeshTasksIndirectCountNV glMultiDrawMeshTasksIndirectCountNV = null;
         internal static Delegates.glMultiDrawRangeElementArrayAPPLE glMultiDrawRangeElementArrayAPPLE = null;
         internal static Delegates.glMultiModeDrawArraysIBM glMultiModeDrawArraysIBM = null;
         internal static Delegates.glMultiModeDrawElementsIBM glMultiModeDrawElementsIBM = null;
@@ -1751,6 +1760,7 @@ namespace OpenGL {
         internal static Delegates.glMulticastGetQueryObjectui64vNV glMulticastGetQueryObjectui64vNV = null;
         internal static Delegates.glMulticastGetQueryObjectuivNV glMulticastGetQueryObjectuivNV = null;
         internal static Delegates.glMulticastWaitSyncNV glMulticastWaitSyncNV = null;
+        internal static Delegates.glNamedBufferAttachMemoryNV glNamedBufferAttachMemoryNV = null;
         internal static Delegates.glNamedBufferData glNamedBufferData = null;
         internal static Delegates.glNamedBufferDataEXT glNamedBufferDataEXT = null;
         internal static Delegates.glNamedBufferPageCommitmentARB glNamedBufferPageCommitmentARB = null;
@@ -1795,6 +1805,7 @@ namespace OpenGL {
         internal static Delegates.glNamedRenderbufferStorage glNamedRenderbufferStorage = null;
         internal static Delegates.glNamedRenderbufferStorageEXT glNamedRenderbufferStorageEXT = null;
         internal static Delegates.glNamedRenderbufferStorageMultisample glNamedRenderbufferStorageMultisample = null;
+        internal static Delegates.glNamedRenderbufferStorageMultisampleAdvancedAMD glNamedRenderbufferStorageMultisampleAdvancedAMD = null;
         internal static Delegates.glNamedRenderbufferStorageMultisampleCoverageEXT glNamedRenderbufferStorageMultisampleCoverageEXT = null;
         internal static Delegates.glNamedRenderbufferStorageMultisampleEXT glNamedRenderbufferStorageMultisampleEXT = null;
         internal static Delegates.glNamedStringARB glNamedStringARB = null;
@@ -2210,6 +2221,7 @@ namespace OpenGL {
         internal static Delegates.glRenderbufferStorageMultisample glRenderbufferStorageMultisample = null;
         internal static Delegates.glRenderbufferStorageMultisampleANGLE glRenderbufferStorageMultisampleANGLE = null;
         internal static Delegates.glRenderbufferStorageMultisampleAPPLE glRenderbufferStorageMultisampleAPPLE = null;
+        internal static Delegates.glRenderbufferStorageMultisampleAdvancedAMD glRenderbufferStorageMultisampleAdvancedAMD = null;
         internal static Delegates.glRenderbufferStorageMultisampleCoverageNV glRenderbufferStorageMultisampleCoverageNV = null;
         internal static Delegates.glRenderbufferStorageMultisampleEXT glRenderbufferStorageMultisampleEXT = null;
         internal static Delegates.glRenderbufferStorageMultisampleIMG glRenderbufferStorageMultisampleIMG = null;
@@ -2241,6 +2253,7 @@ namespace OpenGL {
         internal static Delegates.glRequestResidentProgramsNV glRequestResidentProgramsNV = null;
         internal static Delegates.glResetHistogram glResetHistogram = null;
         internal static Delegates.glResetHistogramEXT glResetHistogramEXT = null;
+        internal static Delegates.glResetMemoryObjectParameterNV glResetMemoryObjectParameterNV = null;
         internal static Delegates.glResetMinmax glResetMinmax = null;
         internal static Delegates.glResetMinmaxEXT glResetMinmaxEXT = null;
         internal static Delegates.glResizeBuffersMESA glResizeBuffersMESA = null;
@@ -2281,6 +2294,8 @@ namespace OpenGL {
         internal static Delegates.glScissorArrayv glScissorArrayv = null;
         internal static Delegates.glScissorArrayvNV glScissorArrayvNV = null;
         internal static Delegates.glScissorArrayvOES glScissorArrayvOES = null;
+        internal static Delegates.glScissorExclusiveArrayvNV glScissorExclusiveArrayvNV = null;
+        internal static Delegates.glScissorExclusiveNV glScissorExclusiveNV = null;
         internal static Delegates.glScissorIndexed glScissorIndexed = null;
         internal static Delegates.glScissorIndexedNV glScissorIndexedNV = null;
         internal static Delegates.glScissorIndexedOES glScissorIndexedOES = null;
@@ -2346,6 +2361,10 @@ namespace OpenGL {
         internal static Delegates.glShaderSource glShaderSource = null;
         internal static Delegates.glShaderSourceARB glShaderSourceARB = null;
         internal static Delegates.glShaderStorageBlockBinding glShaderStorageBlockBinding = null;
+        internal static Delegates.glShadingRateImageBarrierNV glShadingRateImageBarrierNV = null;
+        internal static Delegates.glShadingRateImagePaletteNV glShadingRateImagePaletteNV = null;
+        internal static Delegates.glShadingRateSampleOrderNV glShadingRateSampleOrderNV = null;
+        internal static Delegates.glShadingRateSampleOrderCustomNV glShadingRateSampleOrderCustomNV = null;
         internal static Delegates.glSharpenTexFuncSGIS glSharpenTexFuncSGIS = null;
         internal static Delegates.glSignalSemaphoreEXT glSignalSemaphoreEXT = null;
         internal static Delegates.glSpecializeShader glSpecializeShader = null;
@@ -2398,6 +2417,7 @@ namespace OpenGL {
         internal static Delegates.glTestFenceAPPLE glTestFenceAPPLE = null;
         internal static Delegates.glTestFenceNV glTestFenceNV = null;
         internal static Delegates.glTestObjectAPPLE glTestObjectAPPLE = null;
+        internal static Delegates.glTexAttachMemoryNV glTexAttachMemoryNV = null;
         internal static Delegates.glTexBuffer glTexBuffer = null;
         internal static Delegates.glTexBufferARB glTexBufferARB = null;
         internal static Delegates.glTexBufferEXT glTexBufferEXT = null;
@@ -2561,6 +2581,7 @@ namespace OpenGL {
         internal static Delegates.glTexSubImage3DEXT glTexSubImage3DEXT = null;
         internal static Delegates.glTexSubImage3DOES glTexSubImage3DOES = null;
         internal static Delegates.glTexSubImage4DSGIS glTexSubImage4DSGIS = null;
+        internal static Delegates.glTextureAttachMemoryNV glTextureAttachMemoryNV = null;
         internal static Delegates.glTextureBarrier glTextureBarrier = null;
         internal static Delegates.glTextureBarrierNV glTextureBarrierNV = null;
         internal static Delegates.glTextureBuffer glTextureBuffer = null;
@@ -2779,6 +2800,7 @@ namespace OpenGL {
         internal static Delegates.glVDPAUMapSurfacesNV glVDPAUMapSurfacesNV = null;
         internal static Delegates.glVDPAURegisterOutputSurfaceNV glVDPAURegisterOutputSurfaceNV = null;
         internal static Delegates.glVDPAURegisterVideoSurfaceNV glVDPAURegisterVideoSurfaceNV = null;
+        internal static Delegates.glVDPAURegisterVideoSurfaceWithPictureStructureNV glVDPAURegisterVideoSurfaceWithPictureStructureNV = null;
         internal static Delegates.glVDPAUSurfaceAccessNV glVDPAUSurfaceAccessNV = null;
         internal static Delegates.glVDPAUUnmapSurfacesNV glVDPAUUnmapSurfacesNV = null;
         internal static Delegates.glVDPAUUnregisterSurfaceNV glVDPAUUnregisterSurfaceNV = null;

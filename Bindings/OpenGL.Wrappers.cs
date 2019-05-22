@@ -882,7 +882,7 @@ namespace OpenGL {
         /// bind one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersBase binds a set of count buffer objects whose names are given in the array buffers to
-        /// the count consecutive binding points starting from index index of the array of targets specified by
+        /// the count consecutive binding points starting from index first of the array of targets specified by
         /// target. If buffers is NULL then glBindBuffersBase unbinds any buffers that are currently bound to
         /// the referenced binding points. Assuming no errors are generated, it is equivalent to the following
         /// pseudo-code, which calls glBindBufferBase, with the exception that the non-indexed target is not
@@ -893,7 +893,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -909,7 +911,7 @@ namespace OpenGL {
         /// bind one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersBase binds a set of count buffer objects whose names are given in the array buffers to
-        /// the count consecutive binding points starting from index index of the array of targets specified by
+        /// the count consecutive binding points starting from index first of the array of targets specified by
         /// target. If buffers is NULL then glBindBuffersBase unbinds any buffers that are currently bound to
         /// the referenced binding points. Assuming no errors are generated, it is equivalent to the following
         /// pseudo-code, which calls glBindBufferBase, with the exception that the non-indexed target is not
@@ -920,7 +922,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -937,7 +941,7 @@ namespace OpenGL {
         /// bind ranges of one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersRange binds a set of count ranges from buffer objects whose names are given in the
-        /// array buffers to the count consecutive binding points starting from index index of the array of
+        /// array buffers to the count consecutive binding points starting from index first of the array of
         /// targets specified by target. offsets specifies the address of an array containing count starting
         /// offsets within the buffers, and sizes specifies the address of an array of count sizes of the
         /// ranges. If buffers is NULL then offsets and sizes are ignored and glBindBuffersRange unbinds any
@@ -950,7 +954,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -974,7 +980,7 @@ namespace OpenGL {
         /// bind ranges of one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersRange binds a set of count ranges from buffer objects whose names are given in the
-        /// array buffers to the count consecutive binding points starting from index index of the array of
+        /// array buffers to the count consecutive binding points starting from index first of the array of
         /// targets specified by target. offsets specifies the address of an array containing count starting
         /// offsets within the buffers, and sizes specifies the address of an array of count sizes of the
         /// ranges. If buffers is NULL then offsets and sizes are ignored and glBindBuffersRange unbinds any
@@ -987,7 +993,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -1012,7 +1020,7 @@ namespace OpenGL {
         /// bind ranges of one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersRange binds a set of count ranges from buffer objects whose names are given in the
-        /// array buffers to the count consecutive binding points starting from index index of the array of
+        /// array buffers to the count consecutive binding points starting from index first of the array of
         /// targets specified by target. offsets specifies the address of an array containing count starting
         /// offsets within the buffers, and sizes specifies the address of an array of count sizes of the
         /// ranges. If buffers is NULL then offsets and sizes are ignored and glBindBuffersRange unbinds any
@@ -1025,7 +1033,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -1050,7 +1060,7 @@ namespace OpenGL {
         /// bind ranges of one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersRange binds a set of count ranges from buffer objects whose names are given in the
-        /// array buffers to the count consecutive binding points starting from index index of the array of
+        /// array buffers to the count consecutive binding points starting from index first of the array of
         /// targets specified by target. offsets specifies the address of an array containing count starting
         /// offsets within the buffers, and sizes specifies the address of an array of count sizes of the
         /// ranges. If buffers is NULL then offsets and sizes are ignored and glBindBuffersRange unbinds any
@@ -1063,7 +1073,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -1089,7 +1101,7 @@ namespace OpenGL {
         /// bind ranges of one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersRange binds a set of count ranges from buffer objects whose names are given in the
-        /// array buffers to the count consecutive binding points starting from index index of the array of
+        /// array buffers to the count consecutive binding points starting from index first of the array of
         /// targets specified by target. offsets specifies the address of an array containing count starting
         /// offsets within the buffers, and sizes specifies the address of an array of count sizes of the
         /// ranges. If buffers is NULL then offsets and sizes are ignored and glBindBuffersRange unbinds any
@@ -1102,7 +1114,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -1127,7 +1141,7 @@ namespace OpenGL {
         /// bind ranges of one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersRange binds a set of count ranges from buffer objects whose names are given in the
-        /// array buffers to the count consecutive binding points starting from index index of the array of
+        /// array buffers to the count consecutive binding points starting from index first of the array of
         /// targets specified by target. offsets specifies the address of an array containing count starting
         /// offsets within the buffers, and sizes specifies the address of an array of count sizes of the
         /// ranges. If buffers is NULL then offsets and sizes are ignored and glBindBuffersRange unbinds any
@@ -1140,7 +1154,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -1166,7 +1182,7 @@ namespace OpenGL {
         /// bind ranges of one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersRange binds a set of count ranges from buffer objects whose names are given in the
-        /// array buffers to the count consecutive binding points starting from index index of the array of
+        /// array buffers to the count consecutive binding points starting from index first of the array of
         /// targets specified by target. offsets specifies the address of an array containing count starting
         /// offsets within the buffers, and sizes specifies the address of an array of count sizes of the
         /// ranges. If buffers is NULL then offsets and sizes are ignored and glBindBuffersRange unbinds any
@@ -1179,7 +1195,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -1205,7 +1223,7 @@ namespace OpenGL {
         /// bind ranges of one or more buffer objects to a sequence of indexed buffer targets
         /// <para>
         /// glBindBuffersRange binds a set of count ranges from buffer objects whose names are given in the
-        /// array buffers to the count consecutive binding points starting from index index of the array of
+        /// array buffers to the count consecutive binding points starting from index first of the array of
         /// targets specified by target. offsets specifies the address of an array containing count starting
         /// offsets within the buffers, and sizes specifies the address of an array of count sizes of the
         /// ranges. If buffers is NULL then offsets and sizes are ignored and glBindBuffersRange unbinds any
@@ -1218,7 +1236,9 @@ namespace OpenGL {
         /// Specify the target of the bind operation. target must be one of GL_ATOMIC_COUNTER_BUFFER,
         /// GL_TRANSFORM_FEEDBACK_BUFFER, GL_UNIFORM_BUFFER or GL_SHADER_STORAGE_BUFFER.
         /// </param>
-        /// <param name="first"> </param>
+        /// <param name="first">
+        /// Specify the index of the first binding point within the array specified by target.
+        /// </param>
         /// <param name="count">
         /// Specify the number of contiguous binding points to which to bind buffers.
         /// </param>
@@ -1604,6 +1624,10 @@ namespace OpenGL {
                 Pointers.glBindSamplers(first, count, samplers_);
         }
         
+        public static void glBindShadingRateImageNV(uint texture) {
+            Pointers.glBindShadingRateImageNV(texture);
+        }
+        
         public static uint glBindTexGenParameterEXT(int unit, int coord, int value) {
             return Pointers.glBindTexGenParameterEXT(unit, coord, value);
         }
@@ -1733,8 +1757,8 @@ namespace OpenGL {
         /// <para>
         /// glBindTransformFeedback binds the transform feedback object with name id to the current GL state. id
         /// must be a name previously returned from a call to glGenTransformFeedbacks. If id has not previously
-        /// been bound, a new transform feedback object with name id and initialized with with the default
-        /// transform state vector is created
+        /// been bound, a new transform feedback object with name id and initialized with the default transform
+        /// state vector is created
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -2804,6 +2828,10 @@ namespace OpenGL {
             Pointers.glBufferAddressRangeNV(pname, index, address, length);
         }
         
+        public static void glBufferAttachMemoryNV(int target, uint memory, ulong offset) {
+            Pointers.glBufferAttachMemoryNV(target, memory, offset);
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -2900,7 +2928,7 @@ namespace OpenGL {
         /// following flags. GL_DYNAMIC_STORAGE_BIT, GL_MAP_READ_BIT GL_MAP_WRITE_BIT, GL_MAP_PERSISTENT_BIT,
         /// GL_MAP_COHERENT_BIT, and GL_CLIENT_STORAGE_BIT.
         /// </param>
-        public static void glBufferStorage(int target, uint size, IntPtr data, Enums.MapBufferUsageMask flags) {
+        public static void glBufferStorage(int target, uint size, IntPtr data, Enums.BufferStorageMask flags) {
             Pointers.glBufferStorage(target, size, data, (uint)flags);
         }
         
@@ -2946,7 +2974,7 @@ namespace OpenGL {
         /// following flags. GL_DYNAMIC_STORAGE_BIT, GL_MAP_READ_BIT GL_MAP_WRITE_BIT, GL_MAP_PERSISTENT_BIT,
         /// GL_MAP_COHERENT_BIT, and GL_CLIENT_STORAGE_BIT.
         /// </param>
-        public static void glBufferStorageEXT(int target, uint size, IntPtr data, Enums.MapBufferUsageMask flags) {
+        public static void glBufferStorageEXT(int target, uint size, IntPtr data, Enums.BufferStorageMask flags) {
             Pointers.glBufferStorageEXT(target, size, data, (uint)flags);
         }
         
@@ -2954,7 +2982,7 @@ namespace OpenGL {
             Pointers.glBufferStorageExternalEXT(target, offset, size, clientBuffer, flags);
         }
         
-        public static void glBufferStorageExternalEXT(int target, uint offset, uint size, IntPtr clientBuffer, Enums.MapBufferUsageMask flags) {
+        public static void glBufferStorageExternalEXT(int target, uint offset, uint size, IntPtr clientBuffer, Enums.BufferStorageMask flags) {
             Pointers.glBufferStorageExternalEXT(target, offset, size, clientBuffer, (uint)flags);
         }
         
@@ -3210,8 +3238,8 @@ namespace OpenGL {
         /// </para>
         /// </summary>
         /// <param name="target">
-        /// Specifies the target to which the buffer object is bound for glClearBufferData, which must must be
-        /// one of the buffer binding targets in the following table:
+        /// Specifies the target to which the buffer object is bound for glClearBufferData, which must be one of
+        /// the buffer binding targets in the following table:
         /// </param>
         /// <param name="internalformat">
         /// The internal format with which the data will be stored in the buffer object.
@@ -7584,7 +7612,7 @@ namespace OpenGL {
         /// </summary>
         /// <param name="target">
         /// Specifies the target to which the texture object is bound for glCopyTexSubImage3D function. Must be
-        /// GL_TEXTURE_3D or GL_TEXTURE_2D_ARRAY.
+        /// GL_TEXTURE_3D, GL_TEXTURE_2D_ARRAY or GL_TEXTURE_CUBE_MAP_ARRAY.
         /// </param>
         /// <param name="level">
         /// Specifies the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap
@@ -7627,7 +7655,7 @@ namespace OpenGL {
         /// </summary>
         /// <param name="target">
         /// Specifies the target to which the texture object is bound for glCopyTexSubImage3D function. Must be
-        /// GL_TEXTURE_3D or GL_TEXTURE_2D_ARRAY.
+        /// GL_TEXTURE_3D, GL_TEXTURE_2D_ARRAY or GL_TEXTURE_CUBE_MAP_ARRAY.
         /// </param>
         /// <param name="level">
         /// Specifies the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap
@@ -7813,7 +7841,9 @@ namespace OpenGL {
         /// <param name="n">
         /// Number of framebuffer objects to create.
         /// </param>
-        /// <param name="framebuffers"> </param>
+        /// <param name="framebuffers">
+        /// Specifies an array in which names of the new framebuffer objects are stored.
+        /// </param>
         public static void glCreateFramebuffers(int n, uint* framebuffers) {
             Pointers.glCreateFramebuffers(n, framebuffers);
         }
@@ -7828,7 +7858,9 @@ namespace OpenGL {
         /// <param name="n">
         /// Number of framebuffer objects to create.
         /// </param>
-        /// <param name="framebuffers"> </param>
+        /// <param name="framebuffers">
+        /// Specifies an array in which names of the new framebuffer objects are stored.
+        /// </param>
         public static void glCreateFramebuffers(int n, uint[] framebuffers) {
             fixed(uint* framebuffers_ = &framebuffers[0])
                 Pointers.glCreateFramebuffers(n, framebuffers_);
@@ -10229,7 +10261,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a range of elements
         /// <para>
-        /// glDrawArraysInstanced behaves identically to glDrawArrays except that primcount instances of the
+        /// glDrawArraysInstanced behaves identically to glDrawArrays except that instancecount instances of the
         /// range of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
@@ -10257,7 +10289,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a range of elements
         /// <para>
-        /// glDrawArraysInstanced behaves identically to glDrawArrays except that primcount instances of the
+        /// glDrawArraysInstanced behaves identically to glDrawArrays except that instancecount instances of the
         /// range of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
@@ -10285,7 +10317,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a range of elements
         /// <para>
-        /// glDrawArraysInstanced behaves identically to glDrawArrays except that primcount instances of the
+        /// glDrawArraysInstanced behaves identically to glDrawArrays except that instancecount instances of the
         /// range of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
@@ -10313,7 +10345,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a range of elements with offset applied to instanced attributes
         /// <para>
-        /// glDrawArraysInstancedBaseInstance behaves identically to glDrawArrays except that primcount
+        /// glDrawArraysInstancedBaseInstance behaves identically to glDrawArrays except that instancecount
         /// instances of the range of elements are executed and the value of the internal counter instanceID
         /// advances for each iteration. instanceID is an internal 32-bit integer counter that may be read by a
         /// vertex shader as gl_InstanceID
@@ -10344,7 +10376,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a range of elements with offset applied to instanced attributes
         /// <para>
-        /// glDrawArraysInstancedBaseInstance behaves identically to glDrawArrays except that primcount
+        /// glDrawArraysInstancedBaseInstance behaves identically to glDrawArrays except that instancecount
         /// instances of the range of elements are executed and the value of the internal counter instanceID
         /// advances for each iteration. instanceID is an internal 32-bit integer counter that may be read by a
         /// vertex shader as gl_InstanceID
@@ -10375,7 +10407,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a range of elements
         /// <para>
-        /// glDrawArraysInstanced behaves identically to glDrawArrays except that primcount instances of the
+        /// glDrawArraysInstanced behaves identically to glDrawArrays except that instancecount instances of the
         /// range of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
@@ -10403,7 +10435,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a range of elements
         /// <para>
-        /// glDrawArraysInstanced behaves identically to glDrawArrays except that primcount instances of the
+        /// glDrawArraysInstanced behaves identically to glDrawArrays except that instancecount instances of the
         /// range of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
@@ -10987,8 +11019,8 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a set of elements
         /// <para>
-        /// glDrawElementsInstanced behaves identically to glDrawElements except that primcount instances of the
-        /// set of elements are executed and the value of the internal counter instanceID advances for each
+        /// glDrawElementsInstanced behaves identically to glDrawElements except that instancecount instances of
+        /// the set of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
         /// </para>
@@ -11019,8 +11051,8 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a set of elements
         /// <para>
-        /// glDrawElementsInstanced behaves identically to glDrawElements except that primcount instances of the
-        /// set of elements are executed and the value of the internal counter instanceID advances for each
+        /// glDrawElementsInstanced behaves identically to glDrawElements except that instancecount instances of
+        /// the set of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
         /// </para>
@@ -11051,8 +11083,8 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a set of elements
         /// <para>
-        /// glDrawElementsInstanced behaves identically to glDrawElements except that primcount instances of the
-        /// set of elements are executed and the value of the internal counter instanceID advances for each
+        /// glDrawElementsInstanced behaves identically to glDrawElements except that instancecount instances of
+        /// the set of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
         /// </para>
@@ -11083,7 +11115,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a set of elements with offset applied to instanced attributes
         /// <para>
-        /// glDrawElementsInstancedBaseInstance behaves identically to glDrawElements except that primcount
+        /// glDrawElementsInstancedBaseInstance behaves identically to glDrawElements except that instancecount
         /// instances of the set of elements are executed and the value of the internal counter instanceID
         /// advances for each iteration. instanceID is an internal 32-bit integer counter that may be read by a
         /// vertex shader as gl_InstanceID
@@ -11118,7 +11150,7 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a set of elements with offset applied to instanced attributes
         /// <para>
-        /// glDrawElementsInstancedBaseInstance behaves identically to glDrawElements except that primcount
+        /// glDrawElementsInstancedBaseInstance behaves identically to glDrawElements except that instancecount
         /// instances of the set of elements are executed and the value of the internal counter instanceID
         /// advances for each iteration. instanceID is an internal 32-bit integer counter that may be read by a
         /// vertex shader as gl_InstanceID
@@ -11346,8 +11378,8 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a set of elements
         /// <para>
-        /// glDrawElementsInstanced behaves identically to glDrawElements except that primcount instances of the
-        /// set of elements are executed and the value of the internal counter instanceID advances for each
+        /// glDrawElementsInstanced behaves identically to glDrawElements except that instancecount instances of
+        /// the set of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
         /// </para>
@@ -11378,8 +11410,8 @@ namespace OpenGL {
         /// <summary>
         /// draw multiple instances of a set of elements
         /// <para>
-        /// glDrawElementsInstanced behaves identically to glDrawElements except that primcount instances of the
-        /// set of elements are executed and the value of the internal counter instanceID advances for each
+        /// glDrawElementsInstanced behaves identically to glDrawElements except that instancecount instances of
+        /// the set of elements are executed and the value of the internal counter instanceID advances for each
         /// iteration. instanceID is an internal 32-bit integer counter that may be read by a vertex shader as
         /// gl_InstanceID
         /// </para>
@@ -11409,6 +11441,14 @@ namespace OpenGL {
         
         public static void glDrawMeshArraysSUN(int mode, int first, int count, int width) {
             Pointers.glDrawMeshArraysSUN(mode, first, count, width);
+        }
+        
+        public static void glDrawMeshTasksNV(uint first, uint count) {
+            Pointers.glDrawMeshTasksNV(first, count);
+        }
+        
+        public static void glDrawMeshTasksIndirectNV(uint indirect) {
+            Pointers.glDrawMeshTasksIndirectNV(indirect);
         }
         
         /// <summary>
@@ -11763,9 +11803,9 @@ namespace OpenGL {
         /// glDrawTransformFeedbackInstanced draws multiple copies of a range of primitives of a type specified
         /// by mode using a count retrieved from the transform feedback stream specified by stream of the
         /// transform feedback object specified by id. Calling glDrawTransformFeedbackInstanced is equivalent to
-        /// calling glDrawArraysInstanced with mode and primcount as specified, first set to zero, and count set
-        /// to the number of vertices captured on vertex stream zero the last time transform feedback was active
-        /// on the transform feedback object named by id
+        /// calling glDrawArraysInstanced with mode and instancecount as specified, first set to zero, and count
+        /// set to the number of vertices captured on vertex stream zero the last time transform feedback was
+        /// active on the transform feedback object named by id
         /// </para>
         /// </summary>
         /// <param name="mode">
@@ -11790,9 +11830,9 @@ namespace OpenGL {
         /// glDrawTransformFeedbackInstanced draws multiple copies of a range of primitives of a type specified
         /// by mode using a count retrieved from the transform feedback stream specified by stream of the
         /// transform feedback object specified by id. Calling glDrawTransformFeedbackInstanced is equivalent to
-        /// calling glDrawArraysInstanced with mode and primcount as specified, first set to zero, and count set
-        /// to the number of vertices captured on vertex stream zero the last time transform feedback was active
-        /// on the transform feedback object named by id
+        /// calling glDrawArraysInstanced with mode and instancecount as specified, first set to zero, and count
+        /// set to the number of vertices captured on vertex stream zero the last time transform feedback was
+        /// active on the transform feedback object named by id
         /// </para>
         /// </summary>
         /// <param name="mode">
@@ -11866,9 +11906,9 @@ namespace OpenGL {
         /// glDrawTransformFeedbackStreamInstanced draws multiple copies of a range of primitives of a type
         /// specified by mode using a count retrieved from the transform feedback stream specified by stream of
         /// the transform feedback object specified by id. Calling glDrawTransformFeedbackStreamInstanced is
-        /// equivalent to calling glDrawArraysInstanced with mode and primcount as specified, first set to zero,
-        /// and count set to the number of vertices captured on vertex stream stream the last time transform
-        /// feedback was active on the transform feedback object named by id
+        /// equivalent to calling glDrawArraysInstanced with mode and instancecount as specified, first set to
+        /// zero, and count set to the number of vertices captured on vertex stream stream the last time
+        /// transform feedback was active on the transform feedback object named by id
         /// </para>
         /// </summary>
         /// <param name="mode">
@@ -15059,8 +15099,8 @@ namespace OpenGL {
         /// generate mipmaps for a specified texture object
         /// <para>
         /// glGenerateMipmap and glGenerateTextureMipmap generates mipmaps for the specified texture object. For
-        /// glGenerateMipmap, the texture object is that bound to to target. For glGenerateTextureMipmap,
-        /// texture is the name of the texture object
+        /// glGenerateMipmap, the texture object that is bound to target. For glGenerateTextureMipmap, texture
+        /// is the name of the texture object
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -15076,8 +15116,8 @@ namespace OpenGL {
         /// generate mipmaps for a specified texture object
         /// <para>
         /// glGenerateMipmap and glGenerateTextureMipmap generates mipmaps for the specified texture object. For
-        /// glGenerateMipmap, the texture object is that bound to to target. For glGenerateTextureMipmap,
-        /// texture is the name of the texture object
+        /// glGenerateMipmap, the texture object that is bound to target. For glGenerateTextureMipmap, texture
+        /// is the name of the texture object
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -15913,7 +15953,7 @@ namespace OpenGL {
         /// <para>
         /// glGetActiveSubroutineUniformName retrieves the name of an active shader subroutine uniform. program
         /// contains the name of the program containing the uniform. shadertype specifies the stage for which
-        /// which the uniform location, given by index, is valid. index must be between zero and the value of
+        /// the uniform location, given by index, is valid. index must be between zero and the value of
         /// GL_ACTIVE_SUBROUTINE_UNIFORMS minus one for the shader stage
         /// </para>
         /// </summary>
@@ -15946,7 +15986,7 @@ namespace OpenGL {
         /// <para>
         /// glGetActiveSubroutineUniformName retrieves the name of an active shader subroutine uniform. program
         /// contains the name of the program containing the uniform. shadertype specifies the stage for which
-        /// which the uniform location, given by index, is valid. index must be between zero and the value of
+        /// the uniform location, given by index, is valid. index must be between zero and the value of
         /// GL_ACTIVE_SUBROUTINE_UNIFORMS minus one for the shader stage
         /// </para>
         /// </summary>
@@ -15980,7 +16020,7 @@ namespace OpenGL {
         /// <para>
         /// glGetActiveSubroutineUniformName retrieves the name of an active shader subroutine uniform. program
         /// contains the name of the program containing the uniform. shadertype specifies the stage for which
-        /// which the uniform location, given by index, is valid. index must be between zero and the value of
+        /// the uniform location, given by index, is valid. index must be between zero and the value of
         /// GL_ACTIVE_SUBROUTINE_UNIFORMS minus one for the shader stage
         /// </para>
         /// </summary>
@@ -16013,7 +16053,7 @@ namespace OpenGL {
         /// <para>
         /// glGetActiveSubroutineUniformName retrieves the name of an active shader subroutine uniform. program
         /// contains the name of the program containing the uniform. shadertype specifies the stage for which
-        /// which the uniform location, given by index, is valid. index must be between zero and the value of
+        /// the uniform location, given by index, is valid. index must be between zero and the value of
         /// GL_ACTIVE_SUBROUTINE_UNIFORMS minus one for the shader stage
         /// </para>
         /// </summary>
@@ -16046,8 +16086,8 @@ namespace OpenGL {
         /// query a property of an active shader subroutine uniform
         /// <para>
         /// glGetActiveSubroutineUniform queries a parameter of an active shader subroutine uniform. program
-        /// contains the name of the program containing the uniform. shadertype specifies the stage which which
-        /// the uniform location, given by index, is valid. index must be between zero and the value of
+        /// contains the name of the program containing the uniform. shadertype specifies the stage which the
+        /// uniform location, given by index, is valid. index must be between zero and the value of
         /// GL_ACTIVE_SUBROUTINE_UNIFORMS minus one for the shader stage
         /// </para>
         /// </summary>
@@ -16077,8 +16117,8 @@ namespace OpenGL {
         /// query a property of an active shader subroutine uniform
         /// <para>
         /// glGetActiveSubroutineUniform queries a parameter of an active shader subroutine uniform. program
-        /// contains the name of the program containing the uniform. shadertype specifies the stage which which
-        /// the uniform location, given by index, is valid. index must be between zero and the value of
+        /// contains the name of the program containing the uniform. shadertype specifies the stage which the
+        /// uniform location, given by index, is valid. index must be between zero and the value of
         /// GL_ACTIVE_SUBROUTINE_UNIFORMS minus one for the shader stage
         /// </para>
         /// </summary>
@@ -16109,8 +16149,8 @@ namespace OpenGL {
         /// query a property of an active shader subroutine uniform
         /// <para>
         /// glGetActiveSubroutineUniform queries a parameter of an active shader subroutine uniform. program
-        /// contains the name of the program containing the uniform. shadertype specifies the stage which which
-        /// the uniform location, given by index, is valid. index must be between zero and the value of
+        /// contains the name of the program containing the uniform. shadertype specifies the stage which the
+        /// uniform location, given by index, is valid. index must be between zero and the value of
         /// GL_ACTIVE_SUBROUTINE_UNIFORMS minus one for the shader stage
         /// </para>
         /// </summary>
@@ -16140,8 +16180,8 @@ namespace OpenGL {
         /// query a property of an active shader subroutine uniform
         /// <para>
         /// glGetActiveSubroutineUniform queries a parameter of an active shader subroutine uniform. program
-        /// contains the name of the program containing the uniform. shadertype specifies the stage which which
-        /// the uniform location, given by index, is valid. index must be between zero and the value of
+        /// contains the name of the program containing the uniform. shadertype specifies the stage which the
+        /// uniform location, given by index, is valid. index must be between zero and the value of
         /// GL_ACTIVE_SUBROUTINE_UNIFORMS minus one for the shader stage
         /// </para>
         /// </summary>
@@ -23475,6 +23515,13 @@ namespace OpenGL {
             return Pointers.glGetGraphicsResetStatusARB();
         }
         
+        /// <summary>
+        /// check if the rendering context has not been lost due to software or hardware issues
+        /// <para>
+        /// Certain events can result in a reset of the GL context. Such a reset causes all context state to be
+        /// lost and requires the application to recreate all objects in the affected context
+        /// </para>
+        /// </summary>
         public static int glGetGraphicsResetStatusEXT() {
             return Pointers.glGetGraphicsResetStatusEXT();
         }
@@ -24588,6 +24635,15 @@ namespace OpenGL {
                 Pointers.glGetMaterialxvOES(face, pname, _params_);
         }
         
+        public static void glGetMemoryObjectDetachedResourcesuivNV(uint memory, int pname, int first, int count, uint* _params) {
+            Pointers.glGetMemoryObjectDetachedResourcesuivNV(memory, pname, first, count, _params);
+        }
+        
+        public static void glGetMemoryObjectDetachedResourcesuivNV(uint memory, int pname, int first, int count, uint[] _params) {
+            fixed(uint* _params_ = &_params[0])
+                Pointers.glGetMemoryObjectDetachedResourcesuivNV(memory, pname, first, count, _params_);
+        }
+        
         public static void glGetMemoryObjectParameterivEXT(uint memoryObject, int pname, int* _params) {
             Pointers.glGetMemoryObjectParameterivEXT(memoryObject, pname, _params);
         }
@@ -25178,7 +25234,9 @@ namespace OpenGL {
         /// <param name="name">
         /// The name of the object whose label to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// The length of the buffer whose address is in label.
+        /// </param>
         /// <param name="length">
         /// The address of a variable to receive the length of the object label.
         /// </param>
@@ -25206,7 +25264,9 @@ namespace OpenGL {
         /// <param name="name">
         /// The name of the object whose label to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// The length of the buffer whose address is in label.
+        /// </param>
         /// <param name="length">
         /// The address of a variable to receive the length of the object label.
         /// </param>
@@ -25244,7 +25304,9 @@ namespace OpenGL {
         /// <param name="name">
         /// The name of the object whose label to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// The length of the buffer whose address is in label.
+        /// </param>
         /// <param name="length">
         /// The address of a variable to receive the length of the object label.
         /// </param>
@@ -25272,7 +25334,9 @@ namespace OpenGL {
         /// <param name="name">
         /// The name of the object whose label to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// The length of the buffer whose address is in label.
+        /// </param>
         /// <param name="length">
         /// The address of a variable to receive the length of the object label.
         /// </param>
@@ -25320,7 +25384,9 @@ namespace OpenGL {
         /// <param name="ptr">
         /// The name of the sync object whose label to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// The length of the buffer whose address is in label.
+        /// </param>
         /// <param name="length">
         /// The address of a variable to receive the length of the object label.
         /// </param>
@@ -25340,7 +25406,9 @@ namespace OpenGL {
         /// <param name="ptr">
         /// The name of the sync object whose label to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// The length of the buffer whose address is in label.
+        /// </param>
         /// <param name="length">
         /// The address of a variable to receive the length of the object label.
         /// </param>
@@ -25361,7 +25429,9 @@ namespace OpenGL {
         /// <param name="ptr">
         /// The name of the sync object whose label to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// The length of the buffer whose address is in label.
+        /// </param>
         /// <param name="length">
         /// The address of a variable to receive the length of the object label.
         /// </param>
@@ -25381,7 +25451,9 @@ namespace OpenGL {
         /// <param name="ptr">
         /// The name of the sync object whose label to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// The length of the buffer whose address is in label.
+        /// </param>
         /// <param name="length">
         /// The address of a variable to receive the length of the object label.
         /// </param>
@@ -26327,7 +26399,9 @@ namespace OpenGL {
         /// <param name="program">
         /// Specifies the name of a program object whose binary representation to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// Specifies the size of the buffer whose address is given by binary.
+        /// </param>
         /// <param name="length">
         /// Specifies the address of a variable to receive the number of bytes written into binary.
         /// </param>
@@ -26356,7 +26430,9 @@ namespace OpenGL {
         /// <param name="program">
         /// Specifies the name of a program object whose binary representation to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// Specifies the size of the buffer whose address is given by binary.
+        /// </param>
         /// <param name="length">
         /// Specifies the address of a variable to receive the number of bytes written into binary.
         /// </param>
@@ -26386,7 +26462,9 @@ namespace OpenGL {
         /// <param name="program">
         /// Specifies the name of a program object whose binary representation to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// Specifies the size of the buffer whose address is given by binary.
+        /// </param>
         /// <param name="length">
         /// Specifies the address of a variable to receive the number of bytes written into binary.
         /// </param>
@@ -26416,7 +26494,9 @@ namespace OpenGL {
         /// <param name="program">
         /// Specifies the name of a program object whose binary representation to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// Specifies the size of the buffer whose address is given by binary.
+        /// </param>
         /// <param name="length">
         /// Specifies the address of a variable to receive the number of bytes written into binary.
         /// </param>
@@ -26447,7 +26527,9 @@ namespace OpenGL {
         /// <param name="program">
         /// Specifies the name of a program object whose binary representation to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// Specifies the size of the buffer whose address is given by binary.
+        /// </param>
         /// <param name="length">
         /// Specifies the address of a variable to receive the number of bytes written into binary.
         /// </param>
@@ -26476,7 +26558,9 @@ namespace OpenGL {
         /// <param name="program">
         /// Specifies the name of a program object whose binary representation to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// Specifies the size of the buffer whose address is given by binary.
+        /// </param>
         /// <param name="length">
         /// Specifies the address of a variable to receive the number of bytes written into binary.
         /// </param>
@@ -26506,7 +26590,9 @@ namespace OpenGL {
         /// <param name="program">
         /// Specifies the name of a program object whose binary representation to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// Specifies the size of the buffer whose address is given by binary.
+        /// </param>
         /// <param name="length">
         /// Specifies the address of a variable to receive the number of bytes written into binary.
         /// </param>
@@ -26536,7 +26622,9 @@ namespace OpenGL {
         /// <param name="program">
         /// Specifies the name of a program object whose binary representation to retrieve.
         /// </param>
-        /// <param name="bufSize"> </param>
+        /// <param name="bufSize">
+        /// Specifies the size of the buffer whose address is given by binary.
+        /// </param>
         /// <param name="length">
         /// Specifies the address of a variable to receive the number of bytes written into binary.
         /// </param>
@@ -27514,18 +27602,106 @@ namespace OpenGL {
                 Pointers.glGetProgramivNV(id, pname, _params_);
         }
         
+        /// <summary>
+        /// return parameters of a query object
+        /// <para>
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
+        /// </para>
+        /// </summary>
+        /// <param name="id">
+        /// Specifies the name of a query object.
+        /// </param>
+        /// <param name="buffer">
+        /// Specifies the name of a buffer object.
+        /// </param>
+        /// <param name="pname">
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
+        /// GL_QUERY_RESULT_AVAILABLE.
+        /// </param>
+        /// <param name="offset">
+        /// Specifies the byte offset into buffer's data store where the queried result will be written.
+        /// </param>
         public static void glGetQueryBufferObjecti64v(uint id, uint buffer, int pname, uint offset) {
             Pointers.glGetQueryBufferObjecti64v(id, buffer, pname, offset);
         }
         
+        /// <summary>
+        /// return parameters of a query object
+        /// <para>
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
+        /// </para>
+        /// </summary>
+        /// <param name="id">
+        /// Specifies the name of a query object.
+        /// </param>
+        /// <param name="buffer">
+        /// Specifies the name of a buffer object.
+        /// </param>
+        /// <param name="pname">
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
+        /// GL_QUERY_RESULT_AVAILABLE.
+        /// </param>
+        /// <param name="offset">
+        /// Specifies the byte offset into buffer's data store where the queried result will be written.
+        /// </param>
         public static void glGetQueryBufferObjectiv(uint id, uint buffer, int pname, uint offset) {
             Pointers.glGetQueryBufferObjectiv(id, buffer, pname, offset);
         }
         
+        /// <summary>
+        /// return parameters of a query object
+        /// <para>
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
+        /// </para>
+        /// </summary>
+        /// <param name="id">
+        /// Specifies the name of a query object.
+        /// </param>
+        /// <param name="buffer">
+        /// Specifies the name of a buffer object.
+        /// </param>
+        /// <param name="pname">
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
+        /// GL_QUERY_RESULT_AVAILABLE.
+        /// </param>
+        /// <param name="offset">
+        /// Specifies the byte offset into buffer's data store where the queried result will be written.
+        /// </param>
         public static void glGetQueryBufferObjectui64v(uint id, uint buffer, int pname, uint offset) {
             Pointers.glGetQueryBufferObjectui64v(id, buffer, pname, offset);
         }
         
+        /// <summary>
+        /// return parameters of a query object
+        /// <para>
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
+        /// </para>
+        /// </summary>
+        /// <param name="id">
+        /// Specifies the name of a query object.
+        /// </param>
+        /// <param name="buffer">
+        /// Specifies the name of a buffer object.
+        /// </param>
+        /// <param name="pname">
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
+        /// GL_QUERY_RESULT_AVAILABLE.
+        /// </param>
+        /// <param name="offset">
+        /// Specifies the byte offset into buffer's data store where the queried result will be written.
+        /// </param>
         public static void glGetQueryBufferObjectuiv(uint id, uint buffer, int pname, uint offset) {
             Pointers.glGetQueryBufferObjectuiv(id, buffer, pname, offset);
         }
@@ -27588,14 +27764,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27611,14 +27790,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27635,14 +27817,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27658,14 +27843,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27682,14 +27870,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27705,14 +27896,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27729,14 +27923,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27752,14 +27949,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27776,14 +27976,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27799,14 +28002,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27823,14 +28029,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27846,14 +28055,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27870,14 +28082,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27893,14 +28108,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27917,14 +28135,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27940,14 +28161,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27964,14 +28188,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -27987,14 +28214,17 @@ namespace OpenGL {
         /// <summary>
         /// return parameters of a query object
         /// <para>
-        /// glGetQueryObject returns in params a selected parameter of the query object specified by id
+        /// These commands return a selected parameter of the query object specified by id. glGetQueryObject
+        /// returns in params a selected parameter of the query object specified by id. glGetQueryBufferObject
+        /// returns in buffer a selected parameter of the query object specified by id, by writing it to
+        /// buffer's data store at the byte offset specified by offset
         /// </para>
         /// </summary>
         /// <param name="id">
         /// Specifies the name of a query object.
         /// </param>
         /// <param name="pname">
-        /// Specifies the symbolic name of a query object parameter. Accepted values are GL_QUERY_RESULT or
+        /// Specifies the symbolic name of a query object parameter. 		 Accepted values are GL_QUERY_RESULT or
         /// GL_QUERY_RESULT_AVAILABLE.
         /// </param>
         /// <param name="_params">
@@ -29106,6 +29336,24 @@ namespace OpenGL {
         public static void glGetShaderiv(uint shader, int pname, int[] _params) {
             fixed(int* _params_ = &_params[0])
                 Pointers.glGetShaderiv(shader, pname, _params_);
+        }
+        
+        public static void glGetShadingRateImagePaletteNV(uint viewport, uint entry, int* rate) {
+            Pointers.glGetShadingRateImagePaletteNV(viewport, entry, rate);
+        }
+        
+        public static void glGetShadingRateImagePaletteNV(uint viewport, uint entry, out int rate) {
+            fixed(int* rate_ = &rate)
+                Pointers.glGetShadingRateImagePaletteNV(viewport, entry, rate_);
+        }
+        
+        public static void glGetShadingRateSampleLocationivNV(int rate, uint samples, uint index, int* location) {
+            Pointers.glGetShadingRateSampleLocationivNV(rate, samples, index, location);
+        }
+        
+        public static void glGetShadingRateSampleLocationivNV(int rate, uint samples, uint index, int[] location) {
+            fixed(int* location_ = &location[0])
+                Pointers.glGetShadingRateSampleLocationivNV(rate, samples, index, location_);
         }
         
         public static void glGetSharpenTexFuncSGIS(int target, float* points) {
@@ -30271,7 +30519,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30309,7 +30557,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30348,7 +30596,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30387,7 +30635,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30427,7 +30675,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30466,7 +30714,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30506,7 +30754,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30546,7 +30794,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30587,7 +30835,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30625,7 +30873,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30664,7 +30912,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30703,7 +30951,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30743,7 +30991,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30782,7 +31030,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30822,7 +31070,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -30862,7 +31110,7 @@ namespace OpenGL {
         /// The address of a variable that will receive the size of the varying.
         /// </param>
         /// <param name="type">
-        /// The address of a variable that will recieve the type of the varying.
+        /// The address of a variable that will receive the type of the varying.
         /// </param>
         /// <param name="name">
         /// The address of a variable which will receive the number of characters written into name, excluding
@@ -35197,7 +35445,7 @@ namespace OpenGL {
         /// <param name="access">
         /// Specifies a combination of access flags indicating the desired access to the mapped range.
         /// </param>
-        public static IntPtr glMapBufferRange(int target, uint offset, uint length, Enums.BufferAccessMask access) {
+        public static IntPtr glMapBufferRange(int target, uint offset, uint length, Enums.MapBufferAccessMask access) {
             return Pointers.glMapBufferRange(target, offset, length, (uint)access);
         }
         
@@ -35249,7 +35497,7 @@ namespace OpenGL {
         /// <param name="access">
         /// Specifies a combination of access flags indicating the desired access to the mapped range.
         /// </param>
-        public static IntPtr glMapBufferRangeEXT(int target, uint offset, uint length, Enums.BufferAccessMask access) {
+        public static IntPtr glMapBufferRangeEXT(int target, uint offset, uint length, Enums.MapBufferAccessMask access) {
             return Pointers.glMapBufferRangeEXT(target, offset, length, (uint)access);
         }
         
@@ -35383,7 +35631,7 @@ namespace OpenGL {
             return Pointers.glMapNamedBufferRange(buffer, offset, length, access);
         }
         
-        public static IntPtr glMapNamedBufferRange(uint buffer, uint offset, uint length, Enums.BufferAccessMask access) {
+        public static IntPtr glMapNamedBufferRange(uint buffer, uint offset, uint length, Enums.MapBufferAccessMask access) {
             return Pointers.glMapNamedBufferRange(buffer, offset, length, (uint)access);
         }
         
@@ -35391,7 +35639,7 @@ namespace OpenGL {
             return Pointers.glMapNamedBufferRangeEXT(buffer, offset, length, access);
         }
         
-        public static IntPtr glMapNamedBufferRangeEXT(uint buffer, uint offset, uint length, Enums.BufferAccessMask access) {
+        public static IntPtr glMapNamedBufferRangeEXT(uint buffer, uint offset, uint length, Enums.MapBufferAccessMask access) {
             return Pointers.glMapNamedBufferRangeEXT(buffer, offset, length, (uint)access);
         }
         
@@ -36522,7 +36770,7 @@ namespace OpenGL {
         /// Specifies the address of an array of structures containing the draw parameters.
         /// </param>
         /// <param name="drawcount">
-        /// Specifies the the number of elements in the array of draw parameter structures.
+        /// Specifies the number of elements in the array of draw parameter structures.
         /// </param>
         /// <param name="stride">
         /// Specifies the distance in basic machine units between elements of the draw parameter array.
@@ -36552,7 +36800,7 @@ namespace OpenGL {
         /// Specifies the address of an array of structures containing the draw parameters.
         /// </param>
         /// <param name="primcount">
-        /// Specifies the the number of elements in the array of draw parameter structures.
+        /// Specifies the number of elements in the array of draw parameter structures.
         /// </param>
         /// <param name="stride">
         /// Specifies the distance in basic machine units between elements of the draw parameter array.
@@ -36598,7 +36846,7 @@ namespace OpenGL {
         /// Specifies the address of an array of structures containing the draw parameters.
         /// </param>
         /// <param name="drawcount">
-        /// Specifies the the number of elements in the array of draw parameter structures.
+        /// Specifies the number of elements in the array of draw parameter structures.
         /// </param>
         /// <param name="stride">
         /// Specifies the distance in basic machine units between elements of the draw parameter array.
@@ -37556,6 +37804,14 @@ namespace OpenGL {
         /// </param>
         public static void glMultiDrawElementsIndirectEXT(int mode, int type, IntPtr indirect, int drawcount, int stride) {
             Pointers.glMultiDrawElementsIndirectEXT(mode, type, indirect, drawcount, stride);
+        }
+        
+        public static void glMultiDrawMeshTasksIndirectNV(uint indirect, int drawcount, int stride) {
+            Pointers.glMultiDrawMeshTasksIndirectNV(indirect, drawcount, stride);
+        }
+        
+        public static void glMultiDrawMeshTasksIndirectCountNV(uint indirect, uint drawcount, int maxdrawcount, int stride) {
+            Pointers.glMultiDrawMeshTasksIndirectCountNV(indirect, drawcount, maxdrawcount, stride);
         }
         
         public static void glMultiDrawRangeElementArrayAPPLE(int mode, uint start, uint end, int* first, int* count, int primcount) {
@@ -40496,6 +40752,10 @@ namespace OpenGL {
             Pointers.glMulticastWaitSyncNV(signalGpu, waitGpuMask);
         }
         
+        public static void glNamedBufferAttachMemoryNV(uint buffer, uint memory, ulong offset) {
+            Pointers.glNamedBufferAttachMemoryNV(buffer, memory, offset);
+        }
+        
         public static void glNamedBufferData(uint buffer, uint size, IntPtr data, int usage) {
             Pointers.glNamedBufferData(buffer, size, data, usage);
         }
@@ -40516,7 +40776,7 @@ namespace OpenGL {
             Pointers.glNamedBufferStorage(buffer, size, data, flags);
         }
         
-        public static void glNamedBufferStorage(uint buffer, uint size, IntPtr data, Enums.MapBufferUsageMask flags) {
+        public static void glNamedBufferStorage(uint buffer, uint size, IntPtr data, Enums.BufferStorageMask flags) {
             Pointers.glNamedBufferStorage(buffer, size, data, (uint)flags);
         }
         
@@ -40524,7 +40784,7 @@ namespace OpenGL {
             Pointers.glNamedBufferStorageExternalEXT(buffer, offset, size, clientBuffer, flags);
         }
         
-        public static void glNamedBufferStorageExternalEXT(uint buffer, uint offset, uint size, IntPtr clientBuffer, Enums.MapBufferUsageMask flags) {
+        public static void glNamedBufferStorageExternalEXT(uint buffer, uint offset, uint size, IntPtr clientBuffer, Enums.BufferStorageMask flags) {
             Pointers.glNamedBufferStorageExternalEXT(buffer, offset, size, clientBuffer, (uint)flags);
         }
         
@@ -40532,7 +40792,7 @@ namespace OpenGL {
             Pointers.glNamedBufferStorageEXT(buffer, size, data, flags);
         }
         
-        public static void glNamedBufferStorageEXT(uint buffer, uint size, IntPtr data, Enums.MapBufferUsageMask flags) {
+        public static void glNamedBufferStorageEXT(uint buffer, uint size, IntPtr data, Enums.BufferStorageMask flags) {
             Pointers.glNamedBufferStorageEXT(buffer, size, data, (uint)flags);
         }
         
@@ -40737,6 +40997,10 @@ namespace OpenGL {
         
         public static void glNamedRenderbufferStorageMultisample(uint renderbuffer, int samples, int internalformat, int width, int height) {
             Pointers.glNamedRenderbufferStorageMultisample(renderbuffer, samples, internalformat, width, height);
+        }
+        
+        public static void glNamedRenderbufferStorageMultisampleAdvancedAMD(uint renderbuffer, int samples, int storageSamples, int internalformat, int width, int height) {
+            Pointers.glNamedRenderbufferStorageMultisampleAdvancedAMD(renderbuffer, samples, storageSamples, internalformat, width, height);
         }
         
         public static void glNamedRenderbufferStorageMultisampleCoverageEXT(uint renderbuffer, int coverageSamples, int colorSamples, int internalformat, int width, int height) {
@@ -41312,7 +41576,7 @@ namespace OpenGL {
         }
         
         /// <summary>
-        /// label a a sync object identified by a pointer
+        /// label a sync object identified by a pointer
         /// <para>
         /// glObjectPtrLabel labels the sync object identified by ptr
         /// </para>
@@ -41331,7 +41595,7 @@ namespace OpenGL {
         }
         
         /// <summary>
-        /// label a a sync object identified by a pointer
+        /// label a sync object identified by a pointer
         /// <para>
         /// glObjectPtrLabel labels the sync object identified by ptr
         /// </para>
@@ -46071,6 +46335,10 @@ namespace OpenGL {
             Pointers.glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width, height);
         }
         
+        public static void glRenderbufferStorageMultisampleAdvancedAMD(int target, int samples, int storageSamples, int internalformat, int width, int height) {
+            Pointers.glRenderbufferStorageMultisampleAdvancedAMD(target, samples, storageSamples, internalformat, width, height);
+        }
+        
         public static void glRenderbufferStorageMultisampleCoverageNV(int target, int coverageSamples, int colorSamples, int internalformat, int width, int height) {
             Pointers.glRenderbufferStorageMultisampleCoverageNV(target, coverageSamples, colorSamples, internalformat, width, height);
         }
@@ -46838,6 +47106,10 @@ namespace OpenGL {
         /// </param>
         public static void glResetHistogramEXT(int target) {
             Pointers.glResetHistogramEXT(target);
+        }
+        
+        public static void glResetMemoryObjectParameterNV(uint memory, int pname) {
+            Pointers.glResetMemoryObjectParameterNV(memory, pname);
         }
         
         /// <summary>
@@ -47733,6 +48005,19 @@ namespace OpenGL {
         public static void glScissorArrayvOES(uint first, int count, int[] v) {
             fixed(int* v_ = &v[0])
                 Pointers.glScissorArrayvOES(first, count, v_);
+        }
+        
+        public static void glScissorExclusiveArrayvNV(uint first, int count, int* v) {
+            Pointers.glScissorExclusiveArrayvNV(first, count, v);
+        }
+        
+        public static void glScissorExclusiveArrayvNV(uint first, int count, int[] v) {
+            fixed(int* v_ = &v[0])
+                Pointers.glScissorExclusiveArrayvNV(first, count, v_);
+        }
+        
+        public static void glScissorExclusiveNV(int x, int y, int width, int height) {
+            Pointers.glScissorExclusiveNV(x, y, width, height);
         }
         
         /// <summary>
@@ -49157,6 +49442,32 @@ namespace OpenGL {
             Pointers.glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
         }
         
+        public static void glShadingRateImageBarrierNV(bool synchronize) {
+            Pointers.glShadingRateImageBarrierNV(synchronize);
+        }
+        
+        public static void glShadingRateImagePaletteNV(uint viewport, uint first, int count, uint* rates) {
+            Pointers.glShadingRateImagePaletteNV(viewport, first, count, rates);
+        }
+        
+        public static void glShadingRateImagePaletteNV(uint viewport, uint first, int count, uint[] rates) {
+            fixed(uint* rates_ = &rates[0])
+                Pointers.glShadingRateImagePaletteNV(viewport, first, count, rates_);
+        }
+        
+        public static void glShadingRateSampleOrderNV(int order) {
+            Pointers.glShadingRateSampleOrderNV(order);
+        }
+        
+        public static void glShadingRateSampleOrderCustomNV(int rate, uint samples, int* locations) {
+            Pointers.glShadingRateSampleOrderCustomNV(rate, samples, locations);
+        }
+        
+        public static void glShadingRateSampleOrderCustomNV(int rate, uint samples, int[] locations) {
+            fixed(int* locations_ = &locations[0])
+                Pointers.glShadingRateSampleOrderCustomNV(rate, samples, locations_);
+        }
+        
         public static void glSharpenTexFuncSGIS(int target, int n, float* points) {
             Pointers.glSharpenTexFuncSGIS(target, n, points);
         }
@@ -49660,12 +49971,16 @@ namespace OpenGL {
             return Pointers.glTestObjectAPPLE(_object, name);
         }
         
+        public static void glTexAttachMemoryNV(int target, uint memory, ulong offset) {
+            Pointers.glTexAttachMemoryNV(target, memory, offset);
+        }
+        
         /// <summary>
         /// attach a buffer object's data store to a buffer texture object
         /// <para>
         /// glTexBuffer and glTextureBuffer attaches the data store of a specified buffer object to a specified
-        /// texture object, and specify the storage format for the texture image found found in the buffer
-        /// object. The texture object must be a buffer texture
+        /// texture object, and specify the storage format for the texture image found in the buffer object. The
+        /// texture object must be a buffer texture
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -49685,8 +50000,8 @@ namespace OpenGL {
         /// attach a buffer object's data store to a buffer texture object
         /// <para>
         /// glTexBuffer and glTextureBuffer attaches the data store of a specified buffer object to a specified
-        /// texture object, and specify the storage format for the texture image found found in the buffer
-        /// object. The texture object must be a buffer texture
+        /// texture object, and specify the storage format for the texture image found in the buffer object. The
+        /// texture object must be a buffer texture
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -49706,8 +50021,8 @@ namespace OpenGL {
         /// attach a buffer object's data store to a buffer texture object
         /// <para>
         /// glTexBuffer and glTextureBuffer attaches the data store of a specified buffer object to a specified
-        /// texture object, and specify the storage format for the texture image found found in the buffer
-        /// object. The texture object must be a buffer texture
+        /// texture object, and specify the storage format for the texture image found in the buffer object. The
+        /// texture object must be a buffer texture
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -49727,8 +50042,8 @@ namespace OpenGL {
         /// attach a buffer object's data store to a buffer texture object
         /// <para>
         /// glTexBuffer and glTextureBuffer attaches the data store of a specified buffer object to a specified
-        /// texture object, and specify the storage format for the texture image found found in the buffer
-        /// object. The texture object must be a buffer texture
+        /// texture object, and specify the storage format for the texture image found in the buffer object. The
+        /// texture object must be a buffer texture
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -49748,8 +50063,8 @@ namespace OpenGL {
         /// attach a range of a buffer object's data store to a buffer texture object
         /// <para>
         /// glTexBufferRange and glTextureBufferRange attach a range of the data store of a specified buffer
-        /// object to a specified texture object, and specify the storage format for the texture image found
-        /// found in the buffer object. The texture object must be a buffer texture
+        /// object to a specified texture object, and specify the storage format for the texture image found in
+        /// the buffer object. The texture object must be a buffer texture
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -49776,8 +50091,8 @@ namespace OpenGL {
         /// attach a range of a buffer object's data store to a buffer texture object
         /// <para>
         /// glTexBufferRange and glTextureBufferRange attach a range of the data store of a specified buffer
-        /// object to a specified texture object, and specify the storage format for the texture image found
-        /// found in the buffer object. The texture object must be a buffer texture
+        /// object to a specified texture object, and specify the storage format for the texture image found in
+        /// the buffer object. The texture object must be a buffer texture
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -49804,8 +50119,8 @@ namespace OpenGL {
         /// attach a range of a buffer object's data store to a buffer texture object
         /// <para>
         /// glTexBufferRange and glTextureBufferRange attach a range of the data store of a specified buffer
-        /// object to a specified texture object, and specify the storage format for the texture image found
-        /// found in the buffer object. The texture object must be a buffer texture
+        /// object to a specified texture object, and specify the storage format for the texture image found in
+        /// the buffer object. The texture object must be a buffer texture
         /// </para>
         /// </summary>
         /// <param name="target">
@@ -51959,8 +52274,8 @@ namespace OpenGL {
         /// </param>
         /// <param name="type">
         /// Specifies the data type of the pixel data. The following symbolic values are accepted:
-        /// GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_FLOAT,
-        /// GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
+        /// GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_HALF_FLOAT,
+        /// GL_FLOAT, GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
         /// GL_UNSIGNED_SHORT_5_6_5_REV, GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_4_4_4_4_REV,
         /// GL_UNSIGNED_SHORT_5_5_5_1, GL_UNSIGNED_SHORT_1_5_5_5_REV, GL_UNSIGNED_INT_8_8_8_8,
         /// GL_UNSIGNED_INT_8_8_8_8_REV, GL_UNSIGNED_INT_10_10_10_2, and GL_UNSIGNED_INT_2_10_10_10_REV.
@@ -52014,8 +52329,8 @@ namespace OpenGL {
         /// </param>
         /// <param name="type">
         /// Specifies the data type of the pixel data. The following symbolic values are accepted:
-        /// GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_FLOAT,
-        /// GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
+        /// GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_HALF_FLOAT,
+        /// GL_FLOAT, GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
         /// GL_UNSIGNED_SHORT_5_6_5_REV, GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_4_4_4_4_REV,
         /// GL_UNSIGNED_SHORT_5_5_5_1, GL_UNSIGNED_SHORT_1_5_5_5_REV, GL_UNSIGNED_INT_8_8_8_8,
         /// GL_UNSIGNED_INT_8_8_8_8_REV, GL_UNSIGNED_INT_10_10_10_2, and GL_UNSIGNED_INT_2_10_10_10_REV.
@@ -52108,8 +52423,8 @@ namespace OpenGL {
         /// </param>
         /// <param name="type">
         /// Specifies the data type of the pixel data. The following symbolic values are accepted:
-        /// GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_FLOAT,
-        /// GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
+        /// GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_HALF_FLOAT,
+        /// GL_FLOAT, GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
         /// GL_UNSIGNED_SHORT_5_6_5_REV, GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_4_4_4_4_REV,
         /// GL_UNSIGNED_SHORT_5_5_5_1, GL_UNSIGNED_SHORT_1_5_5_5_REV, GL_UNSIGNED_INT_8_8_8_8,
         /// GL_UNSIGNED_INT_8_8_8_8_REV, GL_UNSIGNED_INT_10_10_10_2, and GL_UNSIGNED_INT_2_10_10_10_REV.
@@ -52165,8 +52480,8 @@ namespace OpenGL {
         /// </param>
         /// <param name="type">
         /// Specifies the data type of the pixel data. The following symbolic values are accepted:
-        /// GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_FLOAT,
-        /// GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
+        /// GL_UNSIGNED_BYTE, GL_BYTE, GL_UNSIGNED_SHORT, GL_SHORT, GL_UNSIGNED_INT, GL_INT, GL_HALF_FLOAT,
+        /// GL_FLOAT, GL_UNSIGNED_BYTE_3_3_2, GL_UNSIGNED_BYTE_2_3_3_REV, GL_UNSIGNED_SHORT_5_6_5,
         /// GL_UNSIGNED_SHORT_5_6_5_REV, GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_4_4_4_4_REV,
         /// GL_UNSIGNED_SHORT_5_5_5_1, GL_UNSIGNED_SHORT_1_5_5_5_REV, GL_UNSIGNED_INT_8_8_8_8,
         /// GL_UNSIGNED_INT_8_8_8_8_REV, GL_UNSIGNED_INT_10_10_10_2, and GL_UNSIGNED_INT_2_10_10_10_REV.
@@ -52558,7 +52873,7 @@ namespace OpenGL {
         /// <summary>
         /// simultaneously specify storage for all levels of a three-dimensional, two-dimensional array or cube-map array texture
         /// <para>
-        /// glTexStorage3D and glTextureStorage3D specify specify the storage requirements for all levels of a
+        /// glTexStorage3D and glTextureStorage3D specify the storage requirements for all levels of a
         /// three-dimensional, two-dimensional array or cube-map array texture simultaneously. Once a texture is
         /// specified with this command, the format and dimensions of all levels become immutable unless it is a
         /// proxy texture. The contents of the image may still be modified, however, its storage requirements
@@ -52592,7 +52907,7 @@ namespace OpenGL {
         /// <summary>
         /// simultaneously specify storage for all levels of a three-dimensional, two-dimensional array or cube-map array texture
         /// <para>
-        /// glTexStorage3D and glTextureStorage3D specify specify the storage requirements for all levels of a
+        /// glTexStorage3D and glTextureStorage3D specify the storage requirements for all levels of a
         /// three-dimensional, two-dimensional array or cube-map array texture simultaneously. Once a texture is
         /// specified with this command, the format and dimensions of all levels become immutable unless it is a
         /// proxy texture. The contents of the image may still be modified, however, its storage requirements
@@ -53015,6 +53330,10 @@ namespace OpenGL {
             Pointers.glTexSubImage4DSGIS(target, level, xoffset, yoffset, zoffset, woffset, width, height, depth, size4d, format, type, pixels);
         }
         
+        public static void glTextureAttachMemoryNV(uint texture, uint memory, ulong offset) {
+            Pointers.glTextureAttachMemoryNV(texture, memory, offset);
+        }
+        
         /// <summary>
         /// controls the ordering of reads and writes to rendered fragments across drawing commands
         /// <para>
@@ -53177,7 +53496,8 @@ namespace OpenGL {
         /// GL_TEXTURE_WRAP_T, or GL_TEXTURE_WRAP_R.
         /// </param>
         /// <param name="param">
-        /// Specifies the texture object name for glTextureParameter functions.
+        /// For the vector commands, specifies a pointer to an array where the value or values of pname are
+        /// stored.
         /// </param>
         public static void glTextureParameterfv(uint texture, int pname, float* param) {
             Pointers.glTextureParameterfv(texture, pname, param);
@@ -53198,7 +53518,8 @@ namespace OpenGL {
         /// GL_TEXTURE_WRAP_T, or GL_TEXTURE_WRAP_R.
         /// </param>
         /// <param name="param">
-        /// Specifies the texture object name for glTextureParameter functions.
+        /// For the vector commands, specifies a pointer to an array where the value or values of pname are
+        /// stored.
         /// </param>
         public static void glTextureParameterfv(uint texture, int pname, float[] param) {
             fixed(float* param_ = &param[0])
@@ -53359,7 +53680,9 @@ namespace OpenGL {
         /// <param name="origtexture">
         /// Specifies the name of a texture object of which to make a view.
         /// </param>
-        /// <param name="internalformat"> </param>
+        /// <param name="internalformat">
+        /// Specifies the internal format for the newly created view.
+        /// </param>
         /// <param name="minlevel">
         /// Specifies lowest level of detail of the view.
         /// </param>
@@ -53395,7 +53718,9 @@ namespace OpenGL {
         /// <param name="origtexture">
         /// Specifies the name of a texture object of which to make a view.
         /// </param>
-        /// <param name="internalformat"> </param>
+        /// <param name="internalformat">
+        /// Specifies the internal format for the newly created view.
+        /// </param>
         /// <param name="minlevel">
         /// Specifies lowest level of detail of the view.
         /// </param>
@@ -53431,7 +53756,9 @@ namespace OpenGL {
         /// <param name="origtexture">
         /// Specifies the name of a texture object of which to make a view.
         /// </param>
-        /// <param name="internalformat"> </param>
+        /// <param name="internalformat">
+        /// Specifies the internal format for the newly created view.
+        /// </param>
         /// <param name="minlevel">
         /// Specifies lowest level of detail of the view.
         /// </param>
@@ -54899,6 +55226,15 @@ namespace OpenGL {
         public static IntPtr glVDPAURegisterVideoSurfaceNV(IntPtr vdpSurface, int target, int numTextureNames, uint[] textureNames) {
             fixed(uint* textureNames_ = &textureNames[0])
                 return Pointers.glVDPAURegisterVideoSurfaceNV(vdpSurface, target, numTextureNames, textureNames_);
+        }
+        
+        public static IntPtr glVDPAURegisterVideoSurfaceWithPictureStructureNV(IntPtr vdpSurface, int target, int numTextureNames, uint* textureNames, bool isFrameStructure) {
+            return Pointers.glVDPAURegisterVideoSurfaceWithPictureStructureNV(vdpSurface, target, numTextureNames, textureNames, isFrameStructure);
+        }
+        
+        public static IntPtr glVDPAURegisterVideoSurfaceWithPictureStructureNV(IntPtr vdpSurface, int target, int numTextureNames, uint[] textureNames, bool isFrameStructure) {
+            fixed(uint* textureNames_ = &textureNames[0])
+                return Pointers.glVDPAURegisterVideoSurfaceWithPictureStructureNV(vdpSurface, target, numTextureNames, textureNames_, isFrameStructure);
         }
         
         public static void glVDPAUSurfaceAccessNV(IntPtr surface, int access) {
@@ -58418,8 +58754,14 @@ namespace OpenGL {
         /// For glViewportIndexedf, specifies the lower left corner of the viewport rectangle, in pixels. The
         /// initial value is (0,0).
         /// </param>
-        /// <param name="w"> </param>
-        /// <param name="h"> </param>
+        /// <param name="w">
+        /// For glViewportIndexedf, specifies the width and height of the viewport. When a GL context is first
+        /// attached to a window, w and h are set to the dimensions of that window.
+        /// </param>
+        /// <param name="h">
+        /// For glViewportIndexedf, specifies the width and height of the viewport. When a GL context is first
+        /// attached to a window, w and h are set to the dimensions of that window.
+        /// </param>
         public static void glViewportIndexedf(uint index, float x, float y, float w, float h) {
             Pointers.glViewportIndexedf(index, x, y, w, h);
         }
@@ -58449,8 +58791,14 @@ namespace OpenGL {
         /// For glViewportIndexedf, specifies the lower left corner of the viewport rectangle, in pixels. The
         /// initial value is (0,0).
         /// </param>
-        /// <param name="w"> </param>
-        /// <param name="h"> </param>
+        /// <param name="w">
+        /// For glViewportIndexedf, specifies the width and height of the viewport. When a GL context is first
+        /// attached to a window, w and h are set to the dimensions of that window.
+        /// </param>
+        /// <param name="h">
+        /// For glViewportIndexedf, specifies the width and height of the viewport. When a GL context is first
+        /// attached to a window, w and h are set to the dimensions of that window.
+        /// </param>
         public static void glViewportIndexedfOES(uint index, float x, float y, float w, float h) {
             Pointers.glViewportIndexedfOES(index, x, y, w, h);
         }
@@ -58480,8 +58828,14 @@ namespace OpenGL {
         /// For glViewportIndexedf, specifies the lower left corner of the viewport rectangle, in pixels. The
         /// initial value is (0,0).
         /// </param>
-        /// <param name="w"> </param>
-        /// <param name="h"> </param>
+        /// <param name="w">
+        /// For glViewportIndexedf, specifies the width and height of the viewport. When a GL context is first
+        /// attached to a window, w and h are set to the dimensions of that window.
+        /// </param>
+        /// <param name="h">
+        /// For glViewportIndexedf, specifies the width and height of the viewport. When a GL context is first
+        /// attached to a window, w and h are set to the dimensions of that window.
+        /// </param>
         public static void glViewportIndexedfNV(uint index, float x, float y, float w, float h) {
             Pointers.glViewportIndexedfNV(index, x, y, w, h);
         }

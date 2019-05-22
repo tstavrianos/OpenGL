@@ -87,6 +87,7 @@ namespace OpenGL {
         internal delegate void glBindRenderbufferOES(int target, uint renderbuffer);
         internal delegate void glBindSampler(uint unit, uint sampler);
         internal delegate void glBindSamplers(uint first, int count, uint* samplers);
+        internal delegate void glBindShadingRateImageNV(uint texture);
         internal delegate uint glBindTexGenParameterEXT(int unit, int coord, int value);
         internal delegate void glBindTexture(int target, uint texture);
         internal delegate void glBindTextureEXT(int target, uint texture);
@@ -160,6 +161,7 @@ namespace OpenGL {
         internal delegate void glBlitFramebufferNV(int srcX0, int srcY0, int srcX1, int srcY1, int dstX0, int dstY0, int dstX1, int dstY1, uint mask, int filter);
         internal delegate void glBlitNamedFramebuffer(uint readFramebuffer, uint drawFramebuffer, int srcX0, int srcY0, int srcX1, int srcY1, int dstX0, int dstY0, int dstX1, int dstY1, uint mask, int filter);
         internal delegate void glBufferAddressRangeNV(int pname, uint index, ulong address, uint length);
+        internal delegate void glBufferAttachMemoryNV(int target, uint memory, ulong offset);
         internal delegate void glBufferData(int target, uint size, IntPtr data, int usage);
         internal delegate void glBufferDataARB(int target, uint size, IntPtr data, int usage);
         internal delegate void glBufferPageCommitmentARB(int target, uint offset, uint size, bool commit);
@@ -580,6 +582,8 @@ namespace OpenGL {
         internal delegate void glDrawElementsInstancedEXT(int mode, int count, int type, IntPtr indices, int primcount);
         internal delegate void glDrawElementsInstancedNV(int mode, int count, int type, IntPtr indices, int primcount);
         internal delegate void glDrawMeshArraysSUN(int mode, int first, int count, int width);
+        internal delegate void glDrawMeshTasksNV(uint first, uint count);
+        internal delegate void glDrawMeshTasksIndirectNV(uint indirect);
         internal delegate void glDrawPixels(int width, int height, int format, int type, IntPtr pixels);
         internal delegate void glDrawRangeElementArrayAPPLE(int mode, uint start, uint end, int first, int count);
         internal delegate void glDrawRangeElementArrayATI(int mode, uint start, uint end, int count);
@@ -994,6 +998,7 @@ namespace OpenGL {
         internal delegate void glGetMaterialxOES(int face, int pname, IntPtr param);
         internal delegate void glGetMaterialxv(int face, int pname, IntPtr* _params);
         internal delegate void glGetMaterialxvOES(int face, int pname, IntPtr* _params);
+        internal delegate void glGetMemoryObjectDetachedResourcesuivNV(uint memory, int pname, int first, int count, uint* _params);
         internal delegate void glGetMemoryObjectParameterivEXT(uint memoryObject, int pname, int* _params);
         internal delegate void glGetMinmax(int target, bool reset, int format, int type, IntPtr values);
         internal delegate void glGetMinmaxEXT(int target, bool reset, int format, int type, IntPtr values);
@@ -1159,6 +1164,8 @@ namespace OpenGL {
         internal delegate void glGetShaderSource(uint shader, int bufSize, int* length, StringBuilder source);
         internal delegate void glGetShaderSourceARB(uint obj, int maxLength, int* length, StringBuilder source);
         internal delegate void glGetShaderiv(uint shader, int pname, int* _params);
+        internal delegate void glGetShadingRateImagePaletteNV(uint viewport, uint entry, int* rate);
+        internal delegate void glGetShadingRateSampleLocationivNV(int rate, uint samples, uint index, int* location);
         internal delegate void glGetSharpenTexFuncSGIS(int target, float* points);
         internal delegate ushort glGetStageIndexNV(int shadertype);
         internal delegate IntPtr glGetString(int name);
@@ -1616,6 +1623,8 @@ namespace OpenGL {
         internal delegate void glMultiDrawElementsIndirectCount(int mode, int type, IntPtr indirect, uint drawcount, int maxdrawcount, int stride);
         internal delegate void glMultiDrawElementsIndirectCountARB(int mode, int type, IntPtr indirect, uint drawcount, int maxdrawcount, int stride);
         internal delegate void glMultiDrawElementsIndirectEXT(int mode, int type, IntPtr indirect, int drawcount, int stride);
+        internal delegate void glMultiDrawMeshTasksIndirectNV(uint indirect, int drawcount, int stride);
+        internal delegate void glMultiDrawMeshTasksIndirectCountNV(uint indirect, uint drawcount, int maxdrawcount, int stride);
         internal delegate void glMultiDrawRangeElementArrayAPPLE(int mode, uint start, uint end, int* first, int* count, int primcount);
         internal delegate void glMultiModeDrawArraysIBM(uint* mode, int* first, int* count, int primcount, int modestride);
         internal delegate void glMultiModeDrawElementsIBM(uint* mode, int* count, int type, IntPtr* indices, int primcount, int modestride);
@@ -1752,6 +1761,7 @@ namespace OpenGL {
         internal delegate void glMulticastGetQueryObjectui64vNV(uint gpu, uint id, int pname, ulong* _params);
         internal delegate void glMulticastGetQueryObjectuivNV(uint gpu, uint id, int pname, uint* _params);
         internal delegate void glMulticastWaitSyncNV(uint signalGpu, uint waitGpuMask);
+        internal delegate void glNamedBufferAttachMemoryNV(uint buffer, uint memory, ulong offset);
         internal delegate void glNamedBufferData(uint buffer, uint size, IntPtr data, int usage);
         internal delegate void glNamedBufferDataEXT(uint buffer, uint size, IntPtr data, int usage);
         internal delegate void glNamedBufferPageCommitmentARB(uint buffer, uint offset, uint size, bool commit);
@@ -1796,6 +1806,7 @@ namespace OpenGL {
         internal delegate void glNamedRenderbufferStorage(uint renderbuffer, int internalformat, int width, int height);
         internal delegate void glNamedRenderbufferStorageEXT(uint renderbuffer, int internalformat, int width, int height);
         internal delegate void glNamedRenderbufferStorageMultisample(uint renderbuffer, int samples, int internalformat, int width, int height);
+        internal delegate void glNamedRenderbufferStorageMultisampleAdvancedAMD(uint renderbuffer, int samples, int storageSamples, int internalformat, int width, int height);
         internal delegate void glNamedRenderbufferStorageMultisampleCoverageEXT(uint renderbuffer, int coverageSamples, int colorSamples, int internalformat, int width, int height);
         internal delegate void glNamedRenderbufferStorageMultisampleEXT(uint renderbuffer, int samples, int internalformat, int width, int height);
         internal delegate void glNamedStringARB(int type, int namelen, string name, int stringlen, string _string);
@@ -2211,6 +2222,7 @@ namespace OpenGL {
         internal delegate void glRenderbufferStorageMultisample(int target, int samples, int internalformat, int width, int height);
         internal delegate void glRenderbufferStorageMultisampleANGLE(int target, int samples, int internalformat, int width, int height);
         internal delegate void glRenderbufferStorageMultisampleAPPLE(int target, int samples, int internalformat, int width, int height);
+        internal delegate void glRenderbufferStorageMultisampleAdvancedAMD(int target, int samples, int storageSamples, int internalformat, int width, int height);
         internal delegate void glRenderbufferStorageMultisampleCoverageNV(int target, int coverageSamples, int colorSamples, int internalformat, int width, int height);
         internal delegate void glRenderbufferStorageMultisampleEXT(int target, int samples, int internalformat, int width, int height);
         internal delegate void glRenderbufferStorageMultisampleIMG(int target, int samples, int internalformat, int width, int height);
@@ -2242,6 +2254,7 @@ namespace OpenGL {
         internal delegate void glRequestResidentProgramsNV(int n, uint* programs);
         internal delegate void glResetHistogram(int target);
         internal delegate void glResetHistogramEXT(int target);
+        internal delegate void glResetMemoryObjectParameterNV(uint memory, int pname);
         internal delegate void glResetMinmax(int target);
         internal delegate void glResetMinmaxEXT(int target);
         internal delegate void glResizeBuffersMESA();
@@ -2282,6 +2295,8 @@ namespace OpenGL {
         internal delegate void glScissorArrayv(uint first, int count, int* v);
         internal delegate void glScissorArrayvNV(uint first, int count, int* v);
         internal delegate void glScissorArrayvOES(uint first, int count, int* v);
+        internal delegate void glScissorExclusiveArrayvNV(uint first, int count, int* v);
+        internal delegate void glScissorExclusiveNV(int x, int y, int width, int height);
         internal delegate void glScissorIndexed(uint index, int left, int bottom, int width, int height);
         internal delegate void glScissorIndexedNV(uint index, int left, int bottom, int width, int height);
         internal delegate void glScissorIndexedOES(uint index, int left, int bottom, int width, int height);
@@ -2347,6 +2362,10 @@ namespace OpenGL {
         internal delegate void glShaderSource(uint shader, int count, string[] _string, int* length);
         internal delegate void glShaderSourceARB(uint shaderObj, int count, string[] _string, int* length);
         internal delegate void glShaderStorageBlockBinding(uint program, uint storageBlockIndex, uint storageBlockBinding);
+        internal delegate void glShadingRateImageBarrierNV(bool synchronize);
+        internal delegate void glShadingRateImagePaletteNV(uint viewport, uint first, int count, uint* rates);
+        internal delegate void glShadingRateSampleOrderNV(int order);
+        internal delegate void glShadingRateSampleOrderCustomNV(int rate, uint samples, int* locations);
         internal delegate void glSharpenTexFuncSGIS(int target, int n, float* points);
         internal delegate void glSignalSemaphoreEXT(uint semaphore, uint numBufferBarriers, uint* buffers, uint numTextureBarriers, uint* textures, uint* dstLayouts);
         internal delegate void glSpecializeShader(uint shader, string pEntryPoint, uint numSpecializationConstants, uint* pConstantIndex, uint* pConstantValue);
@@ -2399,6 +2418,7 @@ namespace OpenGL {
         internal delegate bool glTestFenceAPPLE(uint fence);
         internal delegate bool glTestFenceNV(uint fence);
         internal delegate bool glTestObjectAPPLE(int _object, uint name);
+        internal delegate void glTexAttachMemoryNV(int target, uint memory, ulong offset);
         internal delegate void glTexBuffer(int target, int internalformat, uint buffer);
         internal delegate void glTexBufferARB(int target, int internalformat, uint buffer);
         internal delegate void glTexBufferEXT(int target, int internalformat, uint buffer);
@@ -2562,6 +2582,7 @@ namespace OpenGL {
         internal delegate void glTexSubImage3DEXT(int target, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, IntPtr pixels);
         internal delegate void glTexSubImage3DOES(int target, int level, int xoffset, int yoffset, int zoffset, int width, int height, int depth, int format, int type, IntPtr pixels);
         internal delegate void glTexSubImage4DSGIS(int target, int level, int xoffset, int yoffset, int zoffset, int woffset, int width, int height, int depth, int size4d, int format, int type, IntPtr pixels);
+        internal delegate void glTextureAttachMemoryNV(uint texture, uint memory, ulong offset);
         internal delegate void glTextureBarrier();
         internal delegate void glTextureBarrierNV();
         internal delegate void glTextureBuffer(uint texture, int internalformat, uint buffer);
@@ -2780,6 +2801,7 @@ namespace OpenGL {
         internal delegate void glVDPAUMapSurfacesNV(int numSurfaces, IntPtr* surfaces);
         internal delegate IntPtr glVDPAURegisterOutputSurfaceNV(IntPtr vdpSurface, int target, int numTextureNames, uint* textureNames);
         internal delegate IntPtr glVDPAURegisterVideoSurfaceNV(IntPtr vdpSurface, int target, int numTextureNames, uint* textureNames);
+        internal delegate IntPtr glVDPAURegisterVideoSurfaceWithPictureStructureNV(IntPtr vdpSurface, int target, int numTextureNames, uint* textureNames, bool isFrameStructure);
         internal delegate void glVDPAUSurfaceAccessNV(IntPtr surface, int access);
         internal delegate void glVDPAUUnmapSurfacesNV(int numSurface, IntPtr* surfaces);
         internal delegate void glVDPAUUnregisterSurfaceNV(IntPtr surface);

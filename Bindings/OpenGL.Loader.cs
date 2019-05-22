@@ -10630,6 +10630,13 @@ namespace OpenGL {
                         }
                     }
                 }
+                if(Features.ExtensionsGPU.Contains("GL_NV_vdpau_interop2")) {
+                    if(Pointers.glVDPAURegisterVideoSurfaceWithPictureStructureNV == null) {
+                        if((proc = loadProc("glVDPAURegisterVideoSurfaceWithPictureStructureNV")) != IntPtr.Zero) {
+                            Pointers.glVDPAURegisterVideoSurfaceWithPictureStructureNV = (Delegates.glVDPAURegisterVideoSurfaceWithPictureStructureNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glVDPAURegisterVideoSurfaceWithPictureStructureNV));
+                        }
+                    }
+                }
                 if(Features.ExtensionsGPU.Contains("GL_NV_vertex_array_range")) {
                     if(Pointers.glFlushVertexArrayRangeNV == null) {
                         if((proc = loadProc("glFlushVertexArrayRangeNV")) != IntPtr.Zero) {
@@ -11967,6 +11974,11 @@ namespace OpenGL {
                         Pointers.glBindRenderbufferOES = (Delegates.glBindRenderbufferOES)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glBindRenderbufferOES));
                     }
                 }
+                if(Pointers.glBindShadingRateImageNV == null) {
+                    if((proc = loadProc("glBindShadingRateImageNV")) != IntPtr.Zero) {
+                        Pointers.glBindShadingRateImageNV = (Delegates.glBindShadingRateImageNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glBindShadingRateImageNV));
+                    }
+                }
                 if(Pointers.glBindVertexArrayOES == null) {
                     if((proc = loadProc("glBindVertexArrayOES")) != IntPtr.Zero) {
                         Pointers.glBindVertexArrayOES = (Delegates.glBindVertexArrayOES)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glBindVertexArrayOES));
@@ -12095,6 +12107,11 @@ namespace OpenGL {
                 if(Pointers.glBufferAddressRangeNV == null) {
                     if((proc = loadProc("glBufferAddressRangeNV")) != IntPtr.Zero) {
                         Pointers.glBufferAddressRangeNV = (Delegates.glBufferAddressRangeNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glBufferAddressRangeNV));
+                    }
+                }
+                if(Pointers.glBufferAttachMemoryNV == null) {
+                    if((proc = loadProc("glBufferAttachMemoryNV")) != IntPtr.Zero) {
+                        Pointers.glBufferAttachMemoryNV = (Delegates.glBufferAttachMemoryNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glBufferAttachMemoryNV));
                     }
                 }
                 if(Pointers.glBufferPageCommitmentARB == null) {
@@ -12907,6 +12924,16 @@ namespace OpenGL {
                         Pointers.glDrawElementsInstancedNV = (Delegates.glDrawElementsInstancedNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glDrawElementsInstancedNV));
                     }
                 }
+                if(Pointers.glDrawMeshTasksNV == null) {
+                    if((proc = loadProc("glDrawMeshTasksNV")) != IntPtr.Zero) {
+                        Pointers.glDrawMeshTasksNV = (Delegates.glDrawMeshTasksNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glDrawMeshTasksNV));
+                    }
+                }
+                if(Pointers.glDrawMeshTasksIndirectNV == null) {
+                    if((proc = loadProc("glDrawMeshTasksIndirectNV")) != IntPtr.Zero) {
+                        Pointers.glDrawMeshTasksIndirectNV = (Delegates.glDrawMeshTasksIndirectNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glDrawMeshTasksIndirectNV));
+                    }
+                }
                 if(Pointers.glDrawRangeElementsBaseVertexEXT == null) {
                     if((proc = loadProc("glDrawRangeElementsBaseVertexEXT")) != IntPtr.Zero) {
                         Pointers.glDrawRangeElementsBaseVertexEXT = (Delegates.glDrawRangeElementsBaseVertexEXT)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glDrawRangeElementsBaseVertexEXT));
@@ -13672,6 +13699,11 @@ namespace OpenGL {
                         Pointers.glGetMaterialxvOES = (Delegates.glGetMaterialxvOES)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glGetMaterialxvOES));
                     }
                 }
+                if(Pointers.glGetMemoryObjectDetachedResourcesuivNV == null) {
+                    if((proc = loadProc("glGetMemoryObjectDetachedResourcesuivNV")) != IntPtr.Zero) {
+                        Pointers.glGetMemoryObjectDetachedResourcesuivNV = (Delegates.glGetMemoryObjectDetachedResourcesuivNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glGetMemoryObjectDetachedResourcesuivNV));
+                    }
+                }
                 if(Pointers.glGetMemoryObjectParameterivEXT == null) {
                     if((proc = loadProc("glGetMemoryObjectParameterivEXT")) != IntPtr.Zero) {
                         Pointers.glGetMemoryObjectParameterivEXT = (Delegates.glGetMemoryObjectParameterivEXT)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glGetMemoryObjectParameterivEXT));
@@ -14055,6 +14087,16 @@ namespace OpenGL {
                 if(Pointers.glGetSeparableFilter == null) {
                     if((proc = loadProc("glGetSeparableFilter")) != IntPtr.Zero) {
                         Pointers.glGetSeparableFilter = (Delegates.glGetSeparableFilter)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glGetSeparableFilter));
+                    }
+                }
+                if(Pointers.glGetShadingRateImagePaletteNV == null) {
+                    if((proc = loadProc("glGetShadingRateImagePaletteNV")) != IntPtr.Zero) {
+                        Pointers.glGetShadingRateImagePaletteNV = (Delegates.glGetShadingRateImagePaletteNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glGetShadingRateImagePaletteNV));
+                    }
+                }
+                if(Pointers.glGetShadingRateSampleLocationivNV == null) {
+                    if((proc = loadProc("glGetShadingRateSampleLocationivNV")) != IntPtr.Zero) {
+                        Pointers.glGetShadingRateSampleLocationivNV = (Delegates.glGetShadingRateSampleLocationivNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glGetShadingRateSampleLocationivNV));
                     }
                 }
                 if(Pointers.glGetStageIndexNV == null) {
@@ -14977,6 +15019,16 @@ namespace OpenGL {
                         Pointers.glMultiDrawElementsIndirectEXT = (Delegates.glMultiDrawElementsIndirectEXT)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glMultiDrawElementsIndirectEXT));
                     }
                 }
+                if(Pointers.glMultiDrawMeshTasksIndirectNV == null) {
+                    if((proc = loadProc("glMultiDrawMeshTasksIndirectNV")) != IntPtr.Zero) {
+                        Pointers.glMultiDrawMeshTasksIndirectNV = (Delegates.glMultiDrawMeshTasksIndirectNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glMultiDrawMeshTasksIndirectNV));
+                    }
+                }
+                if(Pointers.glMultiDrawMeshTasksIndirectCountNV == null) {
+                    if((proc = loadProc("glMultiDrawMeshTasksIndirectCountNV")) != IntPtr.Zero) {
+                        Pointers.glMultiDrawMeshTasksIndirectCountNV = (Delegates.glMultiDrawMeshTasksIndirectCountNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glMultiDrawMeshTasksIndirectCountNV));
+                    }
+                }
                 if(Pointers.glMultiTexBufferEXT == null) {
                     if((proc = loadProc("glMultiTexBufferEXT")) != IntPtr.Zero) {
                         Pointers.glMultiTexBufferEXT = (Delegates.glMultiTexBufferEXT)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glMultiTexBufferEXT));
@@ -15187,6 +15239,11 @@ namespace OpenGL {
                         Pointers.glMultiTexSubImage3DEXT = (Delegates.glMultiTexSubImage3DEXT)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glMultiTexSubImage3DEXT));
                     }
                 }
+                if(Pointers.glNamedBufferAttachMemoryNV == null) {
+                    if((proc = loadProc("glNamedBufferAttachMemoryNV")) != IntPtr.Zero) {
+                        Pointers.glNamedBufferAttachMemoryNV = (Delegates.glNamedBufferAttachMemoryNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glNamedBufferAttachMemoryNV));
+                    }
+                }
                 if(Pointers.glNamedBufferDataEXT == null) {
                     if((proc = loadProc("glNamedBufferDataEXT")) != IntPtr.Zero) {
                         Pointers.glNamedBufferDataEXT = (Delegates.glNamedBufferDataEXT)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glNamedBufferDataEXT));
@@ -15340,6 +15397,11 @@ namespace OpenGL {
                 if(Pointers.glNamedRenderbufferStorageEXT == null) {
                     if((proc = loadProc("glNamedRenderbufferStorageEXT")) != IntPtr.Zero) {
                         Pointers.glNamedRenderbufferStorageEXT = (Delegates.glNamedRenderbufferStorageEXT)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glNamedRenderbufferStorageEXT));
+                    }
+                }
+                if(Pointers.glNamedRenderbufferStorageMultisampleAdvancedAMD == null) {
+                    if((proc = loadProc("glNamedRenderbufferStorageMultisampleAdvancedAMD")) != IntPtr.Zero) {
+                        Pointers.glNamedRenderbufferStorageMultisampleAdvancedAMD = (Delegates.glNamedRenderbufferStorageMultisampleAdvancedAMD)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glNamedRenderbufferStorageMultisampleAdvancedAMD));
                     }
                 }
                 if(Pointers.glNamedRenderbufferStorageMultisampleCoverageEXT == null) {
@@ -16137,6 +16199,11 @@ namespace OpenGL {
                         Pointers.glRenderbufferStorageMultisampleAPPLE = (Delegates.glRenderbufferStorageMultisampleAPPLE)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glRenderbufferStorageMultisampleAPPLE));
                     }
                 }
+                if(Pointers.glRenderbufferStorageMultisampleAdvancedAMD == null) {
+                    if((proc = loadProc("glRenderbufferStorageMultisampleAdvancedAMD")) != IntPtr.Zero) {
+                        Pointers.glRenderbufferStorageMultisampleAdvancedAMD = (Delegates.glRenderbufferStorageMultisampleAdvancedAMD)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glRenderbufferStorageMultisampleAdvancedAMD));
+                    }
+                }
                 if(Pointers.glRenderbufferStorageMultisampleCoverageNV == null) {
                     if((proc = loadProc("glRenderbufferStorageMultisampleCoverageNV")) != IntPtr.Zero) {
                         Pointers.glRenderbufferStorageMultisampleCoverageNV = (Delegates.glRenderbufferStorageMultisampleCoverageNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glRenderbufferStorageMultisampleCoverageNV));
@@ -16160,6 +16227,11 @@ namespace OpenGL {
                 if(Pointers.glResetHistogram == null) {
                     if((proc = loadProc("glResetHistogram")) != IntPtr.Zero) {
                         Pointers.glResetHistogram = (Delegates.glResetHistogram)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glResetHistogram));
+                    }
+                }
+                if(Pointers.glResetMemoryObjectParameterNV == null) {
+                    if((proc = loadProc("glResetMemoryObjectParameterNV")) != IntPtr.Zero) {
+                        Pointers.glResetMemoryObjectParameterNV = (Delegates.glResetMemoryObjectParameterNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glResetMemoryObjectParameterNV));
                     }
                 }
                 if(Pointers.glResetMinmax == null) {
@@ -16237,6 +16309,16 @@ namespace OpenGL {
                         Pointers.glScissorArrayvOES = (Delegates.glScissorArrayvOES)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glScissorArrayvOES));
                     }
                 }
+                if(Pointers.glScissorExclusiveArrayvNV == null) {
+                    if((proc = loadProc("glScissorExclusiveArrayvNV")) != IntPtr.Zero) {
+                        Pointers.glScissorExclusiveArrayvNV = (Delegates.glScissorExclusiveArrayvNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glScissorExclusiveArrayvNV));
+                    }
+                }
+                if(Pointers.glScissorExclusiveNV == null) {
+                    if((proc = loadProc("glScissorExclusiveNV")) != IntPtr.Zero) {
+                        Pointers.glScissorExclusiveNV = (Delegates.glScissorExclusiveNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glScissorExclusiveNV));
+                    }
+                }
                 if(Pointers.glScissorIndexedNV == null) {
                     if((proc = loadProc("glScissorIndexedNV")) != IntPtr.Zero) {
                         Pointers.glScissorIndexedNV = (Delegates.glScissorIndexedNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glScissorIndexedNV));
@@ -16280,6 +16362,26 @@ namespace OpenGL {
                 if(Pointers.glSetFenceNV == null) {
                     if((proc = loadProc("glSetFenceNV")) != IntPtr.Zero) {
                         Pointers.glSetFenceNV = (Delegates.glSetFenceNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glSetFenceNV));
+                    }
+                }
+                if(Pointers.glShadingRateImageBarrierNV == null) {
+                    if((proc = loadProc("glShadingRateImageBarrierNV")) != IntPtr.Zero) {
+                        Pointers.glShadingRateImageBarrierNV = (Delegates.glShadingRateImageBarrierNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glShadingRateImageBarrierNV));
+                    }
+                }
+                if(Pointers.glShadingRateImagePaletteNV == null) {
+                    if((proc = loadProc("glShadingRateImagePaletteNV")) != IntPtr.Zero) {
+                        Pointers.glShadingRateImagePaletteNV = (Delegates.glShadingRateImagePaletteNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glShadingRateImagePaletteNV));
+                    }
+                }
+                if(Pointers.glShadingRateSampleOrderNV == null) {
+                    if((proc = loadProc("glShadingRateSampleOrderNV")) != IntPtr.Zero) {
+                        Pointers.glShadingRateSampleOrderNV = (Delegates.glShadingRateSampleOrderNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glShadingRateSampleOrderNV));
+                    }
+                }
+                if(Pointers.glShadingRateSampleOrderCustomNV == null) {
+                    if((proc = loadProc("glShadingRateSampleOrderCustomNV")) != IntPtr.Zero) {
+                        Pointers.glShadingRateSampleOrderCustomNV = (Delegates.glShadingRateSampleOrderCustomNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glShadingRateSampleOrderCustomNV));
                     }
                 }
                 if(Pointers.glSignalSemaphoreEXT == null) {
@@ -16350,6 +16452,11 @@ namespace OpenGL {
                 if(Pointers.glTestFenceNV == null) {
                     if((proc = loadProc("glTestFenceNV")) != IntPtr.Zero) {
                         Pointers.glTestFenceNV = (Delegates.glTestFenceNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glTestFenceNV));
+                    }
+                }
+                if(Pointers.glTexAttachMemoryNV == null) {
+                    if((proc = loadProc("glTexAttachMemoryNV")) != IntPtr.Zero) {
+                        Pointers.glTexAttachMemoryNV = (Delegates.glTexAttachMemoryNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glTexAttachMemoryNV));
                     }
                 }
                 if(Pointers.glTexBufferARB == null) {
@@ -16600,6 +16707,11 @@ namespace OpenGL {
                 if(Pointers.glTexSubImage3DOES == null) {
                     if((proc = loadProc("glTexSubImage3DOES")) != IntPtr.Zero) {
                         Pointers.glTexSubImage3DOES = (Delegates.glTexSubImage3DOES)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glTexSubImage3DOES));
+                    }
+                }
+                if(Pointers.glTextureAttachMemoryNV == null) {
+                    if((proc = loadProc("glTextureAttachMemoryNV")) != IntPtr.Zero) {
+                        Pointers.glTextureAttachMemoryNV = (Delegates.glTextureAttachMemoryNV)Marshal.GetDelegateForFunctionPointer(proc, typeof(Delegates.glTextureAttachMemoryNV));
                     }
                 }
                 if(Pointers.glTextureBarrierNV == null) {

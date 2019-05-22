@@ -29,8 +29,16 @@ namespace OpenGL {
             AllAttribBits = 0xFFFFFFFF,
         }
         
-        // GL_MAP_{COHERENT,FLUSH_EXPLICIT,INVALIDATE_BUFFER,INVALIDATE_RANGE,PERSISTENT,READ,UNSYNCHRONIZED,WRITE}_{BIT,BIT_EXT} also lie in this namespace
-        public enum BufferAccessMask: uint {
+        // GL_MAP_{COHERENT,PERSISTENT,READ,WRITE}_{BIT,BIT_EXT} also lie in this namespace
+        public enum BufferStorageMask: uint {
+            DynamicStorageBit = 0x0100,
+            DynamicStorageBitExt = 0x0100,
+            ClientStorageBit = 0x0200,
+            ClientStorageBitExt = 0x0200,
+            SparseStorageBitArb = 0x0400,
+            LgpuSeparateStorageBitNvx = 0x0800,
+            PerGpuStorageBitNv = 0x0800,
+            ExternalStorageBitNvx = 0x2000,
         }
         
         // GL_{DEPTH,ACCUM,STENCIL,COLOR}_BUFFER_BIT also lie in this namespace
@@ -62,7 +70,7 @@ namespace OpenGL {
             ContextCompatibilityProfileBit = 0x00000002,
         }
         
-        public enum MapBufferUsageMask: uint {
+        public enum MapBufferAccessMask: uint {
             MapReadBit = 0x0001,
             MapReadBitExt = 0x0001,
             MapWriteBit = 0x0002,
@@ -79,14 +87,6 @@ namespace OpenGL {
             MapPersistentBitExt = 0x0040,
             MapCoherentBit = 0x0080,
             MapCoherentBitExt = 0x0080,
-            DynamicStorageBit = 0x0100,
-            DynamicStorageBitExt = 0x0100,
-            ClientStorageBit = 0x0200,
-            ClientStorageBitExt = 0x0200,
-            SparseStorageBitArb = 0x0400,
-            LgpuSeparateStorageBitNvx = 0x0800,
-            PerGpuStorageBitNv = 0x0800,
-            ExternalStorageBitNvx = 0x2000,
         }
         
         public enum MemoryBarrierMask: uint {
@@ -151,6 +151,8 @@ namespace OpenGL {
             TessEvaluationShaderBitExt = 0x00000010,
             TessEvaluationShaderBitOes = 0x00000010,
             ComputeShaderBit = 0x00000020,
+            MeshShaderBitNv = 0x00000040,
+            TaskShaderBitNv = 0x00000080,
             AllShaderBits = 0xFFFFFFFF,
             AllShaderBitsExt = 0xFFFFFFFF,
         }
@@ -283,6 +285,7 @@ namespace OpenGL {
         public enum FoveationConfigBitQCOM: uint {
             FoveationEnableBitQcom = 0x00000001,
             FoveationScaledBinMethodBitQcom = 0x00000002,
+            FoveationSubsampledLayoutMethodBitQcom = 0x00000004,
         }
         
         public enum FfdMaskSGIX: uint {
