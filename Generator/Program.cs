@@ -14,7 +14,8 @@ namespace Generator
         private static string FilenamePrefix = "OpenGL.";
         private static string path = "../../../../Bindings/";
 
-        private static void BuildClass(IndentedStringBuilder sb, string name, Action<IndentedStringBuilder> acn) {
+        private static void BuildClass(IndentedStringBuilder sb, string name, Action<IndentedStringBuilder> acn)
+        {
             sb.AppendLine("public static class {0} {{", name);
             sb.Indent();
 
@@ -31,14 +32,17 @@ namespace Generator
             docHandler.DownloadGL2();
 
             var parser = new XMLParser();
-            
+
             var def = parser.Parse(@"https://raw.githubusercontent.com/KhronosGroup/OpenGL-Registry/master/xml/gl.xml", "cache/gl.xml");
             var consts = new IndentedStringBuilder();
             consts.AppendLine("namespace {0} {{", Namespace);
             consts.Indent();
-            BuildClass(consts, "Constants", (sb) => {
-                foreach(var e1 in def.Enums) {
-                    foreach(var e2 in e1.Enum) {
+            BuildClass(consts, "Constants", (sb) =>
+            {
+                foreach (var e1 in def.Enums)
+                {
+                    foreach (var e2 in e1.Enum)
+                    {
                         e2.ConstantDeclaration(sb);
                     }
                 }
@@ -49,13 +53,19 @@ namespace Generator
             var enums = new IndentedStringBuilder();
             enums.AppendLine("namespace {0} {{", Namespace);
             enums.Indent();
-            BuildClass(enums, "Enums", (sb) => {
+            BuildClass(enums, "Enums", (sb) =>
+            {
                 var enumsStart = true;
-                foreach(var e1 in def.Enums) {
-                    if(!string.IsNullOrEmpty(e1.Group) && e1.Group != "SpecialNumbers") {
-                        if(enumsStart == true) {
+                foreach (var e1 in def.Enums)
+                {
+                    if ((!string.IsNullOrEmpty(e1.Group) && e1.Group != "SpecialNumbers") || (!string.IsNullOrEmpty(e1.Namespace) && e1.Namespace != "GL" && e1.Namespace != "WGL" && e1.Namespace != "EGL"))
+                    {
+                        if (enumsStart == true)
+                        {
                             enumsStart = false;
-                        } else {
+                        }
+                        else
+                        {
                             enums.AppendLine("");
                         }
                         e1.StronglyTypedDeclaration(sb);
@@ -70,12 +80,14 @@ namespace Generator
             features.AppendLine("");
             features.AppendLine("namespace {0} {{", Namespace);
             features.Indent();
-            BuildClass(features, "Features", (sb) => {
+            BuildClass(features, "Features", (sb) =>
+            {
                 sb.AppendLine("internal static HashSet<string> ExtensionsGPU = new HashSet<string>();");
                 sb.AppendLine("");
                 sb.AppendLine("public static bool IsExtensionSupported(string ExtensionName) => ExtensionsGPU.Contains(ExtensionName);");
                 sb.AppendLine("");
-                foreach(var feature in def.Feature) {
+                foreach (var feature in def.Feature)
+                {
                     feature.BuildDeclaration(sb);
                 }
             });
@@ -109,7 +121,8 @@ namespace Generator
             loader.AppendLine("}");
             loader.AppendLine("");
             loader.AppendLine("var version = (byte)(versionMajor * 10 + versionMinor);");
-            foreach(var feat in def.Feature.Where(x => x.Api == "gl")) {
+            foreach (var feat in def.Feature.Where(x => x.Api == "gl"))
+            {
                 feat.BuildAssign(loader);
             }
             loader.AppendLine("");
@@ -161,7 +174,8 @@ namespace Generator
             hashlist.Add("glGetIntegerv");
             def.Commands.Build(delegates, pointers, wrappers, def, hashlist, docHandler);
 
-            foreach(var feature in def.Feature.Where(x => x.Api == "gl")) {
+            foreach (var feature in def.Feature.Where(x => x.Api == "gl"))
+            {
                 feature.BuildLoader(loader, hashlist);
             }
 
@@ -209,11 +223,13 @@ namespace Generator
             loader.Outdent();
             loader.AppendLine("}");
 
-            if(hashlist.Count > 0) {
+            if (hashlist.Count > 0)
+            {
                 loader.AppendLine("");
                 loader.AppendLine("if(loadLeftovers) {");
                 loader.Indent();
-                foreach(var name in hashlist) {
+                foreach (var name in hashlist)
+                {
                     OpenGLSpec.Command.BuildLoader(loader, name);
                 }
                 loader.Outdent();
@@ -224,7 +240,7 @@ namespace Generator
             delegates.AppendLine("}");
             delegates.Outdent();
             delegates.AppendLine("}");
-            
+
             pointers.Outdent();
             pointers.AppendLine("}");
             pointers.Outdent();

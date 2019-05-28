@@ -67,7 +67,7 @@ namespace Generator
                 value = castMatch.Groups["value"].Value;
             }
 
-            return (string.Format("public static readonly {0} {1} = {2};", type, Name, value));
+            return (string.Format("public const {0} {1} = {2};", type, Name, value));
         }
     }
 }

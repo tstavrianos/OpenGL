@@ -53,7 +53,7 @@ namespace Generator
             "else", "long", "static",
             "enum", "namespace", "string",
         };
-        
+
         public static void WriteStringBuilderToFile(IndentedStringBuilder sb, string path, string fileName)
         {
             using (var sw = new StreamWriter(path + fileName))
@@ -63,15 +63,19 @@ namespace Generator
             }
         }
 
-        public static string MapToCSharpType(string type) {
+        public static string MapToCSharpType(string type)
+        {
             type = type.Trim().ToLower();
-            switch (type) {
+            switch (type)
+            {
                 case "void":
                     return "void";
                 case "glboolean":
+                case "bool":
                     return "bool";
                 case "glboolean const *":
                 case "glboolean *":
+                case "bool *":
                     return "bool*";
                 case "glboolean **":
                 case "glboolean const **":
@@ -80,6 +84,9 @@ namespace Generator
                 case "glenum":
                 case "glsizei":
                 case "glclampx":
+                case "int":
+                case "dword":
+                case "int32":
                     return "int";
                 case "glint const *":
                 case "glsizei const *":
@@ -87,6 +94,11 @@ namespace Generator
                 case "glint *":
                 case "glclampx const *":
                 case "glenum *":
+                case "int *":
+                case "const int *":
+                case "dword *":
+                case "dword const *":
+                case "int32 *":
                     return "int*";
                 case "gluint":
                 case "glhandlearb":
@@ -94,6 +106,9 @@ namespace Generator
                 case "glsizeiptr":
                 case "glsizeiptrarb":
                 case "glintptr":
+                case "uint":
+                case "unsigned int":
+                case "unsigned long":
                     return "uint";
                 case "glenum const *":
                 case "gluint const *":
@@ -104,12 +119,16 @@ namespace Generator
                 case "glsizeiptr const *":
                 case "glsizeiptrarb const *":
                 case "glintptr const *":
+                case "uint *":
+                case "unsigned int *":
+                case "unsigned long *":
                     return "uint*";
                 case "gluint64":
                 case "gluint64ext":
                     return "ulong";
                 case "glint64":
                 case "glint64ext":
+                case "int64":
                     return "long";
                 case "gluint64 *":
                 case "gluint64 const *":
@@ -120,19 +139,24 @@ namespace Generator
                 case "glint64 const *":
                 case "glint64ext const *":
                 case "glint64ext *":
+                case "int64 *":
                     return "long*";
                 case "glfloat":
                 case "glclampf":
+                case "float":
                     return "float";
                 case "glfloat const *":
                 case "glclampf const *":
                 case "glfloat *":
+                case "float *":
+                case "float const *":
                     return "float*";
                 case "glubyte":
                     return "byte";
                 case "glbyte":
                     return "sbyte";
                 case "glushort":
+                case "ushort":
                     return "ushort";
                 case "glubyte const *":
                 case "glubyte *":
@@ -142,6 +166,8 @@ namespace Generator
                     return "sbyte*";
                 case "glushort const *":
                 case "glushort *":
+                case "ushort *":
+                case "ushort const *":
                     return "ushort*";
                 case "glvdpausurfacenv":
                 case "glvulkanprocnv":
@@ -159,6 +185,24 @@ namespace Generator
                 case "glsync":
                 case "struct _cl_context *":
                 case "struct _cl_event *":
+                case "lpvoid":
+                case "lpvoid  const":
+                case "hdc":
+                case "handle const":
+                case "handle":
+                case "hglrc":
+                case "hpbufferarb":
+                case "hvideoinputdevicenv":
+                case "hvideooutputdevicenv":
+                case "hpvideodev":
+                case "hpbufferext":
+                case "layerplanedescriptor":
+                case "hgpunv":
+                case "pgpu_device":
+                case "proc":
+                case "henhmetafile":
+                case "colorref":
+                case "lpglyphmetricsfloat":
                     return "IntPtr";
                 case "const void **":
                 case "void **":
@@ -166,6 +210,18 @@ namespace Generator
                 case "glfixed const *":
                 case "glfixed *":
                 case "glvdpausurfacenv const *":
+                case "lpvoid*":
+                case "handle const *":
+                case "handle *":
+                case "lpvoid const *":
+                case "hgpunv const *":
+                case "hvideoinputdevicenv *":
+                case "hvideooutputdevicenv *":
+                case "layerplanedescriptor const *":
+                case "hgpunv *":
+                case "hpvideodev *":
+                case "colorref const *":
+                case "pixelformatdescriptor const *":
                     return "IntPtr*";
                 case "glshort":
                 case "glhalfnv":
@@ -175,13 +231,16 @@ namespace Generator
                     return "short*";
                 case "gldouble":
                 case "glclampd":
+                case "double":
                     return "double";
                 case "gldouble const *":
                 case "gldouble *":
                 case "glclampd const *":
+                case "double *":
                     return "double*";
                 case "glchar":
                 case "glchararb":
+                case "char":
                     return "char";
                 case "glchar *":
                 case "glchararb *":
@@ -189,6 +248,8 @@ namespace Generator
                 case "const glchar *":
                 case "glchar const *":
                 case "glchararb const *":
+                case "const char *":
+                case "lpcstr":
                     return "string";
                 case "glchar const *const*":
                 case "glchararb **":
@@ -203,7 +264,8 @@ namespace Generator
             return type;
         }
 
-        public static string GetReturnType(OpenGLSpec.Param parameter) {
+        public static string GetReturnType(OpenGLSpec.Param parameter)
+        {
             string returnTypeText = null;
             if (parameter.TypeDecorators.Count > 0)
             {
