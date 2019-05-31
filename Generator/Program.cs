@@ -184,7 +184,25 @@ namespace Generator
             loader.Indent();
             loader.AppendLine("if(Pointers.glGetString != null) {");
             loader.Indent();
-            loader.AppendLine("var extStd = Wrappers.glGetString(Constants.GL_EXTENSIONS).Trim();");
+            //loader.AppendLine("var extStd = Wrappers.glGetString(Constants.GL_EXTENSIONS).Trim();");
+            loader.AppendLine("var extStd = Wrappers.glGetString(Constants.GL_EXTENSIONS);//.Trim();");
+            loader.AppendLine("if (string.IsNullOrEmpty(extStd))");
+            loader.AppendLine("{");
+            loader.Indent();
+            loader.AppendLine("extStd = string.Empty;");
+            loader.AppendLine("Wrappers.glGetIntegerv(Constants.GL_NUM_EXTENSIONS, int1);");
+            loader.AppendLine("var exts = int1[0];");
+            loader.AppendLine("for (uint cnt = 0; cnt < exts; cnt++)");
+            loader.AppendLine("{");
+            loader.Indent();
+            loader.AppendLine("var extIdx = Wrappers.glGetStringi(Constants.GL_EXTENSIONS, cnt).Trim();");
+            loader.AppendLine("extStd += ' ' + extIdx;");
+            loader.Outdent();
+            loader.AppendLine("}");
+            loader.Outdent();
+            loader.AppendLine("}");
+            loader.AppendLine("extStd = extStd.Trim();");
+
             loader.AppendLine("foreach (string extension in extStd.Split(' ')) {");
             loader.Indent();
             loader.AppendLine("if (!Features.ExtensionsGPU.Contains(extension) && !String.IsNullOrEmpty(extension)) {");

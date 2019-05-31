@@ -5701,7 +5701,19 @@ namespace OpenGL {
             
             if(loadExtensions) {
                 if(Pointers.glGetString != null) {
-                    var extStd = Wrappers.glGetString(Constants.GL_EXTENSIONS).Trim();
+                    var extStd = Wrappers.glGetString(Constants.GL_EXTENSIONS);//.Trim();
+                    if (string.IsNullOrEmpty(extStd))
+                    {
+                        extStd = string.Empty;
+                        Wrappers.glGetIntegerv(Constants.GL_NUM_EXTENSIONS, int1);
+                        var exts = int1[0];
+                        for (uint cnt = 0; cnt < exts; cnt++)
+                        {
+                            var extIdx = Wrappers.glGetStringi(Constants.GL_EXTENSIONS, cnt).Trim();
+                            extStd += ' ' + extIdx;
+                        }
+                    }
+                    extStd = extStd.Trim();
                     foreach (string extension in extStd.Split(' ')) {
                         if (!Features.ExtensionsGPU.Contains(extension) && !String.IsNullOrEmpty(extension)) {
                             Features.ExtensionsGPU.Add(extension);
